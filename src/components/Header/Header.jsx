@@ -22,7 +22,7 @@ export const Header = () => {
   const { mutate } = useMutation('verify-token', API.verifyToken, {
     onSuccess: (data) => {
       setIsLoading(false);
-      if (data.data) {
+      if (data.data.data) {
         setIsLoading(false);
         setVerifyToken(true);
       } else setVerifyToken(false);

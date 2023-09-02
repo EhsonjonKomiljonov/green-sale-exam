@@ -15,13 +15,17 @@ import './register-form.scss';
 import { LoadingContext } from '../../context/LoadingContext';
 import { Loading } from '../Loading/Loading';
 import { VerifyContactContext } from '../../context/VerifyContactContext';
+import { VerifyTokenContext } from '../../context/VerifyToken';
+import { setToken } from '../../redux/token/tokenAction';
+import { useDispatch } from 'react-redux';
 
 export const RegisterForm = () => {
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
   const { setVerify } = useContext(VerifyContactContext);
+  const dispatch = useDispatch();
 
   const openMenu = () => {
     setMenu(true);
@@ -34,25 +38,26 @@ export const RegisterForm = () => {
   };
 
   const initialValues = {
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    region: '',
+    first_name: '',
+    last_name: '',
+    contact: '',
+    email: '',
+    region: 'toshkent shahri',
     district: '',
     address: '',
     password: '',
   };
 
   const validationSchema = Yup.object({
-    firstName: Yup.string()
+    first_name: Yup.string()
       .required('Iltimos ismingizni kiriting!')
       .min(2, "Ism 2 harfdan ko'p bo'lishi lozim!")
       .max(100, "Ism 100 ta harfdan kam bo'lishi lozim!"),
-    lastName: Yup.string()
+    last_name: Yup.string()
       .required('Iltimos familiyangizni kiriting!')
       .min(2, "Familiya 2 harfdan ko'p bo'lishi lozim!")
       .max(100, "Familiya 100 ta harfdan kam bo'lishi lozim!"),
-    phoneNumber: Yup.string()
+    contact: Yup.string()
       .required('Iltimos Telefon raqamingizni kiriting!')
       .min(9, 'Telefon raqam uzunligi 8 tadan ortiq bolishi lozim!')
       .max(9, "Telefon raqam uzunligi eng ko'pi 9 ta bolishi mumkin!"),
@@ -63,6 +68,15 @@ export const RegisterForm = () => {
     address: Yup.string()
       .required('Iltimos Mahalla nomini kiriting!')
       .min(2, "Mahalla eng kami 2 harf bo'lishi lozim!"),
+    email: Yup.string()
+      .required('Iltimos emailni kiriting!')
+      .min(5)
+      .max(120)
+      .email("Noto'g'ri email!")
+      .matches(
+        /^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$/,
+        "Noto'g'ri email!"
+      ),
     password: Yup.string()
       .required('Iltimos parolingizni kiriting!')
       .min(8, "Parol eng kami 8 ta bo'lishi lozim!")
@@ -74,37 +88,20 @@ export const RegisterForm = () => {
       .matches(
         /[A-Z]/,
         "Parolda bir dona bo'lsa ham katta harf ishlatilishi lozim!"
-      )
-      .matches(
-        /[\`!@#$%^&*()_+={}\[\]:;\"'<>,.?\\\/]+/,
-        'Parolda simbol ishlatilishi lozim. misol (#$%)'
       ),
-  });
-
-  const { mutate: mutateContact } = useMutation('send-code', API.sendContact, {
-    onSuccess: (data) => {
-      setIsLoading(true);
-      if (data.data.result) {
-        setIsLoading(false);
-      }
-    },
-    onError: (err) => {
-      setIsLoading(false);
-      toast.error(
-        err.message == 'Network Error'
-          ? "Serverda xatolik qaytadan urinib ko'ring!"
-          : err.message
-      );
-    },
   });
 
   const { mutate } = useMutation('signup-user', API.registerUser, {
     onSuccess: (data) => {
-      if (data.data.result) {
+      if (data.data.status) {
         setIsLoading(false);
         setVerify('sign-up-user');
-        mutateContact(localStorage.getItem('phone'));
-        navigate('/verify-contact');
+        localStorage.setItem('token', data.data.token);
+        dispatch(setToken(data.data.token));
+        toast.success("Ro'yxatdan muvaffaqiyatli o'tdingiz!");
+        setTimeout(() => {
+          navigate('/');
+        }, 500);
       }
     },
     onError: (err) => {
@@ -124,23 +121,20 @@ export const RegisterForm = () => {
     },
   });
 
-  const onSubmit = async (values, { resetForm }) => {
+  const onSubmit = async (values) => {
     setIsLoading(true);
-    const formData = new FormData();
 
-    formData.append('firstName', values.firstName);
-    formData.append('lastName', values.lastName);
-    formData.append(
-      'region',
-      values.region ? values.region : 'toshkent shahri'
-    );
-    formData.append('district', values.district);
-    formData.append('address', values.address);
-    formData.append('phoneNumber', '+998' + values.phoneNumber);
-    formData.append('password', values.password);
-
-    setAuth('+998' + values.phoneNumber);
-    await mutate(formData);
+    setAuth('+998' + values.contact);
+    await mutate({
+      first_name: values.first_name,
+      last_name: values.last_name,
+      email: values.email,
+      contact: '+998' + values.contact,
+      region: values.region,
+      district: values.district,
+      address: values.address,
+      password: values.password,
+    });
   };
 
   return (
@@ -211,36 +205,46 @@ export const RegisterForm = () => {
             >
               <Form>
                 <div className="d-flex flex-column input-box">
-                  <label className="label" htmlFor="firstName">
+                  <label className="label" htmlFor="first_name">
                     Ismingiz
                   </label>
-                  <Field name="firstName" type="text" />
-                  <span className="err-message" data-has-content>
-                    <ErrorMessage name="firstName" />
+                  <Field name="first_name" type="text" />
+                  <span className="err-message">
+                    <ErrorMessage name="first_name" />
                   </span>
                 </div>
 
                 <div className="d-flex flex-column input-box">
-                  <label className="label" htmlFor="lastName">
+                  <label className="label" htmlFor="last_name">
                     Familiyangiz
                   </label>
-                  <Field name="lastName" type="text" />
-                  <span className="err-message" data-has-content>
-                    <ErrorMessage name="lastName" />
+                  <Field name="last_name" type="text" />
+                  <span className="err-message">
+                    <ErrorMessage name="last_name" />
                   </span>
                 </div>
 
                 <div className="d-flex flex-column input-box">
-                  <label className="label" htmlFor="phoneNumber">
+                  <label className="label" htmlFor="contact">
                     Telefon raqamingiz
                   </label>
                   <div className="d-flex align-items-center phone">
                     <span>+998</span>
-                    <Field name="phoneNumber" type="number" />
-                    <span className="err-message" data-has-content>
-                      <ErrorMessage name="phoneNumber" />
+                    <Field name="contact" type="number" />
+                    <span className="err-message">
+                      <ErrorMessage name="contact" />
                     </span>
                   </div>
+                </div>
+
+                <div className="d-flex flex-column input-box">
+                  <label className="label" htmlFor="email">
+                    Email (gmail, email, mail)
+                  </label>
+                  <Field name="email" type="text" />
+                  <span className="err-message">
+                    <ErrorMessage name="email" />
+                  </span>
                 </div>
 
                 <div className="d-flex flex-column input-box">
@@ -254,7 +258,7 @@ export const RegisterForm = () => {
                       </option>
                     ))}
                   </Field>
-                  <span className="err-message" data-has-content>
+                  <span className="err-message">
                     <ErrorMessage name="region" />
                   </span>
                 </div>
@@ -272,7 +276,7 @@ export const RegisterForm = () => {
                       ></option>
                     ))}
                   </datalist>
-                  <span className="err-message" data-has-content>
+                  <span className="err-message">
                     <ErrorMessage name="district" />
                   </span>
                 </div>
@@ -282,7 +286,7 @@ export const RegisterForm = () => {
                     Mahalla
                   </label>
                   <Field name="address" type="text" />
-                  <span className="err-message" data-has-content>
+                  <span className="err-message">
                     <ErrorMessage name="address" />
                   </span>
                 </div>
@@ -292,7 +296,7 @@ export const RegisterForm = () => {
                     Parol
                   </label>
                   <Field name="password" type="password" />
-                  <span className="err-message" data-has-content>
+                  <span className="err-message">
                     <ErrorMessage name="password" />
                   </span>
                 </div>

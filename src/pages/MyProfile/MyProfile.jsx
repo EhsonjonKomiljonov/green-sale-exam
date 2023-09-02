@@ -27,11 +27,11 @@ export const MyProfile = () => {
   const query = useQuery('get-user', API.getUser, {
     onSuccess: (data) => {
       setIsLoading(true);
-      if (data.data.region == selectCityRef.current?.value) {
+      if (data.data.data.region == selectCityRef.current?.value) {
         optionCityRef.current?.setAttribute('selected');
       }
       setTimeout(() => {
-        setData(data.data);
+        setData(data.data.data);
         setIsLoading(false);
       }, 2000);
     },
@@ -45,22 +45,22 @@ export const MyProfile = () => {
   });
 
   const initialValues = {
-    firstName: data.firstName || '',
-    lastName: data.lastName || '',
-    phoneNumber: data.phoneNumber?.split('+998')[1] || '',
+    first_name: data.first_name || '',
+    last_name: data.last_name || '',
+    contact: data.contact?.split('+998')[1] || '',
     region: data.region || '',
     district: data.district || '',
     address: data.address || '',
   };
 
   const validationSchema = Yup.object({
-    firstName: Yup.string()
+    first_name: Yup.string()
       .min(2, "Ism 2 harfdan ko'p bo'lishi lozim!")
       .max(100, "Ism 100 ta harfdan kam bo'lishi lozim!"),
-    lastName: Yup.string()
+    last_name: Yup.string()
       .min(2, "Familiya 2 harfdan ko'p bo'lishi lozim!")
       .max(100, "Familiya 100 ta harfdan kam bo'lishi lozim!"),
-    phoneNumber: Yup.string()
+    contact: Yup.string()
       .min(9, 'Telefon raqam uzunligi 8 tadan ortiq bolishi lozim!')
       .max(9, "Telefon raqam uzunligi eng ko'pi 9 ta bolishi mumkin!"),
     region: Yup.string().default('toshkent shahri'),
@@ -86,20 +86,16 @@ export const MyProfile = () => {
 
   const onSubmit = async (values) => {
     setIsLoading(true);
-    const formData = new FormData();
 
-    formData.append('firstName', values.firstName);
-    formData.append('lastName', values.lastName);
-    formData.append(
-      'region',
-      values.region ? values.region : 'toshkent shahri'
-    );
-    formData.append('district', values.district);
-    formData.append('address', values.address);
-    formData.append('phoneNumber', '+998' + values.phoneNumber);
-
-    setAuth('+998' + values.phoneNumber);
-    await mutate(formData);
+    await mutate({
+      first_name: values.first_name,
+      last_name: values.last_name,
+      email: values.email,
+      contact: '+998' + values.contact,
+      region: values.region,
+      district: values.district,
+      address: values.address,
+    });
   };
 
   const initialValueEditPass = {
@@ -120,10 +116,6 @@ export const MyProfile = () => {
       .matches(
         /[A-Z]/,
         "Parolda bir dona bo'lsa ham katta harf ishlatilishi lozim!"
-      )
-      .matches(
-        /[\`!@#$%^&*()_+={}\[\]:;\"'<>,.?\\\/]+/,
-        'Parolda simbol ishlatilishi lozim. misol (#$%)'
       ),
     newPassword: Yup.string()
       .min(8, "Parol eng kami 8 ta bo'lishi lozim!")
@@ -136,10 +128,6 @@ export const MyProfile = () => {
       .matches(
         /[A-Z]/,
         "Parolda bir dona bo'lsa ham katta harf ishlatilishi lozim!"
-      )
-      .matches(
-        /[\`!@#$%^&*()_+={}\[\]:;\"'<>,.?\\\/]+/,
-        'Parolda simbol ishlatilishi lozim. misol (#$%)'
       ),
     returnNewPassword: Yup.string()
       .min(8, "Parol eng kami 8 ta bo'lishi lozim!")
@@ -152,10 +140,6 @@ export const MyProfile = () => {
       .matches(
         /[A-Z]/,
         "Parolda bir dona bo'lsa ham katta harf ishlatilishi lozim!"
-      )
-      .matches(
-        /[\`!@#$%^&*()_+={}\[\]:;\"'<>,.?\\\/]+/,
-        'Parolda simbol ishlatilishi lozim. misol (#$%)'
       ),
   });
 
@@ -174,9 +158,7 @@ export const MyProfile = () => {
       },
       onError: (err) => {
         setLoading(false);
-        toast.error(`Ups!
-      serverda qandaydur xatolik.
-      Iltimos qaytadan urinib ko'ring!`);
+        toast.error(err.response?.data.message);
       },
     }
   );
@@ -198,7 +180,7 @@ export const MyProfile = () => {
               <img
                 style={{
                   position: 'absolute',
-                  right: '45%',
+                  right: '40%',
                   top: '60%',
                 }}
                 src={LoadingImage}
@@ -214,34 +196,34 @@ export const MyProfile = () => {
                   <div className="main-inputs">
                     <div className="inputs-left">
                       <div className="d-flex flex-column input-box">
-                        <label className="label" htmlFor="firstName">
+                        <label className="label" htmlFor="first_name">
                           Ismingiz
                         </label>
-                        <Field name="firstName" type="text" />
+                        <Field name="first_name" type="text" />
                         <span className="err-message">
-                          <ErrorMessage name="firstName" />
+                          <ErrorMessage name="first_name" />
                         </span>
                       </div>
 
                       <div className="d-flex flex-column input-box">
-                        <label className="label" htmlFor="lastName">
+                        <label className="label" htmlFor="last_name">
                           Familiyangiz
                         </label>
-                        <Field name="lastName" type="text" />
+                        <Field name="last_name" type="text" />
                         <span className="err-message">
-                          <ErrorMessage name="lastName" />
+                          <ErrorMessage name="last_name" />
                         </span>
                       </div>
 
                       <div className="d-flex flex-column input-box">
-                        <label className="label" htmlFor="phoneNumber">
+                        <label className="label" htmlFor="contact">
                           Telefon raqamingiz
                         </label>
                         <div className="d-flex align-items-center phone">
                           <span>+998</span>
-                          <Field name="phoneNumber" type="number" />
+                          <Field name="contact" type="number" />
                           <span className="err-message">
-                            <ErrorMessage name="phoneNumber" />
+                            <ErrorMessage name="contact" />
                           </span>
                         </div>
                       </div>
