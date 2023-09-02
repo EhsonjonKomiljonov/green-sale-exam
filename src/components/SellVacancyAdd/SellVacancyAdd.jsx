@@ -26,6 +26,7 @@ export const SellVacancyAdd = () => {
     type: Yup.string().required('Mahsulot tipini kiriting !!!'),
     district: Yup.string().required('Tummanni yozish majburiy !!!'),
   });
+
   const createSellerRequest = async (formData) => {
     const data = await API.createSeller(formData).catch((err) =>
       console.log(err)
@@ -42,9 +43,10 @@ export const SellVacancyAdd = () => {
     type: '',
     district: '',
   };
+
   const CreateSellerSubmit = (values) => {
     const formData = new FormData();
-    console.log([filesRef?.current?.files]);
+
     const valueFormData = {
       ...values,
       categoryId: selectRef.current.value,
@@ -52,168 +54,160 @@ export const SellVacancyAdd = () => {
       contact: localStorage.getItem('phone'),
       imgLink: [...filesRef?.current?.files],
     };
-    console.log(valueFormData);
+
     if (
       valueFormData?.categoryId &&
       valueFormData?.contact &&
       valueFormData?.imgLink
     ) {
-      const keysObject = Object.keys(valueFormData);
+      formData.append('name', valueFormData.name);
+      formData.append('price', valueFormData.price);
+      formData.append('capacity', valueFormData.capacity);
+      formData.append('capacityMeasure', valueFormData.capacityMeasure);
+      formData.append('type', valueFormData.type);
+      formData.append('region', valueFormData.region);
+      formData.append('categoryId', valueFormData.categoryId);
+      formData.append('district', valueFormData.district);
+      formData.append('description', valueFormData.description);
+      formData.append('contact', valueFormData.contact);
+      valueFormData.imgLink.forEach((file) => formData.append('imgLink', file));
 
-      formData.set('name', valueFormData.name);
-      formData.set('price', valueFormData.price);
-      formData.set('capacity', valueFormData.capacity);
-      formData.set('capacityMeasure', valueFormData.capacityMeasure);
-      formData.set('type', valueFormData.type);
-      formData.set('region', valueFormData.region);
-      formData.set('categoryId', valueFormData.categoryId);
-      formData.set('district', valueFormData.district);
-      formData.set('description', valueFormData.description);
-      formData.set('contact', valueFormData.contact);
-      formData.set('imgLink', valueFormData.imgLink);
       createSellerRequest(formData);
-      console.log(formData);
     }
   };
   return (
     <>
-      <section className='sell_vacancy '>
-        <div className='sell_vacancy__inner d-flex'>
-          <div className='sell_vacancy_left w-50'>
+      <section className="sell_vacancy ">
+        <div className="sell_vacancy__inner d-flex">
+          <div className="sell_vacancy_left w-50">
             <input
-              className='visually-hidden'
-              type='file'
-              id='file_upload'
+              className="visually-hidden"
+              type="file"
+              id="file_upload"
               ref={filesRef}
               multiple
             />
             <div>
-              <span className='sell__vacancy__icon'></span>
-              <label
-                htmlFor='file_upload'
-                className='sell__vacancy__label'
-              >
+              <span className="sell__vacancy__icon"></span>
+              <label htmlFor="file_upload" className="sell__vacancy__label">
                 faylni yuklash uchun ushbu
                 <br /> maydonga bosing
               </label>
             </div>
           </div>
-          <div className='sell_vacancy_right'>
-            <h2 className='sell__vacancy__title'>Add Product</h2>
+          <div className="sell_vacancy_right">
+            <h2 className="sell__vacancy__title">Add Product</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={CreateSellerSubmit}
             >
-              <Form className='sell__vacancy__form'>
+              <Form className="sell__vacancy__form">
                 <select
                   ref={selectRef}
                   required
-                  className='sell_vacancy__select'
-                  defaultValue='1'
+                  className="sell_vacancy__select"
+                  defaultValue="1"
                 >
-                  <option value='64f07d6885548d0039615a9a'>Sabzavotlar</option>
-                  <option value='64f07653f7c051e624804d60'>
+                  <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>
+                  <option value="64f07653f7c051e624804d60">
                     Poliz-ekinlari
                   </option>
-                  <option value='64f07653f7c051e624804d5f'>Mevalar</option>
+                  <option value="64f07653f7c051e624804d5f">Mevalar</option>
                 </select>
-                <div className='sell__vacancy__input__box'>
-                  <label htmlFor='name'>Mahsulot nomini yozing</label>
+                <div className="sell__vacancy__input__box">
+                  <label htmlFor="name">Mahsulot nomini yozing</label>
                   <Field
                     required
-                    type='text'
-                    name='name'
-                    id='name'
-                    className='sell__vacancy__input'
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="sell__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='name' />
+                  <span className="error__message">
+                    <ErrorMessage name="name" />
                   </span>
                 </div>
-                <div className='sell__vacancy__input__box'>
-                  <label htmlFor='price'>Narxi</label>
+                <div className="sell__vacancy__input__box">
+                  <label htmlFor="price">Narxi</label>
                   <Field
                     required
-                    type='number'
-                    name='price'
-                    id='price'
-                    className='sell__vacancy__input'
+                    type="number"
+                    name="price"
+                    id="price"
+                    className="sell__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='price' />
+                  <span className="error__message">
+                    <ErrorMessage name="price" />
                   </span>
                 </div>
-                <div className='sell__vacancy__input__box'>
-                  <label htmlFor='capacity'>Sig'imini yozing</label>
+                <div className="sell__vacancy__input__box">
+                  <label htmlFor="capacity">Sig'imini yozing</label>
                   <Field
                     required
-                    type='number'
-                    name='capacity'
-                    id='capacity'
-                    className='sell__vacancy__input'
+                    type="number"
+                    name="capacity"
+                    id="capacity"
+                    className="sell__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='capacity' />
+                  <span className="error__message">
+                    <ErrorMessage name="capacity" />
                   </span>
                 </div>
-                <div className='sell__vacancy__input__box'>
-                  <label htmlFor='capacityMeasure'>
+                <div className="sell__vacancy__input__box">
+                  <label htmlFor="capacityMeasure">
                     Sig'im tipi: tonna, kilogram
                   </label>
                   <Field
                     required
-                    type='text'
-                    name='capacityMeasure'
-                    id='capacityMeasure'
-                    className='sell__vacancy__input'
+                    type="text"
+                    name="capacityMeasure"
+                    id="capacityMeasure"
+                    className="sell__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='capacityMeasure' />
+                  <span className="error__message">
+                    <ErrorMessage name="capacityMeasure" />
                   </span>
                 </div>
-                <div className='sell__vacancy__input__box'>
-                  <label htmlFor='type'>Mahsulot tipi</label>
+                <div className="sell__vacancy__input__box">
+                  <label htmlFor="type">Mahsulot tipi</label>
                   <Field
                     required
-                    type='text'
-                    name='type'
-                    id='type'
-                    className='sell__vacancy__input'
+                    type="text"
+                    name="type"
+                    id="type"
+                    className="sell__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='type' />
+                  <span className="error__message">
+                    <ErrorMessage name="type" />
                   </span>
                 </div>
-                <div className='sell__vacancy__input__box'>
+                <div className="sell__vacancy__input__box">
                   <select
                     ref={selectRef2}
                     required
-                    className='sell_vacancy__select sell__vacancy__select'
-                    defaultValue='1'
+                    className="sell_vacancy__select sell__vacancy__select"
+                    defaultValue="1"
                   >
                     {cities.map((item) => (
-                      <option
-                        key={item.name}
-                        value={item.value}
-                      >
+                      <option key={item.name} value={item.value}>
                         {item.name}
                       </option>
                     ))}
                   </select>
-                  <span className='error__message'>
-                    <ErrorMessage name='region' />
+                  <span className="error__message">
+                    <ErrorMessage name="region" />
                   </span>{' '}
                 </div>
-                <div className='sell__vacancy__input__box'>
-                  <label htmlFor='district'>Tuman</label>
+                <div className="sell__vacancy__input__box">
+                  <label htmlFor="district">Tuman</label>
                   <Field
-                    className='sell__vacancy__input'
-                    name='district'
-                    type='text'
-                    list='district'
+                    className="sell__vacancy__input"
+                    name="district"
+                    type="text"
+                    list="district"
                   />
-                  <datalist id='district'>
+                  <datalist id="district">
                     {districts.map((item) => (
                       <option
                         key={item.name}
@@ -222,29 +216,23 @@ export const SellVacancyAdd = () => {
                     ))}
                   </datalist>
                 </div>
-                <div className='sell__vacancy__input__box'>
-                  <label htmlFor='description'>Izoh</label>
+                <div className="sell__vacancy__input__box">
+                  <label htmlFor="description">Izoh</label>
                   <Field
                     required
-                    type='text'
-                    name='description'
-                    id='description'
-                    className='sell__vacancy__input'
+                    type="text"
+                    name="description"
+                    id="description"
+                    className="sell__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='Izoh' />
+                  <span className="error__message">
+                    <ErrorMessage name="Izoh" />
                   </span>
                 </div>
-                <GreenButton
-                  text='Yuborish'
-                  type='submit'
-                />
-                <Link
-                  className='sell__vacancy__link'
-                  to='/'
-                >
+                <GreenButton text="Yuborish" type="submit" />
+                <Link className="sell__vacancy__link" to="/">
                   Bosh Sahifaga
-                  <i className='fa-solid fa-arrow-right'></i>
+                  <i className="fa-solid fa-arrow-right"></i>
                 </Link>
               </Form>
             </Formik>
