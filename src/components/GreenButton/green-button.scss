@@ -1,0 +1,23 @@
+.green-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  font-size: 20px;
+  border: none;
+  color: #fff;
+  background-color: #209240;
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    background-color: #03774c;
+    color: #ffffff;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .green-btn {
+    width: 50%;
+    display: block;
+    font-size: 16px;
+  }
+}

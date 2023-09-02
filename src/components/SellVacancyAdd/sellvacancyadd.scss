@@ -1,0 +1,192 @@
+.sell_vacancy {
+  background-image: url('../../assets/images/sell__vacancy__bg.svg');
+  background-repeat: no-repeat;
+  background-position-y: -30px;
+}
+
+.sell_vacancy__inner {
+  align-items: center;
+  justify-content: space-between;
+  background-image: url('../../assets/images/sell__vacancy__bg2.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-position-y: calc(100% + 180px);
+  background-size: 100%;
+}
+
+.sell__vacancy__input__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.sell_vacancy_left,
+.sell_vacancy_right {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.sell_vacancy_right {
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-top: 270px;
+  height: 100vh;
+  padding-bottom: 60px;
+  background-color: #ffffffd1;
+  backdrop-filter: blur(3px);
+
+  button {
+    margin-top: 20px;
+  }
+  label {
+    font-size: 17px;
+    margin-top: 20px;
+  }
+}
+
+.sell__vacancy__icon {
+  z-index: 10;
+  position: absolute;
+  background-image: url('../../assets/images/PlusAddFile.svg');
+  width: 62px;
+  height: 62px;
+  left: calc(50% - 31px);
+  background-position: center;
+  top: calc(50% - 60px);
+}
+
+.sell__vacancy__label {
+  color: #000;
+  text-align: center;
+  font-style: normal;
+  line-height: normal;
+  padding: 240px 73px 203px;
+  border-radius: 17px;
+  border: 2px dashed #0b0b0b6b;
+  background-color: #ffffffdf;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+
+.sell__vacancy__form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.sell__vacancy__input {
+  max-width: 600px;
+  width: 100%;
+  padding: 3px;
+  font-weight: 400;
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #1c6b92d6;
+  outline: none;
+  color: #1c6b92d6;
+}
+
+.sell__vacancy__title {
+  color: #222;
+  font-size: 40px;
+}
+
+.sell_vacancy__select {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background-image: url('../../assets/images/arrow-down.svg');
+  background-size: 12px;
+  background-position: right 20px center;
+  background-repeat: no-repeat;
+  background-color: #60be74cf;
+  appearance: none;
+  color: #fff;
+}
+.sell__vacancy__select {
+  margin-top: 20px;
+}
+
+.error__message {
+  font-size: 14px;
+  color: red !important;
+  position: absolute;
+  right: 0;
+  top: 100%;
+}
+
+.sell__vacancy__link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #222;
+  font-size: 20px;
+  font-weight: 500;
+
+  i {
+    margin-left: 10px;
+    font-size: 18px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .sell_vacancy__inner {
+    flex-direction: column;
+    align-items: center;
+    background-position-y: calc(100% + 85px);
+    .sell_vacancy_right {
+      padding-bottom: 85px;
+      width: 95% !important;
+      overflow: inherit;
+      height: auto;
+      padding-top: 80px;
+    }
+    .sell_vacancy_left {
+      width: 95% !important;
+      padding-top: 50px;
+    }
+  }
+  .sell__vacancy__label {
+    width: 100%;
+    min-width: 300px;
+  }
+  .sell__vacancy__form {
+    display: flex;
+    width: 62%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .sell__vacancy__form {
+    button {
+      width: 100%;
+    }
+
+    a {
+      font-size: 17px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sell__vacancy__form {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .sell__vacancy__label {
+    padding: 200px 0px 157px;
+    min-width: 265px;
+  }
+}

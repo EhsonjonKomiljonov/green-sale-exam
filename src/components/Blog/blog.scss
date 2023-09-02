@@ -1,0 +1,12 @@
+.blog__cards {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+}
+
+@media screen and (max-width: 1215px) {
+  .blog__cards {
+    justify-content: center !important;
+  }
+}
