@@ -33,15 +33,20 @@ export const LoginForm = () => {
   };
 
   const initialValues = {
-    phoneNumber: '',
+    email: '',
     password: '',
   };
 
   const validationSchema = Yup.object({
-    phoneNumber: Yup.string()
-      .required('Iltimos Telefon raqamingizni kiriting!')
-      .min(8, 'Telefon raqam uzunligi 8 tadan ortiq bolishi lozim!')
-      .max(9, "Telefon raqam uzunligi eng ko'pi 9 ta bolishi mumkin!"),
+    email: Yup.string()
+      .required('Iltimos emailni kiriting!')
+      .min(5)
+      .max(120)
+      .email("Noto'g'ri email!")
+      .matches(
+        /^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$/,
+        "Noto'g'ri email!"
+      ),
     password: Yup.string()
       .required('Iltimos parolingizni kiriting!')
       .matches(/[0-9]/, "Parolda bir dona bo'lsa ham raqam bo'lishi lozim!")
@@ -52,10 +57,6 @@ export const LoginForm = () => {
       .matches(
         /[A-Z]/,
         "Parolda bir dona bo'lsa ham katta harf ishlatilishi lozim!"
-      )
-      .matches(
-        /[\`!@#$%^&*()_+={}\[\]:;\"'<>,.?\\\/]+/,
-        'Parolda simbol ishlatilishi lozim. misol (#$%)'
       ),
   });
 
@@ -74,18 +75,19 @@ export const LoginForm = () => {
     onError: (err) => {
       setIsLoading(false);
       toast.error(
-        err.response.data.ErrorMessage == 'User not found!'
+        err.response.data.message == 'User not found!'
           ? 'Bunday foydalanuvchi mavjud emas!'
-          : err.response.data.ErrorMessage
+          : err.response.data.message == 'Incorrect email or password!'
+          ? 'Email yoki parolda xatolik mavjud!'
+          : err.response.data.message
       );
     },
   });
 
   const onSubmit = (values, { resetForm }) => {
     setIsLoading(true);
-    setAuth('+998' + values.phoneNumber);
     mutate({
-      phoneNumber: '+998' + values.phoneNumber,
+      email: values.email,
       password: values.password,
     });
   };
@@ -164,16 +166,13 @@ export const LoginForm = () => {
             >
               <Form>
                 <div className="d-flex flex-column input-box">
-                  <label className="label" htmlFor="phoneNumber">
-                    Telefon raqamingiz
+                  <label className="label" htmlFor="email">
+                    Email (gmail, email, mail)
                   </label>
-                  <div className="d-flex align-items-center phone">
-                    <span>+998</span>
-                    <Field name="phoneNumber" type="number" />
-                    <span className="err-message" data-has-content>
-                      <ErrorMessage name="phoneNumber" />
-                    </span>
-                  </div>
+                  <Field name="email" type="text" />
+                  <span className="err-message">
+                    <ErrorMessage name="email" />
+                  </span>
                 </div>
 
                 <div className="d-flex flex-column input-box">

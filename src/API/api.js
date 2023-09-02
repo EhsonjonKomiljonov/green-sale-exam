@@ -4,10 +4,10 @@ import axios from 'axios';
 const host = 'http://localhost:9000';
 
 export const API = {
-  verifyToken: (token) =>
+  verifyToken: () =>
     axios.get(host + '/check-token', {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   registerUser: (user) => axios.post(host + '/users', user),

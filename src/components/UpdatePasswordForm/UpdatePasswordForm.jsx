@@ -6,28 +6,32 @@ import * as Yup from 'yup';
 import { useMutation } from 'react-query';
 import { API } from '../../API/api';
 import { toast } from 'react-toastify';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { LoadingContext } from '../../context/LoadingContext';
 import { Loading } from '../Loading/Loading';
-import { VerifyContactContext } from '../../context/VerifyContactContext';
-import { AuthContext } from '../../context/AuthContext';
+import Logo from '../../assets/images/logo.svg';
+import GmailIcon from '../../assets/images/gmail-icon.png';
 
 export const UpdatePasswordForm = () => {
   const navigate = useNavigate();
   const { isLoading, setIsLoading } = useContext(LoadingContext);
-  const { setVerify } = useContext(VerifyContactContext);
-  const { setAuth } = useContext(AuthContext);
+  const emailModalRef = useRef();
 
   const initialValues = {
-    phoneNumber: '',
+    email: '',
     newPassword: '',
   };
 
   const validationSchema = Yup.object({
-    phoneNumber: Yup.string()
-      .required('Iltimos Telefon raqamingizni kiriting!')
-      .min(8, 'Telefon raqam uzunligi 8 tadan ortiq bolishi lozim!')
-      .max(9, "Telefon raqam uzunligi eng ko'pi 9 ta bolishi mumkin!"),
+    email: Yup.string()
+      .required('Iltimos emailni kiriting!')
+      .min(5)
+      .max(120)
+      .email("Noto'g'ri email!")
+      .matches(
+        /^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$/,
+        "Noto'g'ri email!"
+      ),
     newPassword: Yup.string()
       .required('Iltimos parolingizni kiriting!')
       .matches(/[0-9]/, "Parolda bir dona bo'lsa ham raqam bo'lishi lozim!")
@@ -38,19 +42,14 @@ export const UpdatePasswordForm = () => {
       .matches(
         /[A-Z]/,
         "Parolda bir dona bo'lsa ham katta harf ishlatilishi lozim!"
-      )
-      .matches(
-        /[\`!@#$%^&*()_+={}\[\]:;\"'<>,.?\\\/]+/,
-        'Parolda simbol ishlatilishi lozim. misol (#$%)'
       ),
   });
 
   const { mutate } = useMutation('update-user-password', API.updatePassword, {
     onSuccess: (data) => {
-      if (data.data.result) {
+      if (data.data.status) {
         setIsLoading(false);
-        setVerify('update-password');
-        navigate('/verify-contact');
+        emailModalRef.current.style.display = 'grid';
       }
     },
     onError: (err) => {
@@ -63,11 +62,7 @@ export const UpdatePasswordForm = () => {
 
   const onSubmit = (values) => {
     setIsLoading(true);
-    setAuth('+998' + values.phoneNumber);
-    mutate({
-      phoneNumber: '+998' + values.phoneNumber,
-      newPassword: values.newPassword,
-    });
+    mutate(values);
   };
 
   return (
@@ -86,16 +81,13 @@ export const UpdatePasswordForm = () => {
             >
               <Form>
                 <div className="d-flex flex-column input-box">
-                  <label className="label" htmlFor="phoneNumber">
-                    Telefon raqamingiz
+                  <label className="label" htmlFor="email">
+                    Email (gmail, email, mail)
                   </label>
-                  <div className="d-flex align-items-center phone">
-                    <span>+998</span>
-                    <Field id="phoneNumber" name="phoneNumber" type="number" />
-                    <span className="err-message" data-has-content>
-                      <ErrorMessage name="phoneNumber" />
-                    </span>
-                  </div>
+                  <Field name="email" type="text" />
+                  <span className="err-message">
+                    <ErrorMessage name="email" />
+                  </span>
                 </div>
 
                 <div className="d-flex flex-column input-box">
@@ -122,6 +114,22 @@ export const UpdatePasswordForm = () => {
           </div>
         </div>
       </section>
+
+      <div className="verify-email-modal" ref={emailModalRef}>
+        <div className="verify-email-modal__inner">
+          <a className="logo" href="/">
+            <img src={Logo} alt="Green Sale" width="70px" />
+            <p>GREEN SALE</p>
+          </a>
+          <h2 className="h4 text-center">
+            Biz emailingizga xabar yubordik, emailingizni tekshiring.
+          </h2>
+          <a href="https://mail.google.com/" target='_blank'>
+            <img src={GmailIcon} alt="M" />
+            Pochta
+          </a>
+        </div>
+      </div>
 
       {isLoading ? <Loading /> : ''}
     </>

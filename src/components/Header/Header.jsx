@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -19,7 +19,7 @@ export const Header = () => {
   const [menu, setMenu] = useState(false);
   let lastScrollY = 0;
 
-  const { mutate } = useMutation('verify-token', API.verifyToken, {
+const query = useQuery('verify-token', API.verifyToken, {
     onSuccess: (data) => {
       setIsLoading(false);
       if (data.data.data) {
@@ -45,7 +45,6 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    mutate(token);
 
     const handleScroll = () => {
       const scrollY = window.pageYOffset;

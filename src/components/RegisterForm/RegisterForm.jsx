@@ -124,7 +124,6 @@ export const RegisterForm = () => {
   const onSubmit = async (values) => {
     setIsLoading(true);
 
-    setAuth('+998' + values.contact);
     await mutate({
       first_name: values.first_name,
       last_name: values.last_name,
