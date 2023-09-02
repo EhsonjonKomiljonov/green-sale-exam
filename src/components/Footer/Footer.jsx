@@ -67,7 +67,7 @@ export const Footer = () => {
                       href="#log-out-modal"
                       className={`text-white text-opacity-50 ${
                         verifyToken ? '' : 'd-none'
-                      }`}
+                      }`} 
                     >
                       Chiqish
                     </a>
