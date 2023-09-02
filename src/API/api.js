@@ -1,19 +1,18 @@
 import axios from 'axios';
 
-const host = 'http://95.130.227.68:8080';
+const host = 'https://green-sale.onrender.com';
 
 export const API = {
   verifyToken: (token) =>
-    axios.post(host + '/api/auth/token/verify', {
+    axios.get(host + '/check-token', {
       authorization: token,
     }),
-  registerUser: (user) => axios.post(host + '/api/auth/register', user),
-  loginUser: (user) => axios.post(host + '/api/auth/login', user),
-  verifyContact: (obj) => axios.post(host + '/api/auth/register/verify', obj),
-  sendContact: (phone) =>
-    axios.post(
-      host + `/api/auth/register/send-code?phone=${phone.replace('+', '%2B')}`
-    ),
+  registerUser: (user) => axios.post(host + '/users', user),
+  loginUser: (user) => axios.post(host + '/users/login', user),
+  // sendContact: (phone) =>
+  //   axios.post(
+  //     host + `/api/auth/register/send-code?phone=${phone.replace('+', '%2B')}`
+  //   ),
   createSeller: (formData) =>
     axios.post(host + '/api/client/seller/post', {
       headers: {
@@ -21,26 +20,25 @@ export const API = {
       },
       formData,
     }),
-  updatePassword: (data) => axios.post(host + '/api/auth/password/reset', data),
-  verifyNewPassword: (data) =>
-    axios.post(host + '/api/auth/password/verify', data),
+  updatePassword: (data) => axios.post(host + '/users/reset-password', data),
+  // verifyNewPassword: (data) =>
+  //   axios.post(host + '/api/auth/password/verify', data),
   getUser: () =>
-    axios.get(host + '/api/account', {
+    axios.get(host + '/users/my-profile', {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     }),
   editUser: (user) =>
-    axios.put(host + '/api/account/information', user, {
+    axios.put(host + '/users/my-profile/info', user, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     }),
   editUserPassword: (password) =>
-    axios.put(host + '/api/account/security', password, {
+    axios.put(host + '/users/my-profile/security', password, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     }),
 };
- 
