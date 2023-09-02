@@ -17,11 +17,10 @@ export const API = {
   //     host + `/api/auth/register/send-code?phone=${phone.replace('+', '%2B')}`
   //   ),
   createSeller: (formData) =>
-    axios.post(host + '/api/client/seller/post', {
+    axios.post(host + '/seller-post', formData, {
       headers: {
-        Authorization: 'Bearer' + ' ' + localStorage.getItem('token'),
+        authorization: localStorage.getItem('token'),
       },
-      formData,
     }),
   updatePassword: (data) => axios.post(host + '/users/reset-password', data),
   // verifyNewPassword: (data) =>
@@ -45,3 +44,5 @@ export const API = {
       },
     }),
 };
+
+console.log(localStorage.getItem('token'));
