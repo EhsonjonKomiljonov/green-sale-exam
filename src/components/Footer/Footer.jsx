@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './footer.scss';
 import Logo from '../../assets/images/logo.svg';
 import { Link } from 'react-router-dom';
+import { VerifyTokenContext } from '../../context/VerifyToken';
 export const Footer = () => {
+  const { verifyToken } = useContext(VerifyTokenContext);
+
   return (
     <>
       <section className="footer">
@@ -10,41 +13,70 @@ export const Footer = () => {
           <div className="footer__inner">
             <div className="row justify-content-center">
               <div className="col-12 text-md-start text-center pt-md-0 pt-3 col-md-2">
-                <h5 className="h5 footer__title">Biz Haqimizda</h5>
+                <h5 className="h5 footer__title mb-4">Biz Haqimizda</h5>
                 <ul className="footer__list">
                   <li className="footer__item">
-                    <a href="">Biz Haqimizda</a>
+                    <Link to="/">Biz Haqimizda</Link>
                   </li>
                   <li className="footer__item">
-                    <a href="">FAQ</a>
+                    <Link to="/">FAQ</Link>
                   </li>
                 </ul>
               </div>
               <div className="col-12 text-md-start text-center pt-md-0 pt-3 col-md-2">
-                <h5 className="h5 footer__title">Linklar</h5>
+                <h5 className="h5 footer__title mb-4">Linklar</h5>
                 <ul className="footer__list  ">
                   <li className="footer__item">
-                    <a href="">BOSH SAHIFA</a>
+                    <Link to="/">BOSH SAHIFA</Link>
                   </li>
                   <li className="footer__item">
-                    <a href="">SABZAVOTLAR</a>
+                    <Link to="/buy-vacancy">OLISH UCHUN VAKANSIYA</Link>
                   </li>
                   <li className="footer__item">
-                    <a href="">MEVALAR</a>
-                  </li>
-                  <li className="footer__item">
-                    <a href="">POLIZ EKINLARI</a>
+                    <Link to="/sell-vacancies">sotish uchun vakansiya</Link>
                   </li>
                 </ul>
               </div>
               <div className="col-12 text-md-start text-center pt-md-0 pt-3 col-md-2">
-                <h5 className="h5 footer__title">Login</h5>
+                <h5 className="h5 footer__title mb-4">Login</h5>
                 <ul className="footer__list">
                   <li className="footer__item">
-                    <a href="">Login</a>
+                    <Link
+                      style={{
+                        fontSize: '13px',
+                      }}
+                      to="/my-profile"
+                      className={`text-white text-opacity-50 ${
+                        verifyToken ? '' : 'd-none'
+                      }`}
+                    >
+                      Mening profilim
+                    </Link>
+                    <Link
+                      className={`${verifyToken ? 'd-none' : ''}`}
+                      to="/login"
+                    >
+                      Kirish
+                    </Link>
                   </li>
                   <li className="footer__item">
-                    <a href="">Register</a>
+                    <a
+                      style={{
+                        fontSize: '13px',
+                      }}
+                      href="#log-out-modal"
+                      className={`text-white text-opacity-50 ${
+                        verifyToken ? '' : 'd-none'
+                      }`}
+                    >
+                      Chiqish
+                    </a>
+                    <Link
+                      to="/register"
+                      className={`${verifyToken ? 'd-none' : ''}`}
+                    >
+                      Ro'yxatdan o'tish
+                    </Link>
                   </li>
                 </ul>
               </div>
