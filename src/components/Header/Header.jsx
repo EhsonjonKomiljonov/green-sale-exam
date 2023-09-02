@@ -121,12 +121,6 @@ const query = useQuery('verify-token', API.verifyToken, {
                 <img src={Logo} alt="Green Sale" width="50px" />
                 <p>GREEN SALE</p>
               </Link>
-              <label className="px-3 input-group">
-                <input type="text" placeholder="Search for product" />
-                <button className="search-btn-header btn">
-                  <i className="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </label>
               <div className="site-header__center-links">
                 <Link className="like rounded-1" to="/buy-vacancies">
                   Oluvchi vakansiyalar
