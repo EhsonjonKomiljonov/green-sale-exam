@@ -43,6 +43,5 @@ export const API = {
         Authorization: localStorage.getItem('token'),
       },
     }),
+  getProducts: () => axios.get(host + '/seller-post/get-posts'),
 };
-
-console.log(localStorage.getItem('token'));
