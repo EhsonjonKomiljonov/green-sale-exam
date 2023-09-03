@@ -1,5 +1,8 @@
 import React from 'react';
 import './Hero.scss';
+import carouselBg from '../../assets/images/heroCarouselImg1.jpeg';
+import carouselBg1 from '../../assets/images/heroCarouselImg2.jpeg';
+import carouselBg2 from '../../assets/images/heroCarouselImg3.jpeg';
 import cardBg from '../../assets/images/heroCardImg.png';
 import cardBg2 from '../../assets/images/heroCardImgLeft.png';
 import cardBg3 from '../../assets/images/heroCardImgLeft2.png';
@@ -21,11 +24,18 @@ export const Hero = () => {
             <div className='col-12 col-sm-8 col-md-6'>
               <Slider {...settings}>
                 <img
-                  src={cardBg}
+                className='carousel_img'
+                  src={carouselBg}
                   alt=''
                 />{' '}
                 <img
-                  src={cardBg}
+                className='carousel_img'
+                  src={carouselBg1}
+                  alt=''
+                />{' '}
+                <img
+                className='carousel_img'
+                  src={carouselBg2}
                   alt=''
                 />{' '}
               </Slider>
