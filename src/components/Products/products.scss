@@ -5,20 +5,17 @@
     font-weight: 200;
     text-align: center;
   }
-  
+
   &__inner {
     gap: 20px;
     justify-content: center;
   }
 
-  .view-btn {
+  a {
     display: block;
+    width: 100%;
+    max-width: 230px;
     margin: 30px auto 0;
-    padding: 10px 20px;
-    border: none;
-    background-color: #60be74;
-    color: #fff;
-    border-radius: 5px;
   }
 }
 

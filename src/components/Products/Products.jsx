@@ -1,29 +1,40 @@
 import './products.scss';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { products } from '../../db/products.js';
-import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { API } from '../../API/api';
+import { toast } from 'react-toastify';
+import { GreenButton } from '../GreenButton/GreenButton';
+import { Link } from 'react-router-dom';
 
 export const Products = () => {
-  const [data, setData] = useState(products.slice(0, 3));
-
-  const viewAll = () => {
-    data.length === 3 ? setData(products) : setData(products.slice(0, 3));
-  };
+  const { data } = useQuery('get-products', API.getProducts, {
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (err) => {
+      toast.error('Ups serverda xatolik saytni yangilang!');
+    },
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <section className="products py-5">
       <div className="container">
         <h2 className="mb-5">Products</h2>
         <div className="products__inner d-flex flex-wrap">
-          {data.length ? (
-            data.map((item) => <div key={item.title}><ProductCard obj={item} /></div>)
+          {data?.data?.data?.length ? (
+            data.data.data.map((item) => (
+              <div key={item._id}>
+                <ProductCard obj={item} />
+              </div>
+            ))
           ) : (
             <h1>Loading...</h1>
           )}
         </div>
-        <button onClick={() => viewAll()} className="view-btn">
-          {data.length == 3 ? 'View All' : 'Hide All'}
-        </button>
+        <Link to="/seller-vacancies">
+          <GreenButton text="Barchasini ko'rish" />
+        </Link>
       </div>
     </section>
   );
