@@ -99,7 +99,7 @@ export const SellVacancyAdd = () => {
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       toast.error('Iltimos logindan oting');
-      navigate('/register');
+      navigate('/login');
     }
   }, []);
   return (

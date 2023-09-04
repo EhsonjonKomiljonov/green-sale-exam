@@ -6,7 +6,7 @@ import { Home } from './pages/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './pages/Login/Login';
 import { Register } from './pages/Register/Register';
-import { QueryClientProvider, QueryClient} from 'react-query';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setToken } from './redux/token/tokenAction';
@@ -24,16 +24,34 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/new-password" element={<UpdatePassword />} />
-          <Route path="/my-profile" element={<MyProfile />} />
-          <Route path="/sell-vacancies" element={<SellVacancyAdd />} />
+          <Route
+            path='/'
+            element={<Home />}
+          />
+          <Route
+            path='/login'
+            element={<Login />}
+          />
+          <Route
+            path='/register'
+            element={<Register />}
+          />
+          <Route
+            path='/new-password'
+            element={<UpdatePassword />}
+          />
+          <Route
+            path='/my-profile'
+            element={<MyProfile />}
+          />
+          <Route
+            path='/sell-vacancies'
+            element={<SellVacancyAdd />}
+          />
         </Routes>
       </main>
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -42,7 +60,8 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='light'
+        limit='5'
       />
     </QueryClientProvider>
   );
