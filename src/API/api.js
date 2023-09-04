@@ -44,5 +44,3 @@ export const API = {
       },
     }),
 };
-
-console.log(localStorage.getItem('token'));
