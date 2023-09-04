@@ -1,13 +1,13 @@
 import React from 'react';
 import './Hero.scss';
-import carouselBg from '../../assets/images/heroCarouselImg1.jpeg';
-import carouselBg1 from '../../assets/images/heroCarouselImg2.jpeg';
-import carouselBg2 from '../../assets/images/heroCarouselImg3.jpeg';
-import cardBg from '../../assets/images/heroCardImg.png';
+import carouselBg from '../../assets/images/heroCarouselImg1.jpg';
+import carouselBg1 from '../../assets/images/heroCarouselImg2.jpg';
+import carouselBg2 from '../../assets/images/heroCarouselImg3.jfif';
 import cardBg2 from '../../assets/images/heroCardImgLeft.png';
 import cardBg3 from '../../assets/images/heroCardImgLeft2.png';
 import cardBg4 from '../../assets/images/heroCardImgLeft3.png';
 import Slider from 'react-slick';
+import { useNavigate } from 'react-router-dom';
 
 export const Hero = () => {
   const settings = {
@@ -24,17 +24,17 @@ export const Hero = () => {
             <div className='col-12 col-sm-8 col-md-6'>
               <Slider {...settings}>
                 <img
-                className='carousel_img'
+                  className='carousel_img'
                   src={carouselBg}
                   alt=''
                 />{' '}
                 <img
-                className='carousel_img'
+                  className='carousel_img'
                   src={carouselBg1}
                   alt=''
                 />{' '}
                 <img
-                className='carousel_img'
+                  className='carousel_img'
                   src={carouselBg2}
                   alt=''
                 />{' '}
