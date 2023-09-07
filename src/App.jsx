@@ -13,6 +13,7 @@ import { setToken } from './redux/token/tokenAction';
 import { SellVacancyAdd } from './components/SellVacancyAdd/SellVacancyAdd';
 import { UpdatePassword } from './pages/UpdatePassword/UpdatePassword';
 import { MyProfile } from './pages/MyProfile/MyProfile';
+import { Admin } from './pages/Admin/Admin';
 const queryClient = new QueryClient();
 
 function App() {
@@ -24,34 +25,17 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <main>
         <Routes>
-          <Route
-            path='/'
-            element={<Home />}
-          />
-          <Route
-            path='/login'
-            element={<Login />}
-          />
-          <Route
-            path='/register'
-            element={<Register />}
-          />
-          <Route
-            path='/new-password'
-            element={<UpdatePassword />}
-          />
-          <Route
-            path='/my-profile'
-            element={<MyProfile />}
-          />
-          <Route
-            path='/sell-vacancies'
-            element={<SellVacancyAdd />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/new-password" element={<UpdatePassword />} />
+          <Route path="/my-profile" element={<MyProfile />} />
+          <Route path="/sell-vacancies" element={<SellVacancyAdd />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
       <ToastContainer
-        position='top-right'
+        position="top-right"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -60,8 +44,8 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='light'
-        limit='5'
+        theme="light"
+        limit="5"
       />
     </QueryClientProvider>
   );
