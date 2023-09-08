@@ -14,10 +14,12 @@ import { SellVacancyAdd } from './components/SellVacancyAdd/SellVacancyAdd';
 import { UpdatePassword } from './pages/UpdatePassword/UpdatePassword';
 import { MyProfile } from './pages/MyProfile/MyProfile';
 import { Admin } from './pages/Admin/Admin';
+import { useRef } from 'react';
 const queryClient = new QueryClient();
 
 function App() {
   const dispatch = useDispatch();
+  const timerRef = useRef();
 
   dispatch(setToken(localStorage.getItem('token') || ''));
 
@@ -50,5 +52,5 @@ function App() {
     </QueryClientProvider>
   );
 }
-
+// 2.592e8
 export default App;

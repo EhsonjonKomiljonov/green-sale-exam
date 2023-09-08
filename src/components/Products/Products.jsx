@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 export const Products = () => {
   const { data } = useQuery('get-products', API.getProducts, {
     onSuccess: (data) => {
-      console.log(data);
+      console.log('1');
     },
     onError: (err) => {
       toast.error('Ups serverda xatolik saytni yangilang!');
