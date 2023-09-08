@@ -120,7 +120,7 @@ export const LoginForm = () => {
               <Link to="/">Bosh sahifa</Link>
             </li>
             <li>
-              <Link to="/buy-vacancy">Olish uchun vakansiya</Link>
+              <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
             </li>
             <li>
               <Link to="/sell-vacancies">Sotish uchun vakansiya</Link>
@@ -224,7 +224,7 @@ export const LoginForm = () => {
               <Link to="/">Bosh sahifa</Link>
             </li>
             <li>
-              <Link to="/buy-vacancy">Olish uchun vakansiya</Link>
+              <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
             </li>
             <li>
               <Link to="/sell-vacancy">Sotish uchun vakansiya</Link>

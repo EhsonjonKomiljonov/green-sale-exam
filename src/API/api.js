@@ -4,8 +4,8 @@ import axios from 'axios';
 const host = 'http://localhost:9000';
 
 export const API = {
-  verifyToken: () =>
-    axios.get(host + '/check-token', {
+  verifyToken: async () =>
+    await axios.get(host + '/check-token', {
       headers: {
         authorization: localStorage.getItem('token'),
       },
@@ -18,6 +18,12 @@ export const API = {
   //   ),
   createSeller: (formData) =>
     axios.post(host + '/seller-post', formData, {
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    }),
+  createBuyer: (formData) =>
+    axios.post(host + '/buyer-post', formData, {
       headers: {
         authorization: localStorage.getItem('token'),
       },
