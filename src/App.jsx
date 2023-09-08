@@ -15,6 +15,7 @@ import { UpdatePassword } from './pages/UpdatePassword/UpdatePassword';
 import { MyProfile } from './pages/MyProfile/MyProfile';
 import { BuyVacancyAdd } from './pages/BuyVacancyAdd/BuyVacancyAdd';
 import { SellVacancyGet } from './pages/SellVacancyGet/SellVacancyGet';
+import { Admin } from './pages/Admin/Admin';
 const queryClient = new QueryClient();
 
 function App() {
@@ -51,9 +52,9 @@ function App() {
             element={<SellVacancyAdd />}
           />
           <Route
-            path='/buy-vacancies'
-            element={<BuyVacancyAdd />}
-          />
+            path='/admin'
+            element={<Admin />}
+          />{' '}
           <Route
             path='/seller-vacancies'
             element={<SellVacancyGet />}

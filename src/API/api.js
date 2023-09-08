@@ -50,4 +50,5 @@ export const API = {
       },
     }),
   getProducts: () => axios.get(host + '/seller-post/get-posts'),
+  getMainSellProducts: () => axios.get(host + '/seller-post'),
 };

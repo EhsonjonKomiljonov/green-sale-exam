@@ -1,3 +1,7 @@
+import { useContext, useEffect, useRef, useState } from 'react';
+import { LoaderImageContext } from '../../context/LoaderImage';
+import Loader from '../../assets/images/img-loader.svg';
+import Placeholder from '../../assets/images/placeholder-product.png';
 import './product-card.scss';
 const host = 'https://green-sale.onrender.com';
 
@@ -22,10 +26,37 @@ export const ProductCard = ({ obj }) => {
   const hour = timeParts[0];
   const minute = timeParts[1];
 
+  const { isLoadingImage, setIsLoadingImage } = useContext(LoaderImageContext);
+  const [placeholderImg, setPlaceholderImg] = useState(false);
+
+  const onLoadImage = () => {
+    setIsLoadingImage(false);
+  };
+
+  const onErrorImage = () => {
+    setPlaceholderImg(true);
+  };
+
   return (
     <div className={!sellered ? 'product-card' : 'd-none'}>
       <img
-        src={typeof imgLink == 'object' ? host + imgLink[0] : host + imgLink}
+        onLoad={onLoadImage}
+        onError={onErrorImage}
+        style={{
+          display: isLoadingImage ? 'block' : '',
+          width: isLoadingImage ? '200px' : '',
+          height: isLoadingImage ? 'auto' : '',
+          margin: isLoadingImage ? '0 auto' : '',
+        }}
+        src={
+          isLoadingImage
+            ? Loader
+            : placeholderImg
+            ? Placeholder
+            : typeof imgLink == 'object'
+            ? host + imgLink[0]
+            : host + imgLink
+        }
         alt={name}
       />
       <div className="product-card__body">
