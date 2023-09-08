@@ -54,6 +54,10 @@ function App() {
             element={<SellVacancyAdd />}
           />
           <Route
+            path='/buy-vacancies'
+            element={<BuyVacancyAdd />}
+          />
+          <Route
             path='/admin'
             element={<Admin />}
           />{' '}
