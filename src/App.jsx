@@ -13,6 +13,8 @@ import { setToken } from './redux/token/tokenAction';
 import { SellVacancyAdd } from './components/SellVacancyAdd/SellVacancyAdd';
 import { UpdatePassword } from './pages/UpdatePassword/UpdatePassword';
 import { MyProfile } from './pages/MyProfile/MyProfile';
+import { BuyVacancyAdd } from './pages/BuyVacancyAdd/BuyVacancyAdd';
+import { SellVacancyGet } from './pages/SellVacancyGet/SellVacancyGet';
 const queryClient = new QueryClient();
 
 function App() {
@@ -47,6 +49,14 @@ function App() {
           <Route
             path='/sell-vacancies'
             element={<SellVacancyAdd />}
+          />
+          <Route
+            path='/buy-vacancies'
+            element={<BuyVacancyAdd />}
+          />
+          <Route
+            path='/seller-vacancies'
+            element={<SellVacancyGet />}
           />
         </Routes>
       </main>
