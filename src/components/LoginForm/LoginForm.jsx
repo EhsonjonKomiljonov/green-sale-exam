@@ -227,7 +227,7 @@ export const LoginForm = () => {
               <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
             </li>
             <li>
-              <Link to="/sell-vacancy">Sotish uchun vakansiya</Link>
+              <Link to="/sell-vacancies">Sotish uchun vakansiya</Link>
             </li>
             <li>
               <Link to="/about">Biz Haqimizda</Link>
