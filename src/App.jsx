@@ -16,10 +16,12 @@ import { MyProfile } from './pages/MyProfile/MyProfile';
 import { BuyVacancyAdd } from './pages/BuyVacancyAdd/BuyVacancyAdd';
 import { SellVacancyGet } from './pages/SellVacancyGet/SellVacancyGet';
 import { Admin } from './pages/Admin/Admin';
+import { useRef } from 'react';
 const queryClient = new QueryClient();
 
 function App() {
   const dispatch = useDispatch();
+  const timerRef = useRef();
 
   dispatch(setToken(localStorage.getItem('token') || ''));
 
@@ -81,5 +83,5 @@ function App() {
     </QueryClientProvider>
   );
 }
-
+// 2.592e8
 export default App;
