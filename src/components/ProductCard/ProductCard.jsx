@@ -19,6 +19,8 @@ export const ProductCard = ({ obj }) => {
   } = obj;
   const sellered = false;
 
+  console.log(obj)
+
   const parts = created_at ? created_at.split('T') : updated_at.split('T');
   const dateParts = parts[0].split('-');
   const timeParts = parts[1].split(':');
