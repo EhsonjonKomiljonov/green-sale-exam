@@ -51,4 +51,6 @@ export const API = {
     }),
   getProducts: () => axios.get(host + '/seller-post/get-posts'),
   getMainSellProducts: () => axios.get(host + '/seller-post'),
+  getSingleSellProduct: (id) => axios.get(host + `/seller-post/` + id),
+  getSingleBuyProduct: (id) => axios.get(host + `/buyer-post/` + id),
 };

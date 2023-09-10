@@ -17,6 +17,7 @@ import { BuyVacancyAdd } from './pages/BuyVacancyAdd/BuyVacancyAdd';
 import { SellVacancyGet } from './pages/SellVacancyGet/SellVacancyGet';
 import { Admin } from './pages/Admin/Admin';
 import { useRef } from 'react';
+import { ProductSingle } from './pages/ProductSingle/ProductSingle';
 const queryClient = new QueryClient();
 
 function App() {
@@ -29,46 +30,20 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <main>
         <Routes>
-          <Route
-            path='/'
-            element={<Home />}
-          />
-          <Route
-            path='/login'
-            element={<Login />}
-          />
-          <Route
-            path='/register'
-            element={<Register />}
-          />
-          <Route
-            path='/new-password'
-            element={<UpdatePassword />}
-          />
-          <Route
-            path='/my-profile'
-            element={<MyProfile />}
-          />
-          <Route
-            path='/sell-vacancies'
-            element={<SellVacancyAdd />}
-          />
-          <Route
-            path='/buy-vacancies'
-            element={<BuyVacancyAdd />}
-          />
-          <Route
-            path='/admin'
-            element={<Admin />}
-          />{' '}
-          <Route
-            path='/seller-vacancies'
-            element={<SellVacancyGet />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/new-password" element={<UpdatePassword />} />
+          <Route path="/my-profile" element={<MyProfile />} />
+          <Route path="/sell-vacancies" element={<SellVacancyAdd />} />
+          <Route path="/buy-vacancies" element={<BuyVacancyAdd />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/seller-vacancies" element={<SellVacancyGet />} />
+          <Route path="/single-product/:id" element={<ProductSingle />} />
         </Routes>
       </main>
       <ToastContainer
-        position='top-right'
+        position="top-right"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -77,8 +52,8 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme='light'
-        limit='5'
+        theme="light"
+        limit="5"
       />
     </QueryClientProvider>
   );
