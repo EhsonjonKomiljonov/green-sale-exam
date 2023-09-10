@@ -12,6 +12,14 @@ export const API = {
     }),
   registerUser: (user) => axios.post(host + '/users', user),
   loginUser: (user) => axios.post(host + '/users/login', user),
+  getSellerPosts: (c) =>
+    c
+      ? axios.get(host + '/seller-post?categoryId=' + c)
+      : axios.get(host + '/seller-post'),
+  getBuyerPosts: (c) =>
+    c
+      ? axios.get(host + '/buyer-post?categoryId=' + c)
+      : axios.get(host + '/buyer-post'),
   // sendContact: (phone) =>
   //   axios.post(
   //     host + `/api/auth/register/send-code?phone=${phone.replace('+', '%2B')}`

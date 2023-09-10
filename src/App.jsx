@@ -17,6 +17,7 @@ import { BuyVacancyAdd } from './pages/BuyVacancyAdd/BuyVacancyAdd';
 import { SellVacancyGet } from './pages/SellVacancyGet/SellVacancyGet';
 import { Admin } from './pages/Admin/Admin';
 import { useRef } from 'react';
+import { BuyVacancyGet } from './pages/BuyVacancyGet/BuyVacancyGet';
 const queryClient = new QueryClient();
 
 function App() {
@@ -64,6 +65,10 @@ function App() {
           <Route
             path='/seller-vacancies'
             element={<SellVacancyGet />}
+          />
+          <Route
+            path='/buyer-vacancies'
+            element={<BuyVacancyGet />}
           />
         </Routes>
       </main>
