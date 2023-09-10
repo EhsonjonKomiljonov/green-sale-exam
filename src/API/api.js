@@ -20,10 +20,6 @@ export const API = {
     c
       ? axios.get(host + '/buyer-post?categoryId=' + c)
       : axios.get(host + '/buyer-post'),
-  // sendContact: (phone) =>
-  //   axios.post(
-  //     host + `/api/auth/register/send-code?phone=${phone.replace('+', '%2B')}`
-  //   ),
   createSeller: (formData) =>
     axios.post(host + '/seller-post', formData, {
       headers: {
@@ -37,8 +33,6 @@ export const API = {
       },
     }),
   updatePassword: (data) => axios.post(host + '/users/reset-password', data),
-  // verifyNewPassword: (data) =>
-  //   axios.post(host + '/api/auth/password/verify', data),
   getUser: () =>
     axios.get(host + '/users/my-profile', {
       headers: {
@@ -58,7 +52,19 @@ export const API = {
       },
     }),
   getProducts: () => axios.get(host + '/seller-post/get-posts'),
-  getMainSellProducts: () => axios.get(host + '/seller-post'),
   getSingleSellProduct: (id) => axios.get(host + `/seller-post/` + id),
   getSingleBuyProduct: (id) => axios.get(host + `/buyer-post/` + id),
+  loginAdmin: (admin) => axios.post(host + '/admin/login', admin),
+  deleteSellProduct: (id) =>
+    axios.delete(host + '/admin/delete-seller-post/' + id, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    }),
+  deleteBuyProduct: (id) =>
+    axios.delete(host + '/admin/delete-buyer-post/' + id, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    }),
 };

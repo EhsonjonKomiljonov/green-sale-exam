@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { motion } from 'framer-motion';
-import { AuthContext } from '../../context/AuthContext';
 import { useMutation } from 'react-query';
 import { API } from '../../API/api';
 import { GreenButton } from '../GreenButton/GreenButton';
@@ -18,7 +17,6 @@ import './login-form.scss';
 export const LoginForm = () => {
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
-  const { setAuth } = useContext(AuthContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
   const dispatch = useDispatch();
 

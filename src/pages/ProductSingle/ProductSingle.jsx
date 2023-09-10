@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import { toast } from 'react-toastify';
 import { API } from '../../API/api';
@@ -17,7 +17,11 @@ export const ProductSingle = () => {
   const type = params?.id.split('$type=')[1];
   const [data, setData] = useState([]);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
+  const navigate = useNavigate();
   const host = import.meta.env.VITE_REACT_APP_HOST;
+  const admin_sec_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
+
+  window.scroll = 140
 
   const { mutate: buyMutate } = useMutation(
     'get-single-buy-product',
@@ -87,12 +91,49 @@ export const ProductSingle = () => {
     className: 'slider',
     dots: true,
     infinite: true,
-    speed: 400,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: false,
   };
 
-  console.log(data);
+  const { mutate: deleteProductMutate } = useMutation(
+    'delete-product',
+    API.deleteSellProduct,
+    {
+      onSuccess: (data) => {
+        if (data.data.status == 200) {
+          navigate('/admin');
+        }
+      },
+      onError: (err) => {
+        toast.error(`Ups Serverda qandaydur xatolik!
+        saytni yangilab, qaytadan urunib ko'ring!`);
+      },
+    }
+  );
+
+  const { mutate: deleteBuyProductMutate } = useMutation(
+    'delete-product',
+    API.deleteBuyProduct,
+    {
+      onSuccess: (data) => {
+        if (data.data.status == 200) {
+          navigate('/admin');
+        }
+      },
+      onError: (err) => {
+        toast.error(`Ups Serverda qandaydur xatolik!
+        saytni yangilab, qaytadan urunib ko'ring!`);
+      },
+    }
+  );
+
+  const deleteProduct = (evt) => {
+    if (type == 'seller') deleteProductMutate(evt.target.id);
+    else deleteBuyProductMutate(evt.target.id);
+  };
 
   return (
     <>
@@ -146,6 +187,30 @@ export const ProductSingle = () => {
                   Bog'lanish: {data.contact}
                 </a>
               </div>
+              {admin_sec_key == localStorage.getItem('admin') && (
+                <>
+                  <div className="pt-5 mt-5">
+                    <a className="btn btn-danger" href="#delete_product">
+                      DELETE PRODUCT
+                    </a>
+                  </div>
+
+                  <div id="delete_product">
+                    <a href="#"></a>
+                    <div>
+                      <h3>Aniq o'chirmoqchimisiz ?</h3>
+
+                      <button
+                        id={data._id}
+                        className="btn btn-danger d-block mx-auto"
+                        onClick={(evt) => deleteProduct(evt)}
+                      >
+                        O'CHIRISH
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

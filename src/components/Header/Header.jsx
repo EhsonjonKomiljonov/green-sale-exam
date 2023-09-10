@@ -17,9 +17,10 @@ export const Header = () => {
   const { verifyToken, setVerifyToken } = useContext(VerifyTokenContext);
   const [scroll, setScroll] = useState(false);
   const [menu, setMenu] = useState(false);
+  const admin_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
   let lastScrollY = 0;
 
-const query = useQuery('verify-token', API.verifyToken, {
+  const query = useQuery('verify-token', API.verifyToken, {
     onSuccess: (data) => {
       setIsLoading(false);
       if (data.data.data) {
@@ -45,7 +46,6 @@ const query = useQuery('verify-token', API.verifyToken, {
   };
 
   useEffect(() => {
-
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
 
@@ -81,28 +81,32 @@ const query = useQuery('verify-token', API.verifyToken, {
                 <span className="localization__arrow"></span>
               </div>
               <div className="d-flex align-items-center">
-                <Link
-                  style={{
-                    fontSize: '13px',
-                  }}
-                  to="/my-profile"
-                  className={`text-white text-opacity-50 ${
-                    verifyToken ? '' : 'd-none'
-                  }`}
-                >
-                  Mening profilim
-                </Link>
-                <a
-                  style={{
-                    fontSize: '13px',
-                  }}
-                  href="#log-out-modal"
-                  className={`btn text-white text-opacity-50 ${
-                    verifyToken ? '' : 'd-none'
-                  }`}
-                >
-                  Chiqish
-                </a>
+                {admin_key != localStorage.getItem('admin') && (
+                  <Link
+                    style={{
+                      fontSize: '13px',
+                    }}
+                    to="/my-profile"
+                    className={`text-white text-opacity-50 ${
+                      verifyToken ? '' : 'd-none'
+                    }`}
+                  >
+                    Mening profilim
+                  </Link>
+                )}
+                {verifyToken && (
+                  <a
+                    style={{
+                      fontSize: '13px',
+                    }}
+                    href="#log-out-modal"
+                    className={`btn text-white text-opacity-50 ${
+                      verifyToken ? '' : 'd-none'
+                    }`}
+                  >
+                    Chiqish
+                  </a>
+                )}
               </div>
               <div
                 className={`site-header__sign ${verifyToken ? 'd-none' : ''}`}
@@ -220,6 +224,7 @@ const query = useQuery('verify-token', API.verifyToken, {
                 setIsLoading(true);
                 setTimeout(() => {
                   localStorage.removeItem('token');
+                  localStorage.removeItem('admin');
                   location.replace('/');
                   dispatch(removeToken());
                   setIsLoading(false);
