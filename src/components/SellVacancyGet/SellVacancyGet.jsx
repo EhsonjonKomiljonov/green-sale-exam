@@ -5,12 +5,14 @@ import { API } from '../../API/api';
 import { useState } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 export const SellVacancyGetComp = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState('no');
 
   const getPosts = async (c) => {
     const data = await API.getSellerPosts(c);
-    setData(data.data.data);
+
+    return setData(data.data.data);
   };
+  console.log(data);
 
   useEffect(() => {
     getPosts();
@@ -36,9 +38,13 @@ export const SellVacancyGetComp = () => {
               </select>
             </div>
             <div className='sell__vacancy__get__cards'>
-              {data.map((el) => {
-                return <ProductCard obj={el} />;
-              })}
+              {data === 'no' ? (
+                <h2>Yuklanmoqda...</h2>
+              ) : data.length ? (
+                data.map((el) => <ProductCard obj={el} />)
+              ) : (
+                <h2>Topilmadi</h2>
+              )}
             </div>
           </div>
         </div>
