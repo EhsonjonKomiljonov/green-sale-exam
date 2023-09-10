@@ -37,11 +37,13 @@ export const BuyVacancyGetComp = () => {
               </select>
             </div>
             <div className='buy__vacancy__get__cards'>
-              {data
-                ? data.map((el) => {
-                    return <ProductCard obj={el} />;
-                  })
-                : ''}
+              {data.length ? (
+                data.map((el) => {
+                  return <ProductCard obj={el} />;
+                })
+              ) : (
+                <h1>Loading...</h1>
+              )}
             </div>
           </div>
         </div>
