@@ -268,7 +268,7 @@ export const SellVacancyAdd = () => {
                   </select>
                   <span className='error__message'>
                     <ErrorMessage name='region' />
-                  </span>{' '}
+                  </span>
                 </div>
                 <div className='sell__vacancy__input__box'>
                   <label htmlFor='district'>Tuman</label>
