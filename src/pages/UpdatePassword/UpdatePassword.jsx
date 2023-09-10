@@ -38,7 +38,7 @@ export const UpdatePassword = () => {
               <Link to="/">Bosh sahifa</Link>
             </li>
             <li>
-              <Link to="/buy-vacancy">Olish uchun vakansiya</Link>
+              <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
             </li>
             <li>
               <Link to="/sell-vacancies">Sotish uchun vakansiya</Link>
@@ -80,10 +80,10 @@ export const UpdatePassword = () => {
               <Link to="/">Bosh sahifa</Link>
             </li>
             <li>
-              <Link to="/buy-vacancy">Olish uchun vakansiya</Link>
+              <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
             </li>
             <li>
-              <Link to="/sell-vacancy">Sotish uchun vakansiya</Link>
+              <Link to="/sell-vacancies">Sotish uchun vakansiya</Link>
             </li>
             <li>
               <Link to="/about">Biz Haqimizda</Link>
