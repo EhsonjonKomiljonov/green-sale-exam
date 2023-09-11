@@ -15,6 +15,8 @@ export const Hero = () => {
     speed: 500,
     fade: true,
     cssEase: 'linear',
+    autoplay: true,
+    autoplaySpeed: 1500,
   };
   return (
     <>
