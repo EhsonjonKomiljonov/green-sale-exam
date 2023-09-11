@@ -98,6 +98,7 @@ export const RegisterForm = () => {
         setVerify('sign-up-user');
         localStorage.setItem('token', data.data.token);
         dispatch(setToken(data.data.token));
+        setAuth(data.data.userPhone);
         toast.success("Ro'yxatdan muvaffaqiyatli o'tdingiz!");
         setTimeout(() => {
           navigate('/');

@@ -21,7 +21,7 @@ export const ProductSingle = () => {
   const host = import.meta.env.VITE_REACT_APP_HOST;
   const admin_sec_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
 
-  window.scroll = 140
+  window.scrollY = 140
 
   const { mutate: buyMutate } = useMutation(
     'get-single-buy-product',

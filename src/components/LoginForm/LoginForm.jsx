@@ -13,10 +13,12 @@ import { LoadingContext } from '../../context/LoadingContext';
 import { Loading } from '../Loading/Loading';
 import '../Header/header.scss';
 import './login-form.scss';
+import { AuthContext } from '../../context/AuthContext';
 
 export const LoginForm = () => {
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
+  const { setAuth } = useContext(AuthContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
   const dispatch = useDispatch();
 
@@ -64,6 +66,7 @@ export const LoginForm = () => {
         setIsLoading(false);
         localStorage.setItem('token', data.data.token);
         dispatch(setToken(data.data.token));
+        setAuth(data.data.userPhone);
         toast.success('Kirish muvaffaqiyatli yakunlandi!');
         setTimeout(() => {
           navigate('/');
