@@ -4,7 +4,7 @@ import Loader from '../../assets/images/img-loader.svg';
 import Placeholder from '../../assets/images/placeholder-product.png';
 import './product-card.scss';
 import { Link } from 'react-router-dom';
-const host = 'https://green-sale.onrender.com';
+const host = import.meta.env.VITE_REACT_APP_HOST;
 
 export const ProductCard = ({ obj }) => {
   const {
