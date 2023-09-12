@@ -4,7 +4,8 @@ import Loader from '../../assets/images/img-loader.svg';
 import Placeholder from '../../assets/images/placeholder-product.png';
 import './product-card.scss';
 import { Link } from 'react-router-dom';
-const host = import.meta.env.VITE_REACT_APP_HOST;
+// const host = import.meta.env.VITE_REACT_APP_HOST;
+const host = 'http://localhost:9000';
 
 export const ProductCard = ({ obj }) => {
   const {
