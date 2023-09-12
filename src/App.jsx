@@ -20,6 +20,7 @@ import { useRef } from 'react';
 import { ProductSingle } from './pages/ProductSingle/ProductSingle';
 import { BuyVacancyGet } from './pages/BuyVacancyGet/BuyVacancyGet';
 import { AdminLogin } from './pages/AdminLogin/AdminLogin';
+import { MyVacancies } from './pages/MyVacancies/MyVacancies';
 const queryClient = new QueryClient();
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/single-product/:id" element={<ProductSingle />} />
           <Route path="/seller-vacancies" element={<SellVacancyGet />} />
           <Route path="/buyer-vacancies" element={<BuyVacancyGet />} />
+          <Route path="/my-vacancies" element={<MyVacancies />} />
         </Routes>
       </main>
       <ToastContainer

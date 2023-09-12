@@ -20,8 +20,26 @@ export const API = {
     c
       ? axios.get(host + '/buyer-post?categoryId=' + c)
       : axios.get(host + '/buyer-post'),
+  getMyPosts: () =>
+    axios.get(host + '/seller-post/my-posts', {
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    }),
   createSeller: (formData) =>
     axios.post(host + '/seller-post', formData, {
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    }),
+  deleteSeller: (id) =>
+    axios.delete(host + '/seller-post/' + id, {
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    }),
+  deleteBuyer: (id) =>
+    axios.delete(host + '/buyer-post/' + id, {
       headers: {
         authorization: localStorage.getItem('token'),
       },

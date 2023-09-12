@@ -27,6 +27,9 @@ export const BuyVacancyGetComp = () => {
         <div className='container'>
           <div className='buy__vacancy__get__inner'>
             <div className='buy__vacancy__get__top'>
+              <h2 className='h2 text-center'>
+                  Oluvchi vakansiyalar
+              </h2>{' '}
               <select
                 onChange={onChange}
                 className='buy__vacancy__get__select'
