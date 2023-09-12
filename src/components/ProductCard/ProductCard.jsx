@@ -4,9 +4,9 @@ import Loader from '../../assets/images/img-loader.svg';
 import Placeholder from '../../assets/images/placeholder-product.png';
 import './product-card.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { Field, Form, Formik } from 'formik';
 import { API } from '../../API/api';
-const host = import.meta.env.VITE_REACT_APP_HOST;
+import { Link } from 'react-router-dom';
+const host = 'http://localhost:9000';
 
 export const ProductCard = ({ obj, edit, del }) => {
   const {

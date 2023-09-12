@@ -1,0 +1,36 @@
+.about {
+  padding: 80px 0;
+
+  &__desc {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+  &__list-title {
+    margin-top: 30px;
+  }
+
+  ul {
+    width: 100%;
+    max-width: 700px;
+    margin: 20px 0 !important;
+    list-style-type: decimal;
+  }
+
+  li {
+    margin: 0 0 0 50px;
+    padding: 10px 0;
+    font-size: 20px;
+  }
+
+  &__user-title {
+    margin-bottom: 20px;
+  }
+
+  &__user-desc {
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+}
