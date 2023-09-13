@@ -5,7 +5,7 @@ import Placeholder from '../../assets/images/placeholder-product.png';
 import './product-card.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { API } from '../../API/api';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 const host = 'http://localhost:9000';
 
 export const ProductCard = ({ obj, edit, del }) => {

@@ -3,8 +3,8 @@ import './myvacancies.scss';
 import { ProductCard } from '../ProductCard/ProductCard.jsx';
 import { API } from '../../API/api.js';
 import { useState } from 'react';
-import { Loading } from '../Loading/Loading';
-import { LoadingContext } from '../../context/LoadingContext';
+// import { Loading } from '../Loading/Loading';
+// import { LoadingContext } from '../../context/LoadingContext';
 export const MyVacanciesComp = () => {
   // const { isLoading, setIsLoading } = useContext(LoadingContext);
   const [data, setData] = useState([]);
