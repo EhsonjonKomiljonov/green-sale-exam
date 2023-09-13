@@ -8,7 +8,7 @@ export const Footer = () => {
 
   return (
     <>
-      <section className="footer">
+      <footer className="footer">
         <div className="container">
           <div className="footer__inner">
             <div className="row justify-content-center">
@@ -89,7 +89,7 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-      </section>
+      </footer>
     </>
   );
 };
