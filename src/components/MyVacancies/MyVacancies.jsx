@@ -27,7 +27,7 @@ export const MyVacanciesComp = () => {
           <div className='container'>
             <h2 className='h2 text-center'>My Vacancies</h2>
             <div className='my__vacancies__cards'>
-              {data.length
+              {data?.length
                 ? data.map((el) => (
                     <ProductCard
                       edit='true'
@@ -35,7 +35,7 @@ export const MyVacanciesComp = () => {
                       del='true'
                     />
                   ))
-                : ''}
+                : <h2 className='text-center' >Sizning vakansiyalaringiz topilmadi !!!</h2>}
             </div>
           </div>
         </div>
