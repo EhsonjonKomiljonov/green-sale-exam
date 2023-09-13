@@ -108,11 +108,11 @@ export const RegisterForm = () => {
     onError: (err) => {
       setIsLoading(false);
       toast.error(
-        err.response.data.ErrorMessage == 'User already exists'
-          ? "Bunday foydalanuvchi avval ro'yhatdan o'tgan!"
-          : err.response.data.ErrorMessage
+        err.response.data.message == "Bunday User avval ro'yhatdan o'tgan!"
+          ? "Bunday User avval ro'yhatdan o'tgan!"
+          : err.response.data.message
       );
-      if (!err.response.data.ErrorMessage) {
+      if (!err.response.data.message) {
         toast.error(
           err.message == 'Network Error'
             ? "Serverda xatolik qaytadan urinib ko'ring!"
