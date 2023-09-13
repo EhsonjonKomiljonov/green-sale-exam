@@ -26,7 +26,7 @@
   display: grid;
   place-items: center;
   visibility: hidden;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   background-color: #1818189f;
   backdrop-filter: blur(5px);
 
@@ -52,4 +52,36 @@
 
 #delete_product:target {
   visibility: visible;
+}
+
+.add-cat-form {
+  .input-box {
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  label {
+    color: #333;
+    font-weight: bold;
+  }
+
+  input {
+    padding: 3px;
+    font-weight: 400;
+    font-size: 18px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #1c6b92d6;
+    outline: none;
+    color: #222222;
+  }
+
+  .err-message {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    color: #e74646;
+    font-weight: 600;
+    font-size: 11.5px;
+  }
 }

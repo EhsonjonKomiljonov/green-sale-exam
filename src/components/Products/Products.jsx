@@ -27,12 +27,16 @@ export const Products = () => {
               <ProductCard obj={item} key={item._id} />
             ))
           ) : (
-            <h1>Loading...</h1>
+            <h1>Vakansiyalar topilmadi!</h1>
           )}
         </div>
-        <Link to="/seller-vacancies" className='view-btn'>
-          <GreenButton text="Barchasini ko'rish" />
-        </Link>
+        {data.data.data?.length ? (
+          <Link to="/seller-vacancies" className="view-btn">
+            <GreenButton text="Barchasini ko'rish" />
+          </Link>
+        ) : (
+          ''
+        )}
       </div>
     </section>
   );

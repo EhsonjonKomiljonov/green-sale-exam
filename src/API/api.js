@@ -85,4 +85,10 @@ export const API = {
         Authorization: localStorage.getItem('token'),
       },
     }),
+  addCategory: (cat_name) =>
+    axios.post(host + '/admin/add-category', cat_name, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    }),
 };

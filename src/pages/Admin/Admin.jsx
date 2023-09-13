@@ -6,12 +6,16 @@ import { toast } from 'react-toastify';
 import { API } from '../../API/api';
 import { Footer } from '../../components/Footer/Footer';
 import { Header } from '../../components/Header/Header';
+import { LoadingContext } from '../../context/LoadingContext';
 import { Loading } from '../../components/Loading/Loading';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import './admin.scss';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
 
 export const Admin = () => {
   const [data, setData] = useState([]);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
   const token = useSelector((state) => state.token.token);
   const navigate = useNavigate();
   const admin_secret_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
@@ -23,6 +27,7 @@ export const Admin = () => {
   const { mutate } = useMutation('get-products-admin', API.getSellerPosts, {
     onSuccess: (data) => {
       if (data.data.status == 200) {
+        setIsLoading(false);
         setData(data.data.data);
       }
     },
@@ -38,6 +43,7 @@ export const Admin = () => {
     {
       onSuccess: (data) => {
         if (data.data.status == 200) {
+          setIsLoading(false);
           setData(data.data.data);
         }
       },
@@ -49,6 +55,7 @@ export const Admin = () => {
   );
 
   useEffect(() => {
+    setIsLoading(true);
     mutate();
   }, []);
 
@@ -67,11 +74,12 @@ export const Admin = () => {
         <div className="container">
           <div className="d-flex align-items-start justify-content-between">
             <h2 className="text-center mb-5 text-dark">Admin Page</h2>
+
             <select
               className="admin__change-product"
               onChange={(evt) => changeProduct(evt)}
             >
-              <option value="seller" selected>
+              <option defaultValue="seller" selected>
                 Seller posts
               </option>
               <option value="buyer">Buyer posts</option>
@@ -81,12 +89,16 @@ export const Admin = () => {
             {data.length ? (
               data.map((item) => <ProductCard obj={item} key={item._id} />)
             ) : (
-              <Loading />
+              <h2 className="text-center w-100">
+                Hozircha vakansiyalar mavjud emas!
+              </h2>
             )}
           </div>
         </div>
       </section>
       <Footer />
+
+      {isLoading ? <Loading /> : ''}
     </>
   );
 };
