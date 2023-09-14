@@ -125,19 +125,20 @@ export const ProductCard = ({ obj, edit, del }) => {
           </p>
         </div>
       </Link>
+
       {/* {edit == 'true' ? (
         <>
           <button
             type='button'
-            className='btn btn-warning ms-2 mb-2 w-50 edit-btn'
+            className='btn btn-danger ms-2 mb-2 w-50 edit-btn'
             data-bs-toggle='modal'
-            data-bs-target='#staticBackdrop'
+            data-bs-target={`#${_id}`}
           >
-            EDIT
+            O'CHIRISH
           </button>
           <div
             className='modal fade'
-            id='staticBackdrop'
+            id={`${_id}`}
             data-bs-backdrop='static'
             data-bs-keyboard='false'
             tabindex='-1'
@@ -151,7 +152,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                     className='modal-title fs-5'
                     id='staticBackdropLabel'
                   >
-                    EDIT PRODUCT
+                    PRODUCTNI O'CHIRISH
                   </h1>
                   <button
                     type='button'
@@ -161,11 +162,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                   ></button>
                 </div>
                 <div className='modal-body'>
-                  <Formik initialValues={initialValues}>
-                    <Form>
-                      <Field></Field>
-                    </Form>
-                  </Formik>
+                  SIZ ANIQ PRODUCTINGIZNI OCHIRMOQCHIMISIZ ?
                 </div>
                 <div className='modal-footer'>
                   <button
@@ -173,13 +170,16 @@ export const ProductCard = ({ obj, edit, del }) => {
                     className='btn btn-secondary'
                     data-bs-dismiss='modal'
                   >
-                    Close
+                    Orqaga
                   </button>
                   <button
                     type='button'
-                    className='btn btn-primary'
+                    data-bs-dismiss='modal'
+                    id={_id}
+                    onClick={deleteVacancy}
+                    className='btn btn-danger'
                   >
-                    Understood
+                    Ha
                   </button>
                 </div>
               </div>
