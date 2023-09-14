@@ -15,7 +15,16 @@ export const MyVacanciesComp = () => {
   useEffect(() => {
     getVacancies();
   }, [setData]);
+  (async function () {
+    if (localStorage.getItem('token')) {
+      const data = await API.verifyToken();
 
+      if (!data?.data?.data) {
+        toast.error('Iltimos logindan oting');
+        navigate('/login');
+      }
+    }
+  })();
   return (
     <>
       <section className='my__vacancies'>

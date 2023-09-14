@@ -154,7 +154,8 @@
   .site-header__center-links {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
+    gap: 10px;
     width: 100%;
     max-width: 560px;
 
@@ -346,7 +347,6 @@
   }
 
   .site-header__center {
-
     label {
       display: none;
     }

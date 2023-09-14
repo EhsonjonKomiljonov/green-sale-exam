@@ -139,12 +139,16 @@ export const Header = () => {
                 <p>GREEN SALE</p>
               </Link>
               <div className='site-header__center-links'>
-                <Link
-                  className='like rounded-1'
-                  to='/my-vacancies'
-                >
-                  Mening vakansiyalarim
-                </Link>
+                {localStorage.getItem('token') ? (
+                  <Link
+                    className='like rounded-1'
+                    to='/my-vacancies'
+                  >
+                    Mening vakansiyalarim
+                  </Link>
+                ) : (
+                  ''
+                )}
                 <Link
                   className='like rounded-1'
                   to='/buyer-vacancies'
