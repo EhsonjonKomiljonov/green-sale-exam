@@ -21,7 +21,9 @@ export const ProductSingle = () => {
   const host = import.meta.env.VITE_REACT_APP_HOST;
   const admin_sec_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
 
-  window.scrollY = 140;
+  window.scrollTo({
+    top: 140,
+  });
 
   const { mutate: buyMutate } = useMutation(
     'get-single-buy-product',
@@ -138,40 +140,37 @@ export const ProductSingle = () => {
   return (
     <>
       <Header />
-      <div className='single-product'>
+      <div className="single-product">
         <h2 hidden>User Single</h2>
-        <div className='container'>
-          <div className='single-product__inner row'>
-            <div className='single-product__left col-7'>
+        <div className="container">
+          <div className="single-product__inner row">
+            <div className="single-product__left col-7">
               <Slider {...settings}>
                 {data?.imgLink?.length ? (
                   data.imgLink.map((image) => (
                     <img
-                      className='single-carousel__img'
+                      className="single-carousel__img"
                       key={image}
                       src={host + image}
                     />
                   ))
                 ) : (
-                  <img
-                    className='single-carousel__img'
-                    src={Placeholder}
-                  />
+                  <img className="single-carousel__img" src={Placeholder} />
                 )}
               </Slider>
             </div>
-            <div className='single-product__right col-5'>
-              <div className='single-product__product product'>
+            <div className="single-product__right col-5">
+              <div className="single-product__product product">
                 <time dateTime={data?.created_at || ''}>
-                  <i className='fa-solid fa-clock'></i>
+                  <i className="fa-solid fa-clock"></i>
                   {`${month}-${day} ${hour}:${minute}`}
                 </time>
                 <h3>
                   {data.name}, {data.type}
                 </h3>
-                <p className='product__desc'>{data.description}.</p>
+                <p className="product__desc">{data.description}.</p>
                 {type == 'seller' ? (
-                  <p className='product__price'>Narxi: {data.price} so'm</p>
+                  <p className="product__price">Narxi: {data.price} so'm</p>
                 ) : (
                   ''
                 )}
@@ -179,36 +178,33 @@ export const ProductSingle = () => {
                   Hajmi: {data.capacity} {data.capacityMeasure}
                 </p>
               </div>
-              <div className='single-product__user single-user'>
-                <p className='single-user__address'>
+              <div className="single-product__user single-user">
+                <p className="single-user__address">
                   Manzil: {data.region}, {data.district}
                 </p>
                 <a
                   href={`tel:${data.contact}`}
-                  className='single-user__contact'
+                  className="single-user__contact"
                 >
                   Bog'lanish: {data.contact}
                 </a>
               </div>
               {admin_sec_key == localStorage.getItem('admin') && (
                 <>
-                  <div className='pt-5 mt-5'>
-                    <a
-                      className='btn btn-danger'
-                      href='#delete_product'
-                    >
+                  <div className="pt-5 mt-5">
+                    <a className="btn btn-danger" href="#delete_product">
                       DELETE PRODUCT
                     </a>
                   </div>
 
-                  <div id='delete_product'>
-                    <a href='#'></a>
+                  <div id="delete_product">
+                    <a href="#"></a>
                     <div>
                       <h3>Aniq o'chirmoqchimisiz ?</h3>
 
                       <button
                         id={data._id}
-                        className='btn btn-danger d-block mx-auto'
+                        className="btn btn-danger d-block mx-auto"
                         onClick={(evt) => deleteProduct(evt)}
                       >
                         O'CHIRISH

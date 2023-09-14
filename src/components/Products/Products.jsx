@@ -30,7 +30,7 @@ export const Products = () => {
             <h1>Vakansiyalar topilmadi!</h1>
           )}
         </div>
-        {data.data.data?.length ? (
+        {data?.data.data?.length ? (
           <Link to="/seller-vacancies" className="view-btn">
             <GreenButton text="Barchasini ko'rish" />
           </Link>
