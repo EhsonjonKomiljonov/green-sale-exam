@@ -286,7 +286,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                       validationSchema={validationSchema}
                       onSubmit={UpdateSellerSubmit}
                     >
-                      <Form className='d-flex gap-2 flex-wrap flex-column'>
+                      <Form className='d-flex gap-3 flex-wrap flex-column'>
                         <div className='sell_vacancy__input__box'>
                           <input
                             type='file'
@@ -368,7 +368,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                       validationSchema={validationSchemaBuy}
                       onSubmit={UpdateBuyerSubmit}
                     >
-                      <Form className='d-flex gap-2 flex-wrap flex-column'>
+                      <Form className='d-flex gap-3 flex-wrap flex-column'>
                         <div className='sell__vacancy__input__box'>
                           <Field
                             type='text'
