@@ -25,7 +25,7 @@ export const MyVacanciesComp = () => {
       <section className='my__vacancies'>
         <div className='my__vacancies__inner'>
           <div className='container'>
-            <h2 className='h2'>Mening vakansiyalarim</h2>
+            <h2 className='h2 my-4'>Mening vakansiyalarim</h2>
             <div className='my__vacancies__cards'>
               {data?.length ? (
                 data.map((el) => (
