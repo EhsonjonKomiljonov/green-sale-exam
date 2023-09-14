@@ -180,7 +180,7 @@ export const MyProfile = () => {
               <img
                 style={{
                   position: 'absolute',
-                  right: '40%',
+                  right: '45%',
                   top: '60%',
                 }}
                 src={LoadingImage}
