@@ -15,7 +15,7 @@
     box-shadow: none;
   }
 
-  img {
+  .product__card__img {
     width: 100%;
     height: 200px;
   }
@@ -98,8 +98,22 @@
 }
 
 .edit-btn {
+  max-width: 60px;
+  width: 100%;
   position: absolute;
-  bottom: 170px;
+  bottom: 180px;
   right: 10px;
   z-index: 8;
+  margin: 0 !important;
+}
+.delete-btn {
+  display: grid;
+  place-items: center;
+  max-width: 60px;
+  width: 100%;
+  position: absolute;
+  bottom: 180px;
+  left: 10px;
+  z-index: 8;
+  margin: 0 !important;
 }

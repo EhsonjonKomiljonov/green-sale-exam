@@ -22,17 +22,21 @@ export const MyVacanciesComp = () => {
 
   return (
     <>
-      <section className="my__vacancies">
-        <div className="my__vacancies__inner">
-          <div className="container">
-            <h2 className="h2">Mening vakansiyalarim</h2>
-            <div className="my__vacancies__cards">
+      <section className='my__vacancies'>
+        <div className='my__vacancies__inner'>
+          <div className='container'>
+            <h2 className='h2'>Mening vakansiyalarim</h2>
+            <div className='my__vacancies__cards'>
               {data?.length ? (
                 data.map((el) => (
-                  <ProductCard edit="true" obj={el} del="true" />
+                  <ProductCard
+                    edit='true'
+                    obj={el}
+                    del='true'
+                  />
                 ))
               ) : (
-                <h2 className="text-center w-100 my-5 pb-4">
+                <h2 className='text-center w-100 my-5 pb-4'>
                   Hozircha vakansiyalaringiz yo'q !
                 </h2>
               )}
@@ -41,7 +45,7 @@ export const MyVacanciesComp = () => {
         </div>
       </section>
 
-      {isLoading && data?.length ? <Loading /> : ''}
+      {isLoading && !data?.length ? <Loading /> : ''}
     </>
   );
 };

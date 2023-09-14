@@ -71,6 +71,7 @@ export const BuyVacancy = () => {
       createBuyerRequest(valueForm);
     }
   };
+  
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem('token')) {
