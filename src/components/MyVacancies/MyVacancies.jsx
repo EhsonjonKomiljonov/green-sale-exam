@@ -3,15 +3,11 @@ import './myvacancies.scss';
 import { ProductCard } from '../ProductCard/ProductCard.jsx';
 import { API } from '../../API/api.js';
 import { useState } from 'react';
-import { Loading } from '../Loading/Loading';
-import { LoadingContext } from '../../context/LoadingContext';
 
 export const MyVacanciesComp = () => {
-  const { isLoading, setIsLoading } = useContext(LoadingContext);
   const [data, setData] = useState([]);
 
   const getVacancies = async () => {
-    setIsLoading(true);
     const data = await API.getMyPosts();
     setData(data.data.data);
   };
@@ -44,8 +40,6 @@ export const MyVacanciesComp = () => {
           </div>
         </div>
       </section>
-
-      {isLoading && !data?.length ? <Loading /> : ''}
     </>
   );
 };
