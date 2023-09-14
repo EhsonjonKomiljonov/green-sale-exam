@@ -1,15 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './buyVacancyGet.scss';
 import { API } from '../../API/api';
 import { useState } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
+import { Loading } from '../Loading/Loading';
+import { LoadingContext } from '../../context/LoadingContext';
+import { toast } from 'react-toastify';
 
 export const BuyVacancyGetComp = () => {
   const [data, setData] = useState([]);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   const getPosts = async (c) => {
-    console.log(c);
+    setIsLoading(true);
     const data = await API.getBuyerPosts(c);
+
+    if (data.data?.status == 200) {
+      setIsLoading(false);
+    } else {
+      toast.error(data.data?.message);
+    }
     setData(data.data.data);
   };
 
@@ -27,9 +37,7 @@ export const BuyVacancyGetComp = () => {
         <div className='container'>
           <div className='buy__vacancy__get__inner'>
             <div className='buy__vacancy__get__top'>
-              <h2 className='h2 text-center'>
-                  Oluvchi vakansiyalar
-              </h2>{' '}
+              <h2 className='h2'>Oluvchi vakansiyalar</h2>{' '}
               <select
                 onChange={onChange}
                 className='buy__vacancy__get__select'
@@ -45,12 +53,14 @@ export const BuyVacancyGetComp = () => {
                   return <ProductCard obj={el} />;
                 })
               ) : (
-                <h1>Loading...</h1>
+                <h1>Oluvchi vakansiyalar topilmadi !</h1>
               )}
             </div>
           </div>
         </div>
       </section>
+
+      {isLoading && !data?.length ? <Loading /> : ''}
     </>
   );
 };

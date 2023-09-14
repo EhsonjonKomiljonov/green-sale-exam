@@ -32,6 +32,18 @@ export const API = {
         authorization: localStorage.getItem('token'),
       },
     }),
+  updateSeller: (id, formData) =>
+    axios.put(host + '/seller-post/' + id, formData, {
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    }),
+  updateBuyer: (id, value) =>
+    axios.put(host + '/buyer-post/' + id, value, {
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    }),
   deleteSeller: (id) =>
     axios.delete(host + '/seller-post/' + id, {
       headers: {
