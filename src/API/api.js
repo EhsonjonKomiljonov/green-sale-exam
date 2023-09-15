@@ -16,10 +16,10 @@ export const API = {
     c
       ? axios.get(host + '/seller-post?categoryId=' + c)
       : axios.get(host + '/seller-post'),
-  getBuyerPosts: (c) =>
+  getBuyerPosts: (c, page) =>
     c
       ? axios.get(host + '/buyer-post?categoryId=' + c)
-      : axios.get(host + '/buyer-post'),
+      : axios.get(host + '/buyer-post?page=' + page),
   getMyPosts: () =>
     axios.get(host + '/seller-post/my-posts', {
       headers: {
