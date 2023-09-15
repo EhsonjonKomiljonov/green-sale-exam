@@ -22,7 +22,7 @@ export const AdminBuy = () => {
       if (data.data.status == 200) {
         setTotalPage(data.data.pages);
         setIsLoading(false);
-        setData(data.data.data);
+        setData(data.data.data.slice(0, 10));
       }
     },
     onError: (err) => {
@@ -37,7 +37,10 @@ export const AdminBuy = () => {
 
   const searchSubmit = async (e) => {
     e.preventDefault();
-    const data = await API.getSellSearch(e.target.elements[0].value);
+    const data = await API.getBuySearch({
+      val: e.target.elements[0].value,
+      page: activePage,
+    });
     if (data.data?.status == 200) {
       setData(data.data?.data);
     } else {
@@ -45,12 +48,13 @@ export const AdminBuy = () => {
     }
   };
 
+  
   const getMainPosts = (evt) => {
     if (!evt.target.value.length) {
       mutate({ c: null, page: activePage });
     }
   };
-
+  
   useEffect(() => {
     setIsLoading(true);
     mutate({ c: null, page: activePage });
@@ -72,6 +76,7 @@ export const AdminBuy = () => {
           <h3 className="mb-4">Oluvchilar</h3>
           <div className="d-flex justify-content-between align-items-center mb-4">
             <select onChange={onChange} className="sell__vacancy__get__select ">
+              <option value="1" selected disabled>Kategoriya tanlang...</option>
               <option value="64f07653f7c051e624804d5f">Mevalar</option>
               <option value="64f07653f7c051e624804d60">Poliz-Ekinlari</option>
               <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>

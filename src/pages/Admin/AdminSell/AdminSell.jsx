@@ -21,7 +21,7 @@ export const AdminSell = () => {
       if (data.data.status == 200) {
         setTotalPage(data.data.pages);
         setIsLoading(false);
-        setData(data.data.data);
+        setData(data.data.data.slice(0, 10));
       }
     },
     onError: (err) => {
@@ -37,7 +37,10 @@ export const AdminSell = () => {
   const searchSubmit = async (e) => {
     e.preventDefault();
 
-    const data = await API.getSellSearch(e.target.elements[0].value);
+    const data = await API.getSellSearch({
+      val: e.target.elements[0].value,
+      page: activePage,
+    });
 
     if (data.data?.status == 200) {
       setData(data.data?.data);

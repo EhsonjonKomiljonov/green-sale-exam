@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { Loading } from '../Loading/Loading';
 import { LoadingContext } from '../../context/LoadingContext';
+import SearchIcon from '../../assets/images/search-icon.png';
 import { toast } from 'react-toastify';
 import { Pagination } from '../Pagination/Pagination';
-import { calcLength } from 'framer-motion';
 
 export const BuyVacancyGetComp = () => {
   const [data, setData] = useState([]);
@@ -49,32 +49,45 @@ export const BuyVacancyGetComp = () => {
 
   return (
     <>
-      <section className='buy__vacancy__get pb-5'>
-        <div className='container'>
-          <div className='buy__vacancy__get__inner'>
-            <div className='buy__vacancy__get__top'>
-              <h2 className='h2 my-4'>Oluvchi vakansiyalar</h2>{' '}
-              <div className='sort d-flex justify-content-between'>
+      <section className="buy__vacancy__get pb-5">
+        <div className="container">
+          <div className="buy__vacancy__get__inner">
+            <div className="buy__vacancy__get__top">
+              <h2 className="h2 my-4">Oluvchi vakansiyalar</h2>{' '}
+              <div className="sort d-flex justify-content-between">
                 <select
                   onChange={onChange}
-                  className='buy__vacancy__get__select '
+                  className="buy__vacancy__get__select "
                 >
-                  <option value='64f07653f7c051e624804d5f'>Mevalar</option>
-                  <option value='64f07653f7c051e624804d60'>
+                  <option value="64f07653f7c051e624804d5f">Mevalar</option>
+                  <option value="64f07653f7c051e624804d60">
                     Poliz-Ekinlari
                   </option>
-                  <option value='64f07d6885548d0039615a9a'>Sabzavotlar</option>
+                  <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>
                 </select>
-                <form onSubmit={searchSubmit}>
+                <form
+                  style={{ width: 400 }}
+                  onSubmit={searchSubmit}
+                  className="d-flex input-group"
+                >
                   <input
-                    type='text'
-                    className='form-control '
-                    placeholder='search'
+                    onChange={(evt) => getMainPosts(evt)}
+                    type="text"
+                    className="form-control"
+                    placeholder="Sotuvchi vakansiyani nomi bo'yicha izlang..."
                   />
+                  <button className="btn border">
+                    <img
+                      src={SearchIcon}
+                      alt="search"
+                      width={20}
+                      style={{ transform: 'scaleX(-1)' }}
+                    />
+                  </button>
                 </form>
               </div>
             </div>
-            <div className='buy__vacancy__get__cards'>
+            <div className="buy__vacancy__get__cards">
               {data.length ? (
                 data.map((el) => {
                   return <ProductCard obj={el} />;
@@ -84,10 +97,7 @@ export const BuyVacancyGetComp = () => {
               )}
             </div>
           </div>
-          <Pagination
-            setActivePage={setActivePage}
-            totalPage={totalPage}
-          />
+          <Pagination setActivePage={setActivePage} totalPage={totalPage} />
         </div>
       </section>
 

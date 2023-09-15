@@ -12,8 +12,10 @@ export const API = {
     }),
   registerUser: (user) => axios.post(host + '/users', user),
   loginUser: (user) => axios.post(host + '/users/login', user),
-  getBuySearch: (search) => axios.get(host + '/buyer-post?search=' + search),
-  getSellSearch: (search) => axios.get(host + '/seller-post?search=' + search),
+  getBuySearch: ({ val, page }) =>
+    axios.get(host + `/buyer-post?search=${val}&page=${page}`),
+  getSellSearch: ({ val, page }) =>
+    axios.get(host + `?search=${val}&page=${page}`),
   getSellerPosts: ({ c, page }) =>
     c
       ? axios.get(host + '/seller-post?categoryId=' + c)
