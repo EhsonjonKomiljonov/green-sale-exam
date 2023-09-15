@@ -125,11 +125,21 @@ export const Header = () => {
                 <img src={Logo} alt="Green Sale" width="50px" />
                 <p>GREEN SALE</p>
               </Link>
-              <div className="site-header__center-links">
-                <Link className="like rounded-1" to="/my-vacancies">
-                  Mening vakansiyalarim
-                </Link>
-                <Link className="like rounded-1" to="/buyer-vacancies">
+              <div className='site-header__center-links'>
+                {localStorage.getItem('token') ? (
+                  <Link
+                    className='like rounded-1'
+                    to='/my-vacancies'
+                  >
+                    Mening vakansiyalarim
+                  </Link>
+                ) : (
+                  ''
+                )}
+                <Link
+                  className='like rounded-1'
+                  to='/buyer-vacancies'
+                >
                   Oluvchi vakansiyalar
                 </Link>
                 <Link className="like rounded-1" to="/seller-vacancies">
