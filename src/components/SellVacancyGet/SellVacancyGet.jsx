@@ -37,6 +37,12 @@ export const SellVacancyGetComp = () => {
     }
   };
 
+  const getMainPosts = (evt) => {
+    if (!evt.target.value.length) {
+      mutate({ c: null, page: activePage });
+    }
+  };
+
   return (
     <>
       <section className="sell__vacancy__get pb-5">
@@ -56,12 +62,14 @@ export const SellVacancyGetComp = () => {
                   <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>
                 </select>
                 <form
+                  style={{ width: 400 }}
                   onSubmit={searchSubmit}
-                  className="d-flex input-group w-50"
+                  className="d-flex input-group"
                 >
                   <input
+                    onChange={(evt) => getMainPosts(evt)}
                     type="text"
-                    className="form-control w-50"
+                    className="form-control"
                     placeholder="Sotuvchi vakansiyani nomi bo'yicha izlang..."
                   />
                   <button className="btn border">
