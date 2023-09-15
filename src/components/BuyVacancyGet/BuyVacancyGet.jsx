@@ -28,12 +28,12 @@ export const BuyVacancyGetComp = () => {
   }, [setData]);
 
   const onChange = async (e) => {
-    console.log(await getPosts(e.target.value));
+    await getPosts(e.target.value);
   };
 
   return (
     <>
-      <section className='buy__vacancy__get'>
+      <section className='buy__vacancy__get pb-5'>
         <div className='container'>
           <div className='buy__vacancy__get__inner'>
             <div className='buy__vacancy__get__top'>

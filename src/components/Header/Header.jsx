@@ -69,24 +69,24 @@ export const Header = () => {
 
   return (
     <>
-      <header className='site-header'>
-        <div className='container'>
-          <div className='site-header__inner'>
-            <div className='site-header__top d-flex align-items-center justify-content-between mb-4'>
-              <div className='localization'>
-                <select className='localization__select'>
-                  <option value='uzbek'>Uzbek</option>
-                  <option value='rus'>Russian</option>
+      <header className="site-header">
+        <div className="container">
+          <div className="site-header__inner">
+            <div className="site-header__top d-flex align-items-center justify-content-between mb-4">
+              <div className="localization">
+                <select className="localization__select">
+                  <option value="uzbek">Uzbek</option>
+                  <option value="rus">Russian</option>
                 </select>
-                <span className='localization__arrow'></span>
+                <span className="localization__arrow"></span>
               </div>
-              <div className='d-flex align-items-center'>
+              <div className="d-flex align-items-center">
                 {admin_key != localStorage.getItem('admin') && (
                   <Link
                     style={{
                       fontSize: '13px',
                     }}
-                    to='/my-profile'
+                    to="/my-profile"
                     className={`text-white text-opacity-50 ${
                       verifyToken ? '' : 'd-none'
                     }`}
@@ -99,7 +99,7 @@ export const Header = () => {
                     style={{
                       fontSize: '13px',
                     }}
-                    href='#log-out-modal'
+                    href="#log-out-modal"
                     className={`btn text-white text-opacity-50 ${
                       verifyToken ? '' : 'd-none'
                     }`}
@@ -111,57 +111,35 @@ export const Header = () => {
               <div
                 className={`site-header__sign ${verifyToken ? 'd-none' : ''}`}
               >
-                <Link
-                  className='me-3'
-                  to='/login'
-                >
+                <Link className="me-3" to="/login">
                   Kirish
                 </Link>
-                <Link to='/register'>Ro'yxatdan o'tish</Link>
+                <Link to="/register">Ro'yxatdan o'tish</Link>
               </div>
             </div>
-            <div className='site-header__center d-flex align-items-center justify-content-between'>
-              <button
-                className='menu-btn'
-                onClick={() => openMenu()}
-              >
-                <i className='fa-solid fa-bars'></i>
+            <div className="site-header__center d-flex align-items-center justify-content-between">
+              <button className="menu-btn" onClick={() => openMenu()}>
+                <i className="fa-solid fa-bars"></i>
               </button>
-              <Link
-                className='logo'
-                to='/'
-              >
-                <img
-                  src={Logo}
-                  alt='Green Sale'
-                  width='50px'
-                />
+              <Link className="logo" to="/">
+                <img src={Logo} alt="Green Sale" width="50px" />
                 <p>GREEN SALE</p>
               </Link>
-              <div className='site-header__center-links'>
-                <Link
-                  className='like rounded-1'
-                  to='/my-vacancies'
-                >
+              <div className="site-header__center-links">
+                <Link className="like rounded-1" to="/my-vacancies">
                   Mening vakansiyalarim
                 </Link>
-                <Link
-                  className='like rounded-1'
-                  to='/buyer-vacancies'
-                >
+                <Link className="like rounded-1" to="/buyer-vacancies">
                   Oluvchi vakansiyalar
                 </Link>
-                <Link
-                  className='like rounded-1'
-                  to='/seller-vacancies'
-                >
+                <Link className="like rounded-1" to="/seller-vacancies">
                   Sotuvchi vakansiyalar
                 </Link>
               </div>
             </div>
-            <div className='site-header__bottom'>
+            <div className="site-header__bottom">
               <nav
-                className='nav'
+                className="nav"
                 style={{
                   position: scroll ? 'fixed' : '',
                   top: scroll ? '0' : '',
@@ -181,19 +159,16 @@ export const Header = () => {
                   }`}
                 >
                   <li>
-                    <Link to='/'>Bosh sahifa</Link>
+                    <Link to="/">Bosh sahifa</Link>
                   </li>
                   <li>
-                    <Link to='/buy-vacancies'>Olish uchun vakansiya</Link>
+                    <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
                   </li>
                   <li>
-                    <Link to='/sell-vacancies'>Sotish uchun vakansiya</Link>
+                    <Link to="/sell-vacancies">Sotish uchun vakansiya</Link>
                   </li>
                   <li>
-                    <Link to='/about'>Biz Haqimizda</Link>
-                  </li>
-                  <li>
-                    <Link to='/faq'>FAQ</Link>
+                    <Link to="/about">Biz Haqimizda</Link>
                   </li>
                 </ul>
               </nav>
@@ -205,48 +180,42 @@ export const Header = () => {
           onClick={(evt) => closeMenu(evt)}
         >
           <div className={`menu__inner ${menu ? 'open' : ''}`}>
-            <label className='px-3 w-100 input-group'>
+            <label className="px-3 w-100 input-group">
               <input
-                type='text'
-                placeholder='Search for product'
-                className='form-control'
+                type="text"
+                placeholder="Search for product"
+                className="form-control"
               />
-              <button className='search-btn btn'>
-                <i className='fa-solid fa-magnifying-glass'></i>
+              <button className="search-btn btn">
+                <i className="fa-solid fa-magnifying-glass"></i>
               </button>
             </label>
-            <ul className='d-flex flex-column'>
+            <ul className="d-flex flex-column">
               <li>
-                <Link to='/'>Bosh sahifa</Link>
+                <Link to="/">Bosh sahifa</Link>
               </li>
               <li>
-                <Link to='/buy-vacancy'>Olish uchun vakansiya</Link>
+                <Link to="/buy-vacancy">Olish uchun vakansiya</Link>
               </li>
               <li>
-                <Link to='/sell-vacancy'>Sotish uchun vakansiya</Link>
+                <Link to="/sell-vacancy">Sotish uchun vakansiya</Link>
               </li>
               <li>
-                <Link to='/buy-vacancies'>Oluvchi vakansiyalar</Link>
+                <Link to="/buy-vacancies">Oluvchi vakansiyalar</Link>
               </li>
               <li>
-                <Link to='/sell-vacancies'>Sotuvchi vakansiyalar</Link>
+                <Link to="/sell-vacancies">Sotuvchi vakansiyalar</Link>
               </li>
               <li>
-                <Link to='/about'>Biz Haqimizda</Link>
-              </li>
-              <li>
-                <Link to='/faq'>FAQ</Link>
+                <Link to="/about">Biz Haqimizda</Link>
               </li>
             </ul>
           </div>
         </div>
-        <div id='log-out-modal'>
-          <a
-            className='close-modal-bg'
-            href='#'
-          ></a>
+        <div id="log-out-modal">
+          <a className="close-modal-bg" href="#"></a>
           <div>
-            <a href='#'>&times;</a>
+            <a href="#">&times;</a>
             <button
               onClick={() => {
                 setIsLoading(true);

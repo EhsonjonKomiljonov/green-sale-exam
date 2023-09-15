@@ -46,9 +46,6 @@ export const UpdatePassword = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
-            <li>
-              <Link to="/faq">FAQ</Link>
-            </li>
           </ul>
         </nav>
       </div>
@@ -87,9 +84,6 @@ export const UpdatePassword = () => {
             </li>
             <li>
               <Link to="/about">Biz Haqimizda</Link>
-            </li>
-            <li>
-              <Link to="/faq">FAQ</Link>
             </li>
           </ul>
         </div>

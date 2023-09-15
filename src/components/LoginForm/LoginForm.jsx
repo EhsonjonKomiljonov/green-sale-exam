@@ -129,9 +129,6 @@ export const LoginForm = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
-            <li>
-              <Link to="/faq">FAQ</Link>
-            </li>
           </ul>
         </nav>
       </div>
@@ -232,9 +229,6 @@ export const LoginForm = () => {
             </li>
             <li>
               <Link to="/about">Biz Haqimizda</Link>
-            </li>
-            <li>
-              <Link to="/faq">FAQ</Link>
             </li>
           </ul>
         </div>

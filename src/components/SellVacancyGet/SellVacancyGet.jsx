@@ -12,7 +12,6 @@ export const SellVacancyGetComp = () => {
 
     return setData(data.data.data);
   };
-  console.log(data);
 
   useEffect(() => {
     getPosts();
@@ -24,7 +23,7 @@ export const SellVacancyGetComp = () => {
 
   return (
     <>
-      <section className='sell__vacancy__get'>
+      <section className='sell__vacancy__get pb-5'>
         <div className='container'>
           <div className='sell__vacancy__get__inner'>
             <div className='sell__vacancy__get__top'>
@@ -44,7 +43,7 @@ export const SellVacancyGetComp = () => {
               ) : data.length ? (
                 data.map((el) => <ProductCard obj={el} />)
               ) : (
-                <h2>Topilmadi</h2>
+                <h2>Sotuvchi vakansiyalar topilmadi!</h2>
               )}
             </div>
           </div>

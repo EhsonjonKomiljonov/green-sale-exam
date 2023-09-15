@@ -41,7 +41,6 @@ export const BuyVacancy = () => {
     } else {
       toast.error('Iltimos barcha narsani togri kiriting');
     }
-    console.log(data);
   };
 
   const initialValues = {

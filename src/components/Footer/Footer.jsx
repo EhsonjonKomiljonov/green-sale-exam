@@ -18,9 +18,6 @@ export const Footer = () => {
                   <li className="footer__item">
                     <Link to="/">Biz Haqimizda</Link>
                   </li>
-                  <li className="footer__item">
-                    <Link to="/">FAQ</Link>
-                  </li>
                 </ul>
               </div>
               <div className="col-12 text-md-start text-center pt-md-0 pt-3 col-md-2">

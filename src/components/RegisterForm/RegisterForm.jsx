@@ -167,9 +167,7 @@ export const RegisterForm = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
-            <li>
-              <Link to="/faq">FAQ</Link>
-            </li>
+           
           </ul>
         </nav>
       </div>
@@ -341,9 +339,7 @@ export const RegisterForm = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
-            <li>
-              <Link to="/faq">FAQ</Link>
-            </li>
+            
           </ul>
         </div>
       </div>
