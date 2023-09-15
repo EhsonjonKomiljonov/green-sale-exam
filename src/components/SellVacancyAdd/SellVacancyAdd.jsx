@@ -61,7 +61,7 @@ export const SellVacancyAdd = () => {
       toast.error(data.data?.message);
     } else {
       toast.error('Iltimos barcha narsani togri kiriting');
-    }
+    } 
     console.log(data);
   };
 

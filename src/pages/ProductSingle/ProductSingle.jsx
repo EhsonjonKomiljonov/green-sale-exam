@@ -165,9 +165,12 @@ export const ProductSingle = () => {
                   <i className="fa-solid fa-clock"></i>
                   {`${month}-${day} ${hour}:${minute}`}
                 </time>
-                <h3>
-                  {data.name}, {data.type}
-                </h3>
+                <pre>
+                  {' '}
+                  <h3>
+                    {data.name}, {data.type}
+                  </h3>
+                </pre>
                 <p className="product__desc">{data.description}.</p>
                 {type == 'seller' ? (
                   <p className="product__price">Narxi: {data.price} so'm</p>

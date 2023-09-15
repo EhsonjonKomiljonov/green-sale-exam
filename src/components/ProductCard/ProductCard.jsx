@@ -226,7 +226,7 @@ export const ProductCard = ({ obj, edit, del }) => {
               {`${month}-${day} ${hour}:${minute}`}
             </time>
           </div>
-          <h3 className='product-card__title'>{name}</h3>
+          <h3 className='product-card__title'>{name.slice(0, 20)}...</h3>
           <p className='product-card__desc'>{description.slice(0, 40)}...</p>
           <p className='product-card__region'>
             <i className='fa-solid fa-truck'></i>
