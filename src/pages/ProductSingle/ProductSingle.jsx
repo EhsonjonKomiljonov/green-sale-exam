@@ -122,7 +122,7 @@ export const ProductSingle = () => {
     {
       onSuccess: (data) => {
         if (data.data.status == 200) {
-          navigate('/admin');
+          navigate('/admin/seller');
         }
       },
       onError: (err) => {

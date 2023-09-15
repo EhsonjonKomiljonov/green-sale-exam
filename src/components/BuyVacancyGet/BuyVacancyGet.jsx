@@ -16,7 +16,7 @@ export const BuyVacancyGetComp = () => {
 
   const getPosts = async (c) => {
     setIsLoading(true);
-    const data = await API.getBuyerPosts(c, activePage);
+    const data = await API.getBuyerPosts({ c, page: activePage });
 
     if (data.data?.status == 200) {
       setTotalPage(data.data.pages);

@@ -1,0 +1,68 @@
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { useState } from 'react';
+import { useMutation } from 'react-query';
+import { Link } from 'react-router-dom';
+import { API } from '../../../API/api';
+import { Loading } from '../../../components/Loading/Loading';
+import { Pagination } from '../../../components/Pagination/Pagination';
+import { ProductCard } from '../../../components/ProductCard/ProductCard';
+import { LoadingContext } from '../../../context/LoadingContext';
+
+export const AdminSell = () => {
+  const [data, setData] = useState([]);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
+  const [activePage, setActivePage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  const { mutate } = useMutation('get-seller-admin', API.getSellerPosts, {
+    onSuccess: (data) => {
+      if (data.data.status == 200) {
+        setTotalPage(data.data.pages);
+        setIsLoading(false);
+        setData(data.data.data);
+      }
+    },
+    onError: (err) => {
+      toast.error(`Ups serverda qandaydur xatolik!
+      Browser console da to'liq ma'lumot!`);
+    },
+  });
+
+  useEffect(() => {
+    setIsLoading(true);
+    mutate({ c: null, page: activePage });
+  }, [activePage]);
+
+  return (
+    <>
+      <section className="admin">
+        <div className="container">
+          <div className="d-flex align-items-start justify-content-between">
+            <h2 className="text-center mb-5 text-dark">Admin Page</h2>
+            <div>
+              <Link
+                className="ms-5 fs-5 text-dark text-decoration-underline"
+                to="/admin/buyer"
+              >
+                Oluvchi vakansiyalar
+              </Link>
+            </div>
+          </div>
+          <div className="admin__inner d-flex align-items-center justify-content-between flex-wrap gap-5">
+            {data.length ? (
+              data.map((item) => <ProductCard obj={item} key={item._id} />)
+            ) : (
+              <h2 className="text-center w-100">
+                Hozircha vakansiyalar mavjud emas!
+              </h2>
+            )}
+          </div>
+          <Pagination setActivePage={setActivePage} totalPage={totalPage} />
+        </div>
+      </section>
+
+      {isLoading ? <Loading /> : ''}
+    </>
+  );
+};

@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Home } from './pages/Home/Home';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Login } from './pages/Login/Login';
 import { Register } from './pages/Register/Register';
 import { QueryClientProvider, QueryClient } from 'react-query';
@@ -22,11 +22,12 @@ import { BuyVacancyGet } from './pages/BuyVacancyGet/BuyVacancyGet';
 import { AdminLogin } from './pages/AdminLogin/AdminLogin';
 import { MyVacancies } from './pages/MyVacancies/MyVacancies';
 import { About } from './pages/About/About';
+import { AdminSell } from './pages/Admin/AdminSell/AdminSell';
+import { AdminBuy } from './pages/Admin/AdminBuy/AdminBuy';
 const queryClient = new QueryClient();
 
 function App() {
   const dispatch = useDispatch();
-  const timerRef = useRef();
 
   dispatch(setToken(localStorage.getItem('token') || ''));
 
@@ -41,7 +42,11 @@ function App() {
           <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/sell-vacancies" element={<SellVacancyAdd />} />
           <Route path="/buy-vacancies" element={<BuyVacancyAdd />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/*" element={<Admin />}>
+            <Route index element={<Navigate to='/seller' />} />
+            <Route path="seller" element={<AdminSell />} />
+            <Route path="buyer" element={<AdminBuy />} />
+          </Route>
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/single-product/:id" element={<ProductSingle />} />
           <Route path="/seller-vacancies" element={<SellVacancyGet />} />

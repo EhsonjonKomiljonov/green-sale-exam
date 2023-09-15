@@ -4,7 +4,7 @@ export const Pagination = ({ totalPage, setActivePage }) => {
   return (
     <ReactPaginate
       className="pagination justify-content-center my-4 gap-3"
-      pageCount={totalPage}
+      pageCount={totalPage || 1}
       previousLabel="<"
       nextLabel=">"
       previousLinkClassName="btn btn-primary"
