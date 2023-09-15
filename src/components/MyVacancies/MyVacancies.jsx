@@ -31,7 +31,7 @@ export const MyVacanciesComp = () => {
         <div className='my__vacancies__inner'>
           <div className='container'>
             <h2 className='h2 my-4'>Mening vakansiyalarim</h2>
-            <div className='my__vacancies__cards'>
+            <div className='my__vacancies__cards justify-content-center'>
               {data?.length ? (
                 data.map((el) => (
                   <ProductCard
