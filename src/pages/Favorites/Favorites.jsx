@@ -32,7 +32,7 @@ export const Favorites = () => {
 
             <div className="favorites__cards d-flex align-items-center justify-content-center gap-5">
               {data.length ? (
-                data.map((item) => <ProductCard obj={item} />)
+                data.map((item) => <ProductCard obj={item} key={item._id} />)
               ) : (
                 <>
                   <div className="d-flex flex-column align-items-center">
@@ -41,9 +41,9 @@ export const Favorites = () => {
                       width="200px"
                       height="200px"
                       viewBox="0 0 280 280"
-                      class="css-1ffmos1"
+                      className="css-1ffmos1"
                     >
-                      <g fill="none" fill-rule="evenodd">
+                      <g fill="none" fillRule="evenodd">
                         <path
                           fill="#FFD6C9"
                           d="M251.421 116.704a30.95 30.95 0 0 0 8.044-20.974c-.064-17.156-14.02-31.013-31.174-30.949-13.353.05-24.703 8.521-29.049 20.366-4.432-11.812-15.846-20.199-29.199-20.15-17.152.066-31.006 14.025-30.943 31.182.033 8.804 3.73 16.73 9.633 22.362h-.014l50.563 50.192s51.653-51.506 51.991-51.873l.152-.156h-.004zM87.477 79.793a19.465 19.465 0 0 0 5.119-13.246C92.556 55.71 83.673 46.959 72.758 47c-8.498.032-15.72 5.382-18.486 12.863-2.82-7.46-10.084-12.758-18.581-12.726C24.776 47.177 15.96 55.995 16 66.83c.021 5.56 2.374 10.567 6.13 14.124h-.01l32.177 31.7s32.87-32.53 33.085-32.762l.096-.099h-.002z"

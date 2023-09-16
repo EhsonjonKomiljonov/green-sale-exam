@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
@@ -20,6 +20,7 @@ export const ProductSingle = () => {
   const navigate = useNavigate();
   const host = import.meta.env.VITE_REACT_APP_HOST;
   const admin_sec_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
+  const inputCheckRef = useRef();
 
   window.scrollTo({
     top: 140,
@@ -30,7 +31,6 @@ export const ProductSingle = () => {
     API.getSingleBuyProduct,
     {
       onSuccess: (data) => {
-        console.log(data);
         if (data.data.status == 200) {
           setData(data.data.data);
           setIsLoading(false);
@@ -89,6 +89,12 @@ export const ProductSingle = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (data.favorite) {
+      inputCheckRef.current.checked = true;
+    }
+  }, [data?.favorite]);
+
   const settings = {
     className: 'slider',
     dots: true,
@@ -137,6 +143,40 @@ export const ProductSingle = () => {
     else deleteBuyProductMutate(evt.target.id);
   };
 
+  const { mutate: likeMutate } = useMutation('liked-post', API.likedPost, {
+    onSuccess: (data) => {
+      if (data.data.message == 'Unauthorized') {
+        navigate('/login');
+      }
+    },
+    onError: (err) => {
+      toast.error(
+        "Ups serverda xatolik saytni yangilab qaytadan urinib ko'ring!"
+      );
+    },
+  });
+
+  const { mutate: deleteLikeMutate } = useMutation(
+    'liked-post',
+    API.deleteLikedPost,
+    {
+      onSuccess: (data) => {},
+      onError: (err) => {
+        toast.error(
+          "Ups serverda xatolik saytni yangilab qaytadan urinib ko'ring!"
+        );
+      },
+    }
+  );
+
+  const likedPost = (evt) => {
+    if (evt.target.checked) {
+      likeMutate(evt.target.id);
+    } else {
+      deleteLikeMutate(evt.target.id);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -161,16 +201,34 @@ export const ProductSingle = () => {
             </div>
             <div className="single-product__right col-5">
               <div className="single-product__product product">
-                <time dateTime={data?.created_at || ''}>
-                  <i className="fa-solid fa-clock"></i>
-                  {`${month}-${day} ${hour}:${minute}`}
-                </time>
-                <pre>
-                  {' '}
-                  <h3>
-                    {data.name}, {data.type}
-                  </h3>
-                </pre>
+                <div className="position-relative">
+                  <time dateTime={data?.created_at || ''}>
+                    <i className="fa-solid fa-clock"></i>
+                    {`${month}-${day} ${hour}:${minute}`}
+                  </time>
+                  <label className="like-container">
+                    <input
+                      type="checkbox"
+                      id={data._id}
+                      ref={inputCheckRef}
+                      onChange={(evt) => likedPost(evt)}
+                    />
+                    <div className="checkmark">
+                      <svg viewBox="0 0 256 256">
+                        <rect fill="none" height="256" width="256"></rect>
+                        <path
+                          d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                          strokeWidth="20px"
+                          stroke="#d0d0d0"
+                          fill="none"
+                        ></path>
+                      </svg>
+                    </div>
+                  </label>
+                </div>
+                <h3>
+                  {data.name}, {data.type}
+                </h3>
                 <p className="product__desc">{data.description}.</p>
                 {type == 'seller' ? (
                   <p className="product__price">Narxi: {data.price} so'm</p>

@@ -16,7 +16,6 @@ import { MyProfile } from './pages/MyProfile/MyProfile';
 import { BuyVacancyAdd } from './pages/BuyVacancyAdd/BuyVacancyAdd';
 import { SellVacancyGet } from './pages/SellVacancyGet/SellVacancyGet';
 import { Admin } from './pages/Admin/Admin';
-import { useRef } from 'react';
 import { ProductSingle } from './pages/ProductSingle/ProductSingle';
 import { BuyVacancyGet } from './pages/BuyVacancyGet/BuyVacancyGet';
 import { AdminLogin } from './pages/AdminLogin/AdminLogin';
@@ -25,12 +24,16 @@ import { About } from './pages/About/About';
 import { AdminSell } from './pages/Admin/AdminSell/AdminSell';
 import { AdminBuy } from './pages/Admin/AdminBuy/AdminBuy';
 import { Favorites } from './pages/Favorites/Favorites';
+import { useEffect } from 'react';
+import Logo from './assets/images/logo.svg';
 const queryClient = new QueryClient();
 
 function App() {
   const dispatch = useDispatch();
 
   dispatch(setToken(localStorage.getItem('token') || ''));
+
+  useEffect(() => {}, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -73,5 +76,5 @@ function App() {
     </QueryClientProvider>
   );
 }
-// 2.592e8
+
 export default App;

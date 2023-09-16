@@ -77,7 +77,7 @@ body {
   flex-direction: column;
   height: 100%;
   margin: 0;
-  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-family: 'Open Sans', 'Arial', sans-serif !important;
 }
 
 main {
