@@ -174,7 +174,6 @@ export const ProductCard = ({ obj, edit, del }) => {
   const initialValuesBuy = {
     name: '',
     description: '',
-    price: '',
     capacity: '',
     capacityMeasure: '',
     type: '',

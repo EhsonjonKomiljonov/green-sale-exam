@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useMutation } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import { toast } from 'react-toastify';
 import { API } from '../../API/api';
@@ -9,8 +9,8 @@ import { Header } from '../../components/Header/Header';
 import { Loading } from '../../components/Loading/Loading';
 import { LoadingContext } from '../../context/LoadingContext';
 import Placeholder from '../../assets/images/placeholder-product.png';
-import './product-single.scss';
 import { Comment } from '../../components/Comment/Comment';
+import './product-single.scss';
 
 export const ProductSingle = () => {
   const params = useParams();
@@ -202,11 +202,22 @@ export const ProductSingle = () => {
               </Slider>
             </div>
             <div className="single-product__right col-5">
+              <div className="single-product__user user">
+                <h3>
+                  {data?.user_ref_id?.first_name} {data?.user_ref_id?.last_name}
+                </h3>
+                <Link
+                  className="text-dark text-opacity-75 text-decoration-underline"
+                  to={`/user-profile/${data?.user_ref_id?._id}`}
+                >
+                  Profilni ko'rish
+                </Link>
+              </div>
               <div className="single-product__product product">
                 <div className="position-relative">
                   <time dateTime={data?.created_at || ''}>
                     <i className="fa-solid fa-clock"></i>
-                    {`${month}-${day} ${hour}:${minute}`}
+                    Joylangan: {`${month}-${day} ${hour}:${minute}`}
                   </time>
                   <label className="like-container">
                     <input

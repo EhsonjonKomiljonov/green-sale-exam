@@ -150,4 +150,14 @@ export const API = {
       }
     ),
   getSingleUser: (id) => axios.get(host + `/users/${id}`),
+  editComment: ({ text, id }) =>
+    axios.put(
+      host + `/comments/${id}`,
+      { text },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    ),
 };
