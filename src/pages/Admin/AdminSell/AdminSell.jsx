@@ -31,7 +31,7 @@ export const AdminSell = () => {
   });
 
   const onChange = (e) => {
-    mutate({ c: e.target.value });
+    mutate({ c: e.target.value == 'null' ? null : e.target.value });
   };
 
   const searchSubmit = async (e) => {
@@ -77,9 +77,13 @@ export const AdminSell = () => {
           </div>
           <div className="d-flex justify-content-between align-items-center mb-4">
             <select onChange={onChange} className="sell__vacancy__get__select ">
+              <option value="1" selected disabled>
+                Kategoriyani tanlang...
+              </option>
               <option value="64f07653f7c051e624804d5f">Mevalar</option>
               <option value="64f07653f7c051e624804d60">Poliz-Ekinlari</option>
               <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>
+              <option value="null">Barchasi</option>
             </select>
             <form
               style={{ width: 400 }}

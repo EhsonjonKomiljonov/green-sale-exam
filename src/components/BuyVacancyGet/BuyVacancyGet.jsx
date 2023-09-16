@@ -17,7 +17,10 @@ export const BuyVacancyGetComp = () => {
 
   const getPosts = async (c) => {
     setIsLoading(true);
-    const data = await API.getBuyerPosts({ c, page: activePage });
+    const data = await API.getBuyerPosts({
+      c: c == 'null' ? null : c,
+      page: activePage,
+    });
 
     if (data.data?.status == 200) {
       setTotalPage(data.data.pages);
@@ -59,11 +62,15 @@ export const BuyVacancyGetComp = () => {
                   onChange={onChange}
                   className="buy__vacancy__get__select "
                 >
+                  <option value="1" selected disabled>
+                    Kategoriyani tanlang...
+                  </option>
                   <option value="64f07653f7c051e624804d5f">Mevalar</option>
                   <option value="64f07653f7c051e624804d60">
                     Poliz-Ekinlari
                   </option>
                   <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>
+                  <option value="null">Barchasi</option>
                 </select>
                 <form
                   style={{ width: 400 }}

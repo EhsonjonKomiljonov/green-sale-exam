@@ -43,7 +43,7 @@ function App() {
           <Route path="/sell-vacancies" element={<SellVacancyAdd />} />
           <Route path="/buy-vacancies" element={<BuyVacancyAdd />} />
           <Route path="/admin/*" element={<Admin />}>
-            <Route index element={<Navigate to='/seller' />} />
+            <Route index element={<Navigate to='seller' />} />
             <Route path="seller" element={<AdminSell />} />
             <Route path="buyer" element={<AdminBuy />} />
           </Route>

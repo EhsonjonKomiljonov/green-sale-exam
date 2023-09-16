@@ -12,7 +12,10 @@ export const SellVacancyGetComp = () => {
   const [totalPage, setTotalPage] = useState(1);
 
   const getPosts = async (c) => {
-    const data = await API.getSellerPosts({ c, page: activePage });
+    const data = await API.getSellerPosts({
+      c: c == 'null' ? null : c,
+      page: activePage,
+    });
 
     setTotalPage(data.data.pages);
 
@@ -55,11 +58,15 @@ export const SellVacancyGetComp = () => {
                   onChange={onChange}
                   className="sell__vacancy__get__select "
                 >
+                  <option value="1" selected disabled>
+                    Kategoriyani tanlang...
+                  </option>
                   <option value="64f07653f7c051e624804d5f">Mevalar</option>
                   <option value="64f07653f7c051e624804d60">
                     Poliz-Ekinlari
                   </option>
                   <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>
+                  <option value="null">Barchasi</option>
                 </select>
                 <form
                   style={{ width: 400 }}

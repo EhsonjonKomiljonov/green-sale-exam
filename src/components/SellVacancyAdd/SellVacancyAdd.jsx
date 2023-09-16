@@ -61,8 +61,7 @@ export const SellVacancyAdd = () => {
       toast.error(data.data?.message);
     } else {
       toast.error('Iltimos barcha narsani togri kiriting');
-    } 
-    console.log(data);
+    }
   };
 
   const initialValues = {
@@ -177,6 +176,7 @@ export const SellVacancyAdd = () => {
                   className='sell_vacancy__select'
                   defaultValue='1'
                 >
+                  <option value='1' selected disabled>Kategoriyani tanlang...</option>
                   <option value='64f07d6885548d0039615a9a'>Sabzavotlar</option>
                   <option value='64f07653f7c051e624804d60'>
                     Poliz-ekinlari
