@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './sellVacancyGet.scss';
 import SearchIcon from '../../assets/images/search-icon.png';
 import { API } from '../../API/api';
@@ -6,18 +6,26 @@ import { useState } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { Pagination } from '../Pagination/Pagination';
 import { Loading } from '../Loading/Loading';
+import { LoadingContext } from '../../context/LoadingContext';
 export const SellVacancyGetComp = () => {
   const [data, setData] = useState('no');
   const [activePage, setActivePage] = useState();
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
   const [totalPage, setTotalPage] = useState(1);
 
   const getPosts = async (c) => {
+    setIsLoading(true);
     const data = await API.getSellerPosts({
       c: c == 'null' ? null : c,
       page: activePage,
     });
 
-    setTotalPage(data.data.pages);
+    if (data.data?.status == 200) {
+      setTotalPage(data.data.pages);
+      setIsLoading(false);
+    } else {
+      toast.error(data.data?.message);
+    }
 
     return setData(data.data.data);
   };
@@ -27,12 +35,15 @@ export const SellVacancyGetComp = () => {
   }, [setData, activePage]);
 
   const onChange = async (e) => {
-    await getPosts(e.target.value);
+    await getPosts(e.target.value == 'null' ? null : e.target.value);
   };
 
   const searchSubmit = async (e) => {
     e.preventDefault();
-    const data = await API.getSellSearch(e.target.elements[0].value);
+    const data = await API.getSellSearch({
+      val: e.target.elements[0].value,
+      page: 1,
+    });
     if (data.data?.status == 200) {
       setData(data.data?.data);
     } else {
@@ -42,7 +53,7 @@ export const SellVacancyGetComp = () => {
 
   const getMainPosts = (evt) => {
     if (!evt.target.value.length) {
-      mutate({ c: null, page: activePage });
+      getPosts();
     }
   };
 

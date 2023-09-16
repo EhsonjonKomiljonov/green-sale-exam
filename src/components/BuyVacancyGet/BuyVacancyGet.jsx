@@ -34,7 +34,7 @@ export const BuyVacancyGetComp = () => {
   const searchSubmit = async (e) => {
     e.preventDefault();
     const data = await API.getBuySearch(e.target.elements[0].value);
-    console.log(data);
+
     if (data.data?.status == 200) {
       setData(data.data?.data);
     } else {
@@ -47,7 +47,13 @@ export const BuyVacancyGetComp = () => {
   }, [setData, activePage]);
 
   const onChange = async (e) => {
-    await getPosts(e.target.value);
+    await getPosts(e.target.value == 'null' ? null : e.target.value);
+  };
+
+  const getMainPosts = (evt) => {
+    if (!evt.target.value.length) {
+      getPosts();
+    }
   };
 
   return (

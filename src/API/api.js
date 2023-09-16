@@ -15,7 +15,7 @@ export const API = {
   getBuySearch: ({ val, page }) =>
     axios.get(host + `/buyer-post?search=${val}&page=${page}`),
   getSellSearch: ({ val, page }) =>
-    axios.get(host + `?search=${val}&page=${page}`),
+    axios.get(host + `/seller-post?search=${val}&page=${page}`),
   getSellerPosts: ({ c, page }) =>
     c
       ? axios.get(host + '/seller-post?categoryId=' + c)
