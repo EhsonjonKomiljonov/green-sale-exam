@@ -9,6 +9,7 @@ export const MyVacanciesComp = () => {
 
   const getVacancies = async () => {
     const data = await API.getMySellPosts();
+    console.log(data);
     setData(data.data.data);
   };
 
