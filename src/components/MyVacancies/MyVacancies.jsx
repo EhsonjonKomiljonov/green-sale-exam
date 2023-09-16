@@ -9,7 +9,7 @@ export const MyVacanciesComp = () => {
 
   const getVacancies = async () => {
     const data = await API.getMySellPosts();
-    console.log(data)
+
     if (data.data.status == 200) {
       setData(data.data.data);
     }
