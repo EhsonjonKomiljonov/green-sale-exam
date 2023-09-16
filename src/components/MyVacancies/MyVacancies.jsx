@@ -3,6 +3,7 @@ import './myvacancies.scss';
 import { ProductCard } from '../ProductCard/ProductCard.jsx';
 import { API } from '../../API/api.js';
 import { useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 
 export const MyVacanciesComp = () => {
   const [data, setData] = useState([]);
@@ -33,18 +34,7 @@ export const MyVacanciesComp = () => {
       <section className="my__vacancies">
         <div className="my__vacancies__inner">
           <div className="container">
-            <h2 className="h2 my-4">Mening vakansiyalarim</h2>
-            <div className="my__vacancies__cards justify-content-center">
-              {data?.length ? (
-                data.map((el) => (
-                  <ProductCard edit="true" obj={el} del="true" />
-                ))
-              ) : (
-                <h2 className="text-center w-100 my-5 pb-4">
-                  Hozircha vakansiyalaringiz yo'q !
-                </h2>
-              )}
-            </div>
+            <Outlet />
           </div>
         </div>
       </section>

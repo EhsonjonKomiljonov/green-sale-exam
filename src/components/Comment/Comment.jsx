@@ -72,7 +72,7 @@ export const Comment = ({ obj }) => {
       onSuccess: (data) => {
         if (data.data.status == 200) {
           setIsLoading(false);
-          toast.info("Comment o'zgartirildi!");
+          toast.info("Izoh o'zgartirildi!");
 
           setTimeout(() => {
             location.reload();
@@ -86,13 +86,49 @@ export const Comment = ({ obj }) => {
     }
   );
 
-  const editComment = (evt) => {
+  const { mutate: deleteCommentUser } = useMutation(
+    'edit-comment-user',
+    API.deleteComment,
+    {
+      onSuccess: (data) => {
+        if (data.data.status == 200) {
+          setIsLoading(false);
+          toast.info("Izoh o'chirildi!");
+
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        }
+      },
+      onError: (err) => {
+        toast.error(`Ups serverda qandaydur xatolik!
+        Saytni yangilang.`);
+      },
+    }
+  );
+
+  const deleteComment = (evt) => {
+    const res = prompt(
+      `Aniq o'chirmoqchimisiz?
+    HA yoki YO'Q`,
+      "YO'Q"
+    );
+
+    if (res.toLowerCase() == "yo'q") {
+      toast.info("O'chirilmadi !");
+      return;
+    } else if (res.toLowerCase() == 'ha') {
+      deleteCommentUser(evt.target.id);
+    }
+  };
+
+  const editComment = async (evt) => {
     let getComment = obj?.comments.find((item) => item._id == evt.target.id);
-    let text = prompt("Yangi ko'mmentni kiriting!", getComment?.text);
+    let text = await prompt("Yangi ko'mmentni kiriting!", getComment?.text);
 
     if (!text || text.length < 3) {
-      toast.error(`Commentingiz O'zgartirilmadi!
-      Comment eng kami 3 harfdan iborat bo'lishi lozim!`);
+      toast.error(`Izohingiz O'zgartirilmadi!
+      Izoh eng kami 3 harfdan iborat bo'lishi lozim!`);
     } else {
       setIsLoading(true);
       editCommentUser({ text, id: evt.target.id });
@@ -178,48 +214,49 @@ export const Comment = ({ obj }) => {
                     >
                       Profilni ko'rish
                     </Link>
-                    {commentGroup[0]?.user_ref_id?.contact == auth && (
-                      <div>
-                        <button
-                          type="button"
-                          className="btn btn-warning"
-                          id={commentGroup[0]?._id}
-                          onClick={(evt) => editComment(evt)}
-                        >
-                          <img
-                            width="28px"
-                            height="28px"
-                            src={editicon}
-                            alt="..."
-                            id={commentGroup[0]?._id}
-                          />
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-danger ms-2"
-                          id={commentGroup[0]?._id}
-                        >
-                          <img
-                            width="28px"
-                            height="28px"
-                            src={deleteicon}
-                            alt=""
-                            id={commentGroup[0]?._id}
-                          />
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
-                <ul>
+                <div className='d-flex align-items-center justify-content-between' >
                   {commentGroup.map((comment) => (
-                    <li style={{ whiteSpace: 'pre-wrap' }} key={comment._id}>
+                    <div style={{ whiteSpace: 'pre-wrap' }} key={comment._id}>
                       <p className="ms-5 fs-6" whiteSpace>
                         {comment.text}
                       </p>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                  {commentGroup[0]?.user_ref_id?.contact == auth && (
+                    <div>
+                      <button
+                        type="button"
+                        className="btn btn-warning  p-1"
+                        id={commentGroup[0]?._id}
+                        onClick={(evt) => editComment(evt)}
+                      >
+                        <img
+                          width="20px"
+                          height="20px"
+                          src={editicon}
+                          alt="..."
+                          id={commentGroup[0]?._id}
+                        />
+                      </button>
+                      <button
+                        onClick={(evt) => deleteComment(evt)}
+                        type="button"
+                        className="btn btn-danger ms-2 p-1"
+                        id={commentGroup[0]?._id}
+                      >
+                        <img
+                          width="20px"
+                          height="20px"
+                          src={deleteicon}
+                          id={commentGroup[0]?._id}
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </li>
             ))
           ) : (

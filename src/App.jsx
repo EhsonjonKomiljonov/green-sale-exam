@@ -28,6 +28,8 @@ import Logo from './assets/images/logo.svg';
 import { UserProfile } from './pages/UserProfile/UserProfile';
 import { UserProfileSellPosts } from './pages/UserProfile/UserProfileSellPosts/UserProfileSellPosts';
 import { UserProfileBuyPosts } from './pages/UserProfile/UserProfileBuyPosts/UserProfileBuyPosts';
+import { MyBuyVacancies } from './components/MyVacancies/MyBuyVacancies/MyBuyVacancies';
+import { MySellVacancies } from './components/MyVacancies/MySellVacancies/MySellVacancies';
 const queryClient = new QueryClient();
 
 function App() {
@@ -55,7 +57,11 @@ function App() {
           <Route path="/single-product/:id" element={<ProductSingle />} />
           <Route path="/seller-vacancies" element={<SellVacancyGet />} />
           <Route path="/buyer-vacancies" element={<BuyVacancyGet />} />
-          <Route path="/my-vacancies" element={<MyVacancies />} />
+          <Route path="/my-vacancies/*" element={<MyVacancies />}>
+            <Route index element={<Navigate to="sell" />} />
+            <Route path="sell" element={<MySellVacancies />} />
+            <Route path="buy" element={<MyBuyVacancies />} />
+          </Route>
           <Route path="/about" element={<About />} />
           <Route path="/favorite-vacancies" element={<Favorites />} />
           <Route path="/user-profile/:id/*" element={<UserProfile />}>
