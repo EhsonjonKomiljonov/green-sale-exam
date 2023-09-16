@@ -24,6 +24,7 @@ import { MyVacancies } from './pages/MyVacancies/MyVacancies';
 import { About } from './pages/About/About';
 import { AdminSell } from './pages/Admin/AdminSell/AdminSell';
 import { AdminBuy } from './pages/Admin/AdminBuy/AdminBuy';
+import { Favorites } from './pages/Favorites/Favorites';
 const queryClient = new QueryClient();
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
           <Route path="/sell-vacancies" element={<SellVacancyAdd />} />
           <Route path="/buy-vacancies" element={<BuyVacancyAdd />} />
           <Route path="/admin/*" element={<Admin />}>
-            <Route index element={<Navigate to='seller' />} />
+            <Route index element={<Navigate to="seller" />} />
             <Route path="seller" element={<AdminSell />} />
             <Route path="buyer" element={<AdminBuy />} />
           </Route>
@@ -53,6 +54,7 @@ function App() {
           <Route path="/buyer-vacancies" element={<BuyVacancyGet />} />
           <Route path="/my-vacancies" element={<MyVacancies />} />
           <Route path="/about" element={<About />} />
+          <Route path="/favorite-vacancies" element={<Favorites />} />
         </Routes>
       </main>
       <ToastContainer

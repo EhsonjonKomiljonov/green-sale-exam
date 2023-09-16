@@ -125,25 +125,30 @@ export const Header = () => {
                 <img src={Logo} alt="Green Sale" width="50px" />
                 <p>GREEN SALE</p>
               </Link>
-              <div className='site-header__center-links'>
+              <div className="site-header__center-links">
                 {localStorage.getItem('token') ? (
-                  <Link
-                    className='like rounded-1'
-                    to='/my-vacancies'
-                  >
+                  <Link className="like rounded-1" to="/my-vacancies">
                     Mening vakansiyalarim
                   </Link>
                 ) : (
                   ''
                 )}
-                <Link
-                  className='like rounded-1'
-                  to='/buyer-vacancies'
-                >
+                <Link className="like rounded-1" to="/buyer-vacancies">
                   Oluvchi vakansiyalar
                 </Link>
                 <Link className="like rounded-1" to="/seller-vacancies">
                   Sotuvchi vakansiyalar
+                </Link>
+                <Link className="like rounded-1" to="/favorite-vacancies">
+                  <svg width={23} viewBox="0 0 256 256">
+                    <rect fill="none" height="256" width="256"></rect>
+                    <path
+                      d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                      stroke-width="20px"
+                      stroke="#ffffff"
+                      fill="none"
+                    ></path>
+                  </svg>
                 </Link>
               </div>
             </div>

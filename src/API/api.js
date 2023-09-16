@@ -107,4 +107,26 @@ export const API = {
         Authorization: localStorage.getItem('token'),
       },
     }),
+  likedPost: (product_id) =>
+    axios.post(
+      host + '/favorites',
+      { product_ref_id: product_id },
+      {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    ),
+  deleteLikedPost: (id) =>
+    axios.delete(host + `/favorites/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    }),
+  getFavoritePosts: () =>
+    axios.get(host + '/favorites', {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    }),
 };
