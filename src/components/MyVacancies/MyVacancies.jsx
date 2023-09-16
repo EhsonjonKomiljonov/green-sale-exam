@@ -8,7 +8,7 @@ export const MyVacanciesComp = () => {
   const [data, setData] = useState([]);
 
   const getVacancies = async () => {
-    const data = await API.getMyPosts();
+    const data = await API.getMySellPosts();
     setData(data.data.data);
   };
 

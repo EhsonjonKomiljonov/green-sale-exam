@@ -10,6 +10,7 @@ import { Loading } from '../../components/Loading/Loading';
 import { LoadingContext } from '../../context/LoadingContext';
 import Placeholder from '../../assets/images/placeholder-product.png';
 import './product-single.scss';
+import { Comment } from '../../components/Comment/Comment';
 
 export const ProductSingle = () => {
   const params = useParams();
@@ -87,7 +88,7 @@ export const ProductSingle = () => {
       setIsLoading(true);
       buyMutate(id);
     }
-  }, []);
+  }, [type]);
 
   useEffect(() => {
     if (data.favorite) {
@@ -119,6 +120,7 @@ export const ProductSingle = () => {
         toast.error(`Ups Serverda qandaydur xatolik!
         saytni yangilab, qaytadan urunib ko'ring!`);
       },
+      retry: 1,
     }
   );
 
@@ -180,7 +182,7 @@ export const ProductSingle = () => {
   return (
     <>
       <Header />
-      <div className="single-product">
+      <section className="single-product">
         <h2 hidden>User Single</h2>
         <div className="container">
           <div className="single-product__inner row">
@@ -277,7 +279,8 @@ export const ProductSingle = () => {
             </div>
           </div>
         </div>
-      </div>
+        <Comment obj={data} />
+      </section>
       <Footer />
 
       {isLoading ? <Loading /> : ''}

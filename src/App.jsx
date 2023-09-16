@@ -24,16 +24,16 @@ import { About } from './pages/About/About';
 import { AdminSell } from './pages/Admin/AdminSell/AdminSell';
 import { AdminBuy } from './pages/Admin/AdminBuy/AdminBuy';
 import { Favorites } from './pages/Favorites/Favorites';
-import { useEffect } from 'react';
 import Logo from './assets/images/logo.svg';
+import { UserProfile } from './pages/UserProfile/UserProfile';
+import { UserProfileSellPosts } from './pages/UserProfile/UserProfileSellPosts/UserProfileSellPosts';
+import { UserProfileBuyPosts } from './pages/UserProfile/UserProfileBuyPosts/UserProfileBuyPosts';
 const queryClient = new QueryClient();
 
 function App() {
   const dispatch = useDispatch();
 
   dispatch(setToken(localStorage.getItem('token') || ''));
-
-  useEffect(() => {}, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -58,6 +58,11 @@ function App() {
           <Route path="/my-vacancies" element={<MyVacancies />} />
           <Route path="/about" element={<About />} />
           <Route path="/favorite-vacancies" element={<Favorites />} />
+          <Route path="/user-profile/:id/*" element={<UserProfile />}>
+            <Route index element={<Navigate to="seller" />} />
+            <Route path="seller" element={<UserProfileSellPosts />} />
+            <Route path="buyer" element={<UserProfileBuyPosts />} />
+          </Route>
         </Routes>
       </main>
       <ToastContainer
