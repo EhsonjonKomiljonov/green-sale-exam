@@ -9,12 +9,15 @@ export const MyVacanciesComp = () => {
 
   const getVacancies = async () => {
     const data = await API.getMySellPosts();
-    setData(data.data.data);
+    console.log(data)
+    if (data.data.status == 200) {
+      setData(data.data.data);
+    }
   };
 
   useEffect(() => {
     getVacancies();
-  }, [setData]);
+  }, []);
   (async function () {
     if (localStorage.getItem('token')) {
       const data = await API.verifyToken();
@@ -27,21 +30,17 @@ export const MyVacanciesComp = () => {
   })();
   return (
     <>
-      <section className='my__vacancies'>
-        <div className='my__vacancies__inner'>
-          <div className='container'>
-            <h2 className='h2 my-4'>Mening vakansiyalarim</h2>
-            <div className='my__vacancies__cards justify-content-center'>
+      <section className="my__vacancies">
+        <div className="my__vacancies__inner">
+          <div className="container">
+            <h2 className="h2 my-4">Mening vakansiyalarim</h2>
+            <div className="my__vacancies__cards justify-content-center">
               {data?.length ? (
                 data.map((el) => (
-                  <ProductCard
-                    edit='true'
-                    obj={el}
-                    del='true'
-                  />
+                  <ProductCard edit="true" obj={el} del="true" />
                 ))
               ) : (
-                <h2 className='text-center w-100 my-5 pb-4'>
+                <h2 className="text-center w-100 my-5 pb-4">
                   Hozircha vakansiyalaringiz yo'q !
                 </h2>
               )}
