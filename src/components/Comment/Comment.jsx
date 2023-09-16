@@ -1,21 +1,22 @@
-import SearchIcon from '../../assets/images/search-icon.png';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react';
 import { VerifyTokenContext } from '../../context/VerifyToken';
 import { toast } from 'react-toastify';
 import { useMutation, useQuery } from 'react-query';
 import { API } from '../../API/api';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
+import editicon from '../../assets/images/edit_icon.svg';
+import deleteicon from '../../assets/images/delete_icon.svg';
+import { AuthContext } from '../../context/AuthContext';
+import { Loading } from '../Loading/Loading';
 
 export const Comment = ({ obj }) => {
   const params = useParams();
   const id = params?.id.split('$')[0];
-  const [data, setData] = useState([]);
+  const { auth } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const { verifyToken, setVerifyToken } = useContext(VerifyTokenContext);
-  const type = params?.id.split('$type=')[1];
-  const navigate = useNavigate();
 
   const query = useQuery('verify-token', API.verifyToken, {
     onSuccess: (data) => {
@@ -39,7 +40,7 @@ export const Comment = ({ obj }) => {
         toast.success("Izohingiz qo'shildi!");
         setTimeout(() => {
           location.reload();
-        }, 2000);
+        }, 1000);
       }
     },
     onError: (err) => {
@@ -64,6 +65,40 @@ export const Comment = ({ obj }) => {
     mutate({ text: values.text, product_ref_id: obj._id });
   };
 
+  const { mutate: editCommentUser } = useMutation(
+    'edit-comment-user',
+    API.editComment,
+    {
+      onSuccess: (data) => {
+        if (data.data.status == 200) {
+          setIsLoading(false);
+          toast.info("Comment o'zgartirildi!");
+
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        }
+      },
+      onError: (err) => {
+        toast.error(`Ups serverda qandaydur xatolik!
+        Saytni yangilang.`);
+      },
+    }
+  );
+
+  const editComment = (evt) => {
+    let getComment = obj?.comments.find((item) => item._id == evt.target.id);
+    let text = prompt("Yangi ko'mmentni kiriting!", getComment?.text);
+
+    if (!text || text.length < 3) {
+      toast.error(`Commentingiz O'zgartirilmadi!
+      Comment eng kami 3 harfdan iborat bo'lishi lozim!`);
+    } else {
+      setIsLoading(true);
+      editCommentUser({ text, id: evt.target.id });
+    }
+  };
+
   return (
     <section className="comments">
       <div className="container">
@@ -83,12 +118,7 @@ export const Comment = ({ obj }) => {
                   placeholder="Siz ham izoh qoldiring..."
                 />
                 <button className="btn border" type="submit">
-                  <img
-                    src={SearchIcon}
-                    alt="search"
-                    width={20}
-                    style={{ transform: 'scaleX(-1)' }}
-                  />
+                  Yuborish
                 </button>
               </div>
               <span className="text-danger">
@@ -118,22 +148,75 @@ export const Comment = ({ obj }) => {
               }, {})
             ).map((commentGroup, index) => (
               <li className="list-group-item" key={index}>
-                <div className="d-flex align-items-center">
-                  <h4 className="me-5 pe-5">
-                    {commentGroup[0].user_ref_id.first_name}{' '}
-                    {commentGroup[0].user_ref_id.last_name}
-                  </h4>
-                  <Link
-                    className="text-dark text-opacity-75 text-decoration-underline"
-                    to={`/user-profile/${commentGroup[0].user_ref_id._id}`}
-                  >
-                    Profilni ko'rish
-                  </Link>
+                <div className="d-flex align-items-center justify-content-between">
+                  <div className="d-flex align-items-center gap-4 mb-3">
+                    <h4 className="m-0">
+                      {commentGroup[0].user_ref_id.first_name}{' '}
+                      {commentGroup[0].user_ref_id.last_name}:
+                    </h4>
+                    <p
+                      style={{
+                        color: '#308f1b',
+                      }}
+                    >
+                      {commentGroup.map((comment) => {
+                        const createdAt = new Date(comment.created_at);
+                        const now = new Date();
+                        const diffInHours = Math.abs(now - createdAt) / 36e5;
+                        const hours = Math.floor(diffInHours);
+                        const minutes = Math.floor((diffInHours - hours) * 60);
+                        return `${hours == 0 ? '' : hours + ' soat-'}${
+                          minutes == 0 ? '' : minutes + ' daqiqa'
+                        } avval.`;
+                      })}
+                    </p>
+                  </div>
+                  <div className="d-flex flex-column">
+                    <Link
+                      className="text-dark text-opacity-75 text-decoration-underline"
+                      to={`/user-profile/${commentGroup[0].user_ref_id._id}`}
+                    >
+                      Profilni ko'rish
+                    </Link>
+                    {commentGroup[0]?.user_ref_id?.contact == auth && (
+                      <div>
+                        <button
+                          type="button"
+                          className="btn btn-warning"
+                          id={commentGroup[0]?._id}
+                          onClick={(evt) => editComment(evt)}
+                        >
+                          <img
+                            width="28px"
+                            height="28px"
+                            src={editicon}
+                            alt="..."
+                            id={commentGroup[0]?._id}
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-danger ms-2"
+                          id={commentGroup[0]?._id}
+                        >
+                          <img
+                            width="28px"
+                            height="28px"
+                            src={deleteicon}
+                            alt=""
+                            id={commentGroup[0]?._id}
+                          />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <ul>
                   {commentGroup.map((comment) => (
-                    <li key={comment._id}>
-                      <p className="ms-5 fs-5">{comment.text}</p>
+                    <li style={{ whiteSpace: 'pre-wrap' }} key={comment._id}>
+                      <p className="ms-5 fs-6" whiteSpace>
+                        {comment.text}
+                      </p>
                     </li>
                   ))}
                 </ul>
@@ -143,6 +226,8 @@ export const Comment = ({ obj }) => {
             <li className="h4">Hozircha izohlar mavjud emas.</li>
           )}
         </ul>
+
+        {isLoading ? <Loading /> : ''}
       </div>
     </section>
   );

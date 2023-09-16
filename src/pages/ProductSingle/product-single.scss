@@ -1,6 +1,18 @@
 .single-product {
   padding: 70px 0 20px;
 
+  .user {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    box-shadow: #3c40434d 0px 1px 2px 0px, #3c404326 0px 1px 3px 1px;
+  }
+
   .product {
     width: 100%;
     max-width: 500px;
