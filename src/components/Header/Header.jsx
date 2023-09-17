@@ -26,7 +26,9 @@ export const Header = () => {
       if (data.data.data) {
         setIsLoading(false);
         setVerifyToken(true);
-      } else setVerifyToken(false);
+      } else {
+        setVerifyToken(false);
+      }
     },
     onError: (err) => {
       setIsLoading(false);

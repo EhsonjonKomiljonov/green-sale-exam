@@ -3,13 +3,11 @@ import axios from 'axios';
 // const host = 'https://green-sale.onrender.com';
 const host = 'http://localhost:9000';
 
-const token = localStorage.getItem('token');
-
 export const API = {
   verifyToken: async () =>
     await axios.get(host + '/check-token', {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   registerUser: (user) => axios.post(host + '/users', user),
@@ -37,7 +35,7 @@ export const API = {
         : host + '/seller-post/my-posts',
       {
         headers: {
-          authorization: token,
+          authorization: localStorage.getItem('token'),
         },
       }
     ),
@@ -50,63 +48,63 @@ export const API = {
         : host + '/buyer-post/my-posts',
       {
         headers: {
-          authorization: token,
+          authorization: localStorage.getItem('token'),
         },
       }
     ),
   createSeller: (formData) =>
     axios.post(host + '/seller-post', formData, {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   updateSeller: (id, formData) =>
     axios.put(host + '/seller-post/' + id, formData, {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   updateBuyer: (id, value) =>
     axios.put(host + '/buyer-post/' + id, value, {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   deleteSeller: (id) =>
     axios.delete(host + '/seller-post/' + id, {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   deleteBuyer: (id) =>
     axios.delete(host + '/buyer-post/' + id, {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   createBuyer: (formData) =>
     axios.post(host + '/buyer-post', formData, {
       headers: {
-        authorization: token,
+        authorization: localStorage.getItem('token'),
       },
     }),
   updatePassword: (data) => axios.post(host + '/users/reset-password', data),
   getUser: () =>
     axios.get(host + '/users/my-profile', {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   editUser: (user) =>
     axios.put(host + '/users/my-profile/info', user, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   editUserPassword: (password) =>
     axios.put(host + '/users/my-profile/security', password, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   getProducts: () => axios.get(host + '/seller-post/get-posts'),
@@ -116,19 +114,19 @@ export const API = {
   deleteSellProduct: (id) =>
     axios.delete(host + '/admin/delete-seller-post/' + id, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   deleteBuyProduct: (id) =>
     axios.delete(host + '/admin/delete-buyer-post/' + id, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   addCategory: (cat_name) =>
     axios.post(host + '/admin/add-category', cat_name, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   likedPost: (product_id) =>
@@ -137,20 +135,20 @@ export const API = {
       { product_ref_id: product_id },
       {
         headers: {
-          Authorization: token,
+          Authorization: localStorage.getItem('token'),
         },
       }
     ),
   deleteLikedPost: (id) =>
     axios.delete(host + `/favorites/${id}`, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   getFavoritePosts: () =>
     axios.get(host + '/favorites', {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   postComment: ({ text, product_ref_id }) =>
@@ -159,7 +157,7 @@ export const API = {
       { text, product_ref_id },
       {
         headers: {
-          Authorization: token,
+          Authorization: localStorage.getItem('token'),
         },
       }
     ),
@@ -170,20 +168,20 @@ export const API = {
       { text },
       {
         headers: {
-          Authorization: token,
+          Authorization: localStorage.getItem('token'),
         },
       }
     ),
   deleteComment: (id) =>
     axios.delete(host + `/comments/${id}`, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
   deleteCommentAdmin: (id) =>
     axios.delete(host + `/admin/delete-comment/${id}`, {
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem('token'),
       },
     }),
 };

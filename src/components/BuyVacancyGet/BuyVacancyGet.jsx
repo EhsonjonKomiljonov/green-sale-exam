@@ -16,7 +16,6 @@ export const BuyVacancyGetComp = () => {
   const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   const getPosts = async (c) => {
-    setIsLoading(true);
     const data = await API.getBuyerPosts({
       c: c == 'null' ? null : c,
       page: activePage,
@@ -24,7 +23,6 @@ export const BuyVacancyGetComp = () => {
 
     if (data.data?.status == 200) {
       setTotalPage(data.data.pages);
-      setIsLoading(false);
     } else {
       toast.error(data.data?.message);
     }
@@ -33,7 +31,10 @@ export const BuyVacancyGetComp = () => {
 
   const searchSubmit = async (e) => {
     e.preventDefault();
-    const data = await API.getBuySearch(e.target.elements[0].value);
+    const data = await API.getBuySearch({
+      val: e.target.elements[0].value,
+      page: activePage,
+    });
 
     if (data.data?.status == 200) {
       setData(data.data?.data);
