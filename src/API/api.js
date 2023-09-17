@@ -28,18 +28,32 @@ export const API = {
       : axios.get(host + '/buyer-post?page=' + page),
   getSellPostsById: (id) => axios.get(host + `/seller-post/user/${id}`),
   getBuyPostsById: (id) => axios.get(host + `/buyer-post/user/${id}`),
-  getMySellPosts: () =>
-    axios.get(host + '/seller-post/my-posts', {
-      headers: {
-        authorization: token,
-      },
-    }),
-  getMyBuyPosts: () =>
-    axios.get(host + '/buyer-post/my-posts', {
-      headers: {
-        authorization: token,
-      },
-    }),
+  getMySellPosts: (s, cId) =>
+    axios.get(
+      s
+        ? host + '/seller-post/my-posts?search=' + s
+        : cId
+        ? host + '/seller-post/my-posts?categoryId=' + cId
+        : host + '/seller-post/my-posts',
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    ),
+  getMyBuyPosts: (s, cId) =>
+    axios.get(
+      s
+        ? host + '/buyer-post/my-posts?search=' + s
+        : cId
+        ? host + '/buyer-post/my-posts?categoryId=' + cId
+        : host + '/buyer-post/my-posts',
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    ),
   createSeller: (formData) =>
     axios.post(host + '/seller-post', formData, {
       headers: {

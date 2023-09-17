@@ -31,9 +31,9 @@ export const MyVacanciesComp = () => {
   })();
   return (
     <>
-      <section className="my__vacancies">
-        <div className="my__vacancies__inner">
-          <div className="container">
+      <section className='my__vacancies'>
+        <div className='my__vacancies__inner'>
+          <div className='container'>
             <Outlet />
           </div>
         </div>
