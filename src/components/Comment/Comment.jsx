@@ -246,7 +246,7 @@ export const Comment = ({ obj }) => {
                       key={comment._id}
                     >
                       <div className="d-flex flex-column-reverse">
-                        <p className="ms-5 fs-6 mb-3">{comment.text}</p>
+                        <p className="ms-5 fs-6 mb-2">{comment.text}</p>
                         <p
                           className="ms-5"
                           style={{
@@ -297,14 +297,16 @@ export const Comment = ({ obj }) => {
                         ''
                       )}
                       {localStorage.getItem('admin') == admin_sec_key && (
-                        <button
-                          onClick={(evt) => deleteCommentAdmin(evt)}
-                          type="button"
-                          className="btn ms-2 p-0 text-danger fw-bold"
-                          id={commentGroup[0]?._id}
-                        >
-                          o'chirish
-                        </button>
+                        <div className="w-100 d-flex justify-content-end">
+                          <button
+                            onClick={(evt) => deleteCommentAdmin(evt)}
+                            type="button"
+                            className="btn ms-2 p-0 text-danger fw-bold"
+                            id={commentGroup[0]?._id}
+                          >
+                            o'chirish
+                          </button>
+                        </div>
                       )}
                     </div>
                   ))}
