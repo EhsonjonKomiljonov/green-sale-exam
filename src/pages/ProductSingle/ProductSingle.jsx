@@ -88,7 +88,7 @@ export const ProductSingle = () => {
       setIsLoading(true);
       buyMutate(id);
     }
-  }, [type]);
+  }, [type, id]);
 
   useEffect(() => {
     if (data.favorite) {

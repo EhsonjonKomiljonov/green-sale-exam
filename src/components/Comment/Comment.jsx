@@ -12,6 +12,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Loading } from '../Loading/Loading';
 
 export const Comment = ({ obj }) => {
+  const admin_sec_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
   const params = useParams();
   const id = params?.id.split('$')[0];
   const { auth } = useContext(AuthContext);
@@ -107,6 +108,28 @@ export const Comment = ({ obj }) => {
     }
   );
 
+  const { mutate: deleteUserCommentAdmin } = useMutation(
+    'delete-comment-admin',
+    API.deleteCommentAdmin,
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        if (data.data.status == 200) {
+          setIsLoading(false);
+          toast.info("Izoh o'chirildi!");
+
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        }
+      },
+      onError: (err) => {
+        toast.error(`Ups serverda qandaydur xatolik!
+        Saytni yangilang.`);
+      },
+    }
+  );
+
   const deleteComment = (evt) => {
     const res = prompt(
       `Aniq o'chirmoqchimisiz?
@@ -132,6 +155,21 @@ export const Comment = ({ obj }) => {
     } else {
       setIsLoading(true);
       editCommentUser({ text, id: evt.target.id });
+    }
+  };
+
+  const deleteCommentAdmin = async (evt) => {
+    const res = await prompt(
+      `Aniq o'chirmoqchimisiz?
+    HA yoki YO'Q`,
+      "YO'Q"
+    );
+
+    if (res.toLowerCase() == "yo'q") {
+      toast.info("O'chirilmadi !");
+      return;
+    } else if (res.toLowerCase() == 'ha') {
+      await deleteUserCommentAdmin(evt.target.id);
     }
   };
 
@@ -190,22 +228,6 @@ export const Comment = ({ obj }) => {
                       {commentGroup[0].user_ref_id.first_name}{' '}
                       {commentGroup[0].user_ref_id.last_name}:
                     </h4>
-                    <p
-                      style={{
-                        color: '#308f1b',
-                      }}
-                    >
-                      {commentGroup.map((comment) => {
-                        const createdAt = new Date(comment.created_at);
-                        const now = new Date();
-                        const diffInHours = Math.abs(now - createdAt) / 36e5;
-                        const hours = Math.floor(diffInHours);
-                        const minutes = Math.floor((diffInHours - hours) * 60);
-                        return `${hours == 0 ? '' : hours + ' soat-'}${
-                          minutes == 0 ? '' : minutes + ' daqiqa'
-                        } avval.`;
-                      })}
-                    </p>
                   </div>
                   <div className="d-flex flex-column">
                     <Link
@@ -216,46 +238,76 @@ export const Comment = ({ obj }) => {
                     </Link>
                   </div>
                 </div>
-                <div className='d-flex align-items-center justify-content-between' >
+                <div>
                   {commentGroup.map((comment) => (
-                    <div style={{ whiteSpace: 'pre-wrap' }} key={comment._id}>
-                      <p className="ms-5 fs-6" whiteSpace>
-                        {comment.text}
-                      </p>
+                    <div
+                      style={{ whiteSpace: 'pre-wrap' }}
+                      className="d-flex flex-column"
+                      key={comment._id}
+                    >
+                      <div className="d-flex flex-column-reverse">
+                        <p className="ms-5 fs-6 mb-3">{comment.text}</p>
+                        <p
+                          className="ms-5"
+                          style={{
+                            fontWeight: 'bold',
+                            color: '#308f1b',
+                          }}
+                        >
+                          {(function () {
+                            const createdAt = new Date(comment.created_at);
+                            const now = new Date();
+                            const diffInHours =
+                              Math.abs(now - createdAt) / 36e5;
+                            const hours = Math.floor(diffInHours);
+                            const minutes = Math.floor(
+                              (diffInHours - hours) * 60
+                            );
+                            return `${hours == 0 ? '' : hours + ' soat-'}${
+                              minutes == 0 ? '' : minutes + ' daqiqa'
+                            } ${
+                              hours == 0 && minutes == 0
+                                ? 'Hozir yozildi.'
+                                : 'avval.'
+                            }`;
+                          })()}
+                        </p>
+                      </div>
+                      {commentGroup[0]?.user_ref_id?.contact == auth &&
+                      !localStorage.getItem('admin') ? (
+                        <div className="w-100 d-flex justify-content-end">
+                          <button
+                            type="button"
+                            className="btn p-0 text-warning fw-bold"
+                            id={commentGroup[0]?._id}
+                            onClick={(evt) => editComment(evt)}
+                          >
+                            o'zgartirish
+                          </button>
+                          <button
+                            onClick={(evt) => deleteComment(evt)}
+                            type="button"
+                            className="btn ms-2 p-0 text-danger fw-bold"
+                            id={commentGroup[0]?._id}
+                          >
+                            o'chirish
+                          </button>
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                      {localStorage.getItem('admin') == admin_sec_key && (
+                        <button
+                          onClick={(evt) => deleteCommentAdmin(evt)}
+                          type="button"
+                          className="btn ms-2 p-0 text-danger fw-bold"
+                          id={commentGroup[0]?._id}
+                        >
+                          o'chirish
+                        </button>
+                      )}
                     </div>
                   ))}
-                  {commentGroup[0]?.user_ref_id?.contact == auth && (
-                    <div>
-                      <button
-                        type="button"
-                        className="btn btn-warning  p-1"
-                        id={commentGroup[0]?._id}
-                        onClick={(evt) => editComment(evt)}
-                      >
-                        <img
-                          width="20px"
-                          height="20px"
-                          src={editicon}
-                          alt="..."
-                          id={commentGroup[0]?._id}
-                        />
-                      </button>
-                      <button
-                        onClick={(evt) => deleteComment(evt)}
-                        type="button"
-                        className="btn btn-danger ms-2 p-1"
-                        id={commentGroup[0]?._id}
-                      >
-                        <img
-                          width="20px"
-                          height="20px"
-                          src={deleteicon}
-                          id={commentGroup[0]?._id}
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                  )}
                 </div>
               </li>
             ))

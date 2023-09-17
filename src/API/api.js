@@ -161,12 +161,15 @@ export const API = {
       }
     ),
   deleteComment: (id) =>
-    axios.delete(
-      host + `/comments/${id}`,
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    ),
+    axios.delete(host + `/comments/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    }),
+  deleteCommentAdmin: (id) =>
+    axios.delete(host + `/admin/delete-comment/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    }),
 };

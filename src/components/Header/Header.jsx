@@ -126,7 +126,7 @@ export const Header = () => {
                 <p>GREEN SALE</p>
               </Link>
               <div className="site-header__center-links">
-                {verifyToken ? (
+                {verifyToken && admin_key != localStorage.getItem('admin') ? (
                   <Link className="like rounded-1" to="/my-vacancies">
                     Mening vakansiyalarim
                   </Link>
