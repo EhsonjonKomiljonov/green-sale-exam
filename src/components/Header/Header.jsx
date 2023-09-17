@@ -139,7 +139,7 @@ export const Header = () => {
                 <Link className="like rounded-1" to="/seller-vacancies">
                   Sotuvchi vakansiyalar
                 </Link>
-                {verifyToken ? (
+                {verifyToken && admin_key != localStorage.getItem('admin') ? (
                   <Link className="like rounded-1" to="/favorite-vacancies">
                     <svg width={23} viewBox="0 0 256 256">
                       <rect fill="none" height="256" width="256"></rect>

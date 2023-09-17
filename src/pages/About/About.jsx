@@ -39,13 +39,15 @@ export const About = () => {
             <h3 className="about__user-title">Foydalanuvchilar:</h3>
             <p className="about__user-desc">
               Saytga kirgan har bir foydalanuvchi barcha joylashtirilgan
-              e'lonlarni ko'rish imkoniyatiga ega. Shuningdek, e'lon egasi bilan
-              bog'lanish uchun uning telefon raqamini ko'rishi mumkin.
+              e'lonlarni va izohlarni ko'rish imkoniyatiga ega. Shuningdek,
+              e'lon egasi bilan bog'lanish uchun uning telefon raqamini ko'rishi
+              mumkin.
             </p>
             <p className="about__user-desc">
-              Ammo saytga e'lon joylashtirish uchun siz avval ro'yxatdan
-              o'tishingiz lozim. Ro'yxatdan o'tish bepul va oddiy!
-              <Link to="register"> Ro'yxatdan o'tish</Link>
+              Ammo saytga e'lon joylashtirish va qandaydur e'longa izoh
+              qoldirish uchun siz avval ro'yxatdan o'tishingiz lozim. Ro'yxatdan
+              o'tish esa bepul va oddiy!
+              <Link to="/register"> Ro'yxatdan o'tish</Link>
             </p>
           </div>
         </div>
