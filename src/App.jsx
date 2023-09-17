@@ -30,6 +30,7 @@ import { UserProfileSellPosts } from './pages/UserProfile/UserProfileSellPosts/U
 import { UserProfileBuyPosts } from './pages/UserProfile/UserProfileBuyPosts/UserProfileBuyPosts';
 import { MyBuyVacancies } from './components/MyVacancies/MyBuyVacancies/MyBuyVacancies';
 import { MySellVacancies } from './components/MyVacancies/MySellVacancies/MySellVacancies';
+import { Compare } from './pages/Compare/Compare';
 const queryClient = new QueryClient();
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
             <Route path="seller" element={<UserProfileSellPosts />} />
             <Route path="buyer" element={<UserProfileBuyPosts />} />
           </Route>
+          <Route path="/compares" element={<Compare />} />
         </Routes>
       </main>
       <ToastContainer

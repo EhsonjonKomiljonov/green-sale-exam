@@ -191,6 +191,9 @@ export const Header = () => {
                   <li>
                     <Link to="/about">Biz Haqimizda</Link>
                   </li>
+                  <li>
+                    <Link to="/compares">Taqqoslash</Link>
+                  </li>
                 </ul>
               </nav>
             </div>

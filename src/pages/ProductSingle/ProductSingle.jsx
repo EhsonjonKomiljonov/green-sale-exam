@@ -10,6 +10,7 @@ import { Loading } from '../../components/Loading/Loading';
 import { LoadingContext } from '../../context/LoadingContext';
 import Placeholder from '../../assets/images/placeholder-product.png';
 import { Comment } from '../../components/Comment/Comment';
+import Compare from '../../assets/images/compare.png';
 import './product-single.scss';
 
 export const ProductSingle = () => {
@@ -17,6 +18,9 @@ export const ProductSingle = () => {
   const id = params?.id.split('$')[0];
   const type = params?.id.split('$type=')[1];
   const [data, setData] = useState([]);
+  const [comparedProduct, setComparedProduct] = useState(
+    JSON.parse(localStorage.getItem('compare-products')) || []
+  );
   const { isLoading, setIsLoading } = useContext(LoadingContext);
   const navigate = useNavigate();
   const host = import.meta.env.VITE_REACT_APP_HOST;
@@ -238,6 +242,42 @@ export const ProductSingle = () => {
                       </svg>
                     </div>
                   </label>
+                  <button
+                    className="btn position-absolute py-2 px-2 pb-1"
+                    style={{
+                      width: 40,
+                      height: 40,
+                      right: '5px',
+                      bottom: '-100px',
+                      border: '1px solid #646262',
+                      backgroundImage: `url(${Compare})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
+                      backgroundSize: '28px',
+                    }}
+                    onClick={async (evt) => {
+                      if (comparedProduct.some((item) => item === data._id)) {
+                        toast.info(
+                          "Bu vakansiya avval solishtirish uchun qo'shilgan!"
+                        );
+                      } else if (comparedProduct.length == 3) {
+                        toast.info(
+                          "Solishtirish uchun eng ko'pi 3 ta vakansiya qo'shish mumkin!"
+                        );
+                      } else {
+                        const updatedComparedProduct = [
+                          ...comparedProduct,
+                          data._id,
+                        ];
+                        setComparedProduct(updatedComparedProduct);
+                        await localStorage.setItem(
+                          'compare-products',
+                          JSON.stringify(updatedComparedProduct)
+                        );
+                        toast.info("Vakansiya solishtirish uchun qo'shildi!");
+                      }
+                    }}
+                  ></button>
                 </div>
                 <h3>
                   {data.name}, {data.type}

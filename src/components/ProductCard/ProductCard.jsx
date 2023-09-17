@@ -85,7 +85,7 @@ export const ProductCard = ({ obj, edit, del }) => {
 
   const updateSellerRequest = async (formData) => {
     const data = await API.updateSeller(_id, formData).catch((err) =>
-      console.log(err)
+      toast.error("Ups serverda qandaydur xatolik qaytadan urinib ko'ring!")
     );
 
     if (data.data?.data?._id) {
@@ -110,7 +110,6 @@ export const ProductCard = ({ obj, edit, del }) => {
 
   const UpdateSellerSubmit = (values) => {
     const formData = new FormData();
-    console.log(values);
     const valueFormData = {
       ...values,
       imgLink: [...filesRef?.current?.files],
@@ -221,7 +220,7 @@ export const ProductCard = ({ obj, edit, del }) => {
   return (
     <div className={!sellered ? 'product-card' : 'd-none'}>
       <Link
-        className='product-card-link'
+        className="product-card-link"
         to={
           '/single-product/' + _id + '$type=' + (obj.price ? 'seller' : 'buyer')
         }
@@ -229,7 +228,7 @@ export const ProductCard = ({ obj, edit, del }) => {
         <img
           onLoad={onLoadImage}
           onError={onErrorImage}
-          className='product__card__img'
+          className="product__card__img"
           style={{
             display: isLoadingImage ? 'block' : '',
             width: isLoadingImage ? '200px' : '',
@@ -247,46 +246,39 @@ export const ProductCard = ({ obj, edit, del }) => {
           }
           alt={name}
         />
-        <div className='product-card__body'>
-          <div className='product-card__heading'>
+        <div className="product-card__body">
+          <div className="product-card__heading">
             <span className={sellered ? 'sellered' : ''}>
               {sellered ? 'Kelishilgan' : 'Yangi'}
             </span>
-            <time
-              className='product-card__time'
-              dateTime={created_at || ''}
-            >
-              <i className='fa-solid fa-clock'></i>
+            <time className="product-card__time" dateTime={created_at || ''}>
+              <i className="fa-solid fa-clock"></i>
               {`${month}-${day} ${hour}:${minute}`}
             </time>
           </div>
-          <h3 className='product-card__title'>{name.slice(0, 20)}...</h3>
-          <p className='product-card__desc'>{description.slice(0, 40)}...</p>
-          <p className='product-card__region'>
-            <i className='fa-solid fa-truck'></i>
+          <h3 className="product-card__title">{name.slice(0, 20)}...</h3>
+          <p className="product-card__desc">{description.slice(0, 40)}...</p>
+          <p className="product-card__region">
+            <i className="fa-solid fa-truck"></i>
             Manzil: {region}, {district.slice(0, 9)}...
           </p>
         </div>
       </Link>
-      <label className='like-container'>
+      <label className="like-container">
         <input
-          type='checkbox'
+          type="checkbox"
           id={_id}
           defaultChecked={favorite ? 'checked' : ''}
           onChange={(evt) => likedPost(evt)}
         />
-        <div className='checkmark'>
-          <svg viewBox='0 0 256 256'>
-            <rect
-              fill='none'
-              height='256'
-              width='256'
-            ></rect>
+        <div className="checkmark">
+          <svg viewBox="0 0 256 256">
+            <rect fill="none" height="256" width="256"></rect>
             <path
-              d='M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z'
-              strokeWidth='20px'
-              stroke='#4e4c4c'
-              fill='none'
+              d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+              strokeWidth="20px"
+              stroke="#4e4c4c"
+              fill="none"
             ></path>
           </svg>
         </div>
@@ -295,125 +287,116 @@ export const ProductCard = ({ obj, edit, del }) => {
       {edit == 'true' ? (
         <>
           <button
-            type='button'
-            className='btn btn-warning   ms-2 mb-2 w-50 edit-btn'
-            data-bs-toggle='modal'
+            type="button"
+            className="btn btn-warning   ms-2 mb-2 w-50 edit-btn"
+            data-bs-toggle="modal"
             onClick={editVacancyCheck}
             data-bs-target={`#${_id}_edit`}
             ref={filesRef}
             id={_id}
           >
-            <img
-              width='28px'
-              height='28px'
-              src={editicon}
-              id={_id}
-              alt='...'
-            />
+            <img width="28px" height="28px" src={editicon} id={_id} alt="..." />
           </button>
           <div
-            className='modal fade'
+            className="modal fade"
             id={`${_id}_edit`}
-            data-bs-backdrop='static'
-            data-bs-keyboard='false'
-            tabindex='-1'
-            aria-labelledby='staticBackdropLabel'
-            aria-hidden='true'
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
           >
-            <div className='modal-dialog'>
-              <div className='modal-content'>
-                <div className='modal-header'>
-                  <h1
-                    className='modal-title fs-5'
-                    id='staticBackdropLabel'
-                  >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
                     PRODUCTNI O'ZGARTIRISH
                   </h1>
                   <button
-                    type='button'
-                    className='btn-close'
-                    data-bs-dismiss='modal'
-                    aria-label='Close'
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
                   ></button>
                 </div>
-                <div className='modal-body'>
+                <div className="modal-body">
                   {productType != 'no' && productType == 'seller' ? (
                     <Formik
                       initialValues={initialValues}
                       validationSchema={validationSchema}
                       onSubmit={UpdateSellerSubmit}
                     >
-                      <Form className='d-flex gap-3 flex-wrap flex-column'>
-                        <div className='sell_vacancy__input__box'>
+                      <Form className="d-flex gap-3 flex-wrap flex-column">
+                        <div className="sell_vacancy__input__box">
                           <input
-                            type='file'
-                            accept='image/*'
-                            className='form-control'
-                            placeholder='Mahsulot nomini yozing'
+                            type="file"
+                            accept="image/*"
+                            className="form-control"
+                            placeholder="Mahsulot nomini yozing"
                             multiple
                             onChange={handleFiles}
                             ref={filesRef}
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='name'
-                            placeholder='Mahsulot nomini yozing'
-                            name='name'
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            placeholder="Mahsulot nomini yozing"
+                            name="name"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='number'
-                            className='form-control'
-                            id='price'
-                            placeholder='Mahsulot narxini yozing'
-                            name='price'
+                            type="number"
+                            className="form-control"
+                            id="price"
+                            placeholder="Mahsulot narxini yozing"
+                            name="price"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='number'
-                            className='form-control'
-                            id='capacity'
+                            type="number"
+                            className="form-control"
+                            id="capacity"
                             placeholder="Mahsulot sig'imini yozing"
-                            name='capacity'
+                            name="capacity"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='capacityMeasure'
-                            placeholder='Mahsulot Sigim tipini yozing (tonna, kilogram, litr)'
-                            name='capacityMeasure'
+                            type="text"
+                            className="form-control"
+                            id="capacityMeasure"
+                            placeholder="Mahsulot Sigim tipini yozing (tonna, kilogram, litr)"
+                            name="capacityMeasure"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='type'
-                            placeholder='Mahsulot tipini yozing'
-                            name='type'
+                            type="text"
+                            className="form-control"
+                            id="type"
+                            placeholder="Mahsulot tipini yozing"
+                            name="type"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='description'
-                            placeholder='Izohni yozing'
-                            name='description'
+                            type="text"
+                            className="form-control"
+                            id="description"
+                            placeholder="Izohni yozing"
+                            name="description"
                           />
                         </div>
                         <button
-                          type='submit'
-                          data-bs-dismiss='modal'
+                          type="submit"
+                          data-bs-dismiss="modal"
                           id={_id}
-                          className='btn btn-success text-white w-25'
+                          className="btn btn-success text-white w-25"
                         >
                           Yuborish
                         </button>
@@ -425,66 +408,66 @@ export const ProductCard = ({ obj, edit, del }) => {
                       validationSchema={validationSchemaBuy}
                       onSubmit={UpdateBuyerSubmit}
                     >
-                      <Form className='d-flex gap-3 flex-wrap flex-column'>
-                        <div className='sell__vacancy__input__box'>
+                      <Form className="d-flex gap-3 flex-wrap flex-column">
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='name'
-                            placeholder='Mahsulot nomini yozing'
-                            name='name'
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            placeholder="Mahsulot nomini yozing"
+                            name="name"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='number'
-                            className='form-control'
-                            id='price'
-                            placeholder='Mahsulot narxini yozing'
-                            name='price'
+                            type="number"
+                            className="form-control"
+                            id="price"
+                            placeholder="Mahsulot narxini yozing"
+                            name="price"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='number'
-                            className='form-control'
-                            id='capacity'
+                            type="number"
+                            className="form-control"
+                            id="capacity"
                             placeholder="Mahsulot sig'imini yozing"
-                            name='capacity'
+                            name="capacity"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='capacityMeasure'
-                            placeholder='Mahsulot Sigim tipini yozing (tonna, kilogram, litr)'
-                            name='capacityMeasure'
+                            type="text"
+                            className="form-control"
+                            id="capacityMeasure"
+                            placeholder="Mahsulot Sigim tipini yozing (tonna, kilogram, litr)"
+                            name="capacityMeasure"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='type'
-                            placeholder='Mahsulot tipini yozing'
-                            name='type'
+                            type="text"
+                            className="form-control"
+                            id="type"
+                            placeholder="Mahsulot tipini yozing"
+                            name="type"
                           />
                         </div>
-                        <div className='sell__vacancy__input__box'>
+                        <div className="sell__vacancy__input__box">
                           <Field
-                            type='text'
-                            className='form-control'
-                            id='description'
-                            placeholder='Izohni yozing'
-                            name='description'
+                            type="text"
+                            className="form-control"
+                            id="description"
+                            placeholder="Izohni yozing"
+                            name="description"
                           />
                         </div>
                         <button
-                          type='submit'
-                          data-bs-dismiss='modal'
+                          type="submit"
+                          data-bs-dismiss="modal"
                           id={_id}
-                          className='btn btn-success text-white w-25'
+                          className="btn btn-success text-white w-25"
                         >
                           Yuborish
                         </button>
@@ -494,11 +477,11 @@ export const ProductCard = ({ obj, edit, del }) => {
                     ''
                   )}
                 </div>
-                <div className='modal-footer'>
+                <div className="modal-footer">
                   <button
-                    type='button'
-                    className='btn btn-secondary'
-                    data-bs-dismiss='modal'
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
                   >
                     Orqaga
                   </button>
@@ -514,60 +497,52 @@ export const ProductCard = ({ obj, edit, del }) => {
       {del == 'true' ? (
         <>
           <button
-            type='button'
-            className='btn btn-danger ms-2 mb-2 w-50 delete-btn'
-            data-bs-toggle='modal'
+            type="button"
+            className="btn btn-danger ms-2 mb-2 w-50 delete-btn"
+            data-bs-toggle="modal"
             data-bs-target={`#${_id}_del`}
           >
-            <img
-              width='28px'
-              height='28px'
-              src={deleteicon}
-              alt=''
-            />
+            <img width="28px" height="28px" src={deleteicon} alt="" />
           </button>
           <div
-            className='modal fade'
+            className="modal fade"
             id={`${_id}_del`}
-            data-bs-backdrop='static'
-            data-bs-keyboard='false'
-            tabindex='-1'
-            aria-labelledby='staticBackdropLabel'
-            aria-hidden='true'
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
           >
-            <div className='modal-dialog'>
-              <div className='modal-content'>
-                <div className='modal-header'>
-                  <h1
-                    className='modal-title fs-5'
-                    id='staticBackdropLabel'
-                  >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
                     PRODUCTNI O'CHIRISH
                   </h1>
                   <button
-                    type='button'
-                    className='btn-close'
-                    data-bs-dismiss='modal'
-                    aria-label='Close'
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
                   ></button>
                 </div>
-                <div className='modal-body'>
+                <div className="modal-body">
                   SIZ ANIQ PRODUCTINGIZNI OCHIRMOQCHIMISIZ ?
                 </div>
-                <div className='modal-footer'>
+                <div className="modal-footer">
                   <button
-                    type='button'
-                    className='btn btn-secondary'
-                    data-bs-dismiss='modal'
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
                   >
                     Orqaga
                   </button>
                   <button
-                    type='button'
-                    data-bs-dismiss='modal'
+                    type="button"
+                    data-bs-dismiss="modal"
                     id={_id}
                     onClick={deleteVacancy}
-                    className='btn btn-danger'
+                    className="btn btn-danger"
                   >
                     Ha
                   </button>
