@@ -260,7 +260,7 @@ export const ProductCard = ({ obj, edit, del }) => {
           <p className="product-card__desc">{description.slice(0, 40)}...</p>
           <p className="product-card__region">
             <i className="fa-solid fa-truck"></i>
-            Manzil: {region}, {district.slice(0, 9)}...
+            Manzil: {region.slice(0, 17)}, {district.slice(0, 9)}...
           </p>
         </div>
       </Link>

@@ -14,30 +14,23 @@ export const Products = () => {
     onError: (err) => {
       toast.error('Ups serverda xatolik saytni yangilang!');
     },
-    refetchOnWindowFocus: false,
   });
 
   return (
-    <section className='products py-5'>
-      <div className='container'>
-        <h2 className='mb-5'>Products</h2>
-        <div className='products__inner d-flex flex-wrap'>
+    <section className="products py-5">
+      <div className="container">
+        <h2 className="mb-5">Products</h2>
+        <div className="products__inner d-flex flex-wrap">
           {data?.data?.data?.length ? (
             data.data.data.map((item) => (
-              <ProductCard
-                obj={item}
-                key={item._id}
-              />
+              <ProductCard obj={item} key={item._id} />
             ))
           ) : (
             <h1>Vakansiyalar topilmadi!</h1>
           )}
         </div>
         {data?.data?.data?.length ? (
-          <Link
-            to='/seller-vacancies'
-            className='view-btn'
-          >
+          <Link to="/seller-vacancies" className="view-btn">
             <GreenButton text="Barchasini ko'rish" />
           </Link>
         ) : (

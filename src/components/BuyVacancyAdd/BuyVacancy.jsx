@@ -93,7 +93,7 @@ export const BuyVacancy = () => {
       <section className='buy_vacancy'>
         <div className='buy_vacancy__inner d-flex'>
           <div className='buy_vacancy_right'>
-            <h2 className='buy__vacancy__title'>Buyer Vacancy</h2>
+            <h2 className='buy__vacancy__title'>Olish uchun vakansiya</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
