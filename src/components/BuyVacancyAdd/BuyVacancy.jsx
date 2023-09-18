@@ -62,15 +62,11 @@ export const BuyVacancy = () => {
       contact: localStorage.getItem('phone'),
     };
 
-    if (
-      valueForm?.categoryId &&
-      valueForm?.contact &&
-      valueForm?.region
-    ) {
+    if (valueForm?.categoryId && valueForm?.contact && valueForm?.region) {
       createBuyerRequest(valueForm);
     }
   };
-  
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -90,111 +86,108 @@ export const BuyVacancy = () => {
   })();
   return (
     <>
-      <section className='buy_vacancy'>
-        <div className='buy_vacancy__inner d-flex'>
-          <div className='buy_vacancy_right'>
-            <h2 className='buy__vacancy__title'>Olish uchun vakansiya</h2>
+      <section className="buy_vacancy">
+        <div className="buy_vacancy__inner d-flex">
+          <div className="buy_vacancy_right">
+            <h2 className="buy__vacancy__title">Olish uchun vakansiya</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={CreatebuyerSubmit}
             >
-              <Form className='buy__vacancy__form'>
+              <Form className="buy__vacancy__form">
                 <select
                   ref={selectRef}
                   required
-                  className='buy_vacancy__select'
-                  defaultValue='1'
+                  className="buy_vacancy__select"
+                  defaultValue="1"
                 >
-                  <option value='64f07d6885548d0039615a9a'>Sabzavotlar</option>
-                  <option value='64f07653f7c051e624804d60'>
+                  <option value="6507ea8059f642ae7e96e29b">Sabzavotlar</option>
+                  <option value="6507eaa8a56f231cf168c608">
                     Poliz-ekinlari
                   </option>
-                  <option value='64f07653f7c051e624804d5f'>Mevalar</option>
+                  <option value="6507ea98ed8a459c1bb6b595">Mevalar</option>
                 </select>
-                <div className='buy__vacancy__input__box'>
-                  <label htmlFor='name'>Mahsulot nomini yozing</label>
+                <div className="buy__vacancy__input__box">
+                  <label htmlFor="name">Mahsulot nomini yozing</label>
                   <Field
                     required
-                    type='text'
-                    name='name'
-                    id='name'
-                    className='buy__vacancy__input'
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="buy__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='name' />
+                  <span className="error__message">
+                    <ErrorMessage name="name" />
                   </span>
                 </div>
-                <div className='buy__vacancy__input__box'>
-                  <label htmlFor='capacity'>Sig'imini yozing</label>
+                <div className="buy__vacancy__input__box">
+                  <label htmlFor="capacity">Sig'imini yozing</label>
                   <Field
                     required
-                    type='number'
-                    name='capacity'
-                    id='capacity'
-                    className='buy__vacancy__input'
+                    type="number"
+                    name="capacity"
+                    id="capacity"
+                    className="buy__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='capacity' />
+                  <span className="error__message">
+                    <ErrorMessage name="capacity" />
                   </span>
                 </div>
-                <div className='buy__vacancy__input__box'>
-                  <label htmlFor='capacityMeasure'>
+                <div className="buy__vacancy__input__box">
+                  <label htmlFor="capacityMeasure">
                     Sig'im tipi: tonna, kilogram
                   </label>
                   <Field
                     required
-                    type='text'
-                    name='capacityMeasure'
-                    id='capacityMeasure'
-                    className='buy__vacancy__input'
+                    type="text"
+                    name="capacityMeasure"
+                    id="capacityMeasure"
+                    className="buy__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='capacityMeasure' />
+                  <span className="error__message">
+                    <ErrorMessage name="capacityMeasure" />
                   </span>
                 </div>
-                <div className='buy__vacancy__input__box'>
-                  <label htmlFor='type'>Mahsulot tipi</label>
+                <div className="buy__vacancy__input__box">
+                  <label htmlFor="type">Mahsulot tipi</label>
                   <Field
                     required
-                    type='text'
-                    name='type'
-                    id='type'
-                    className='buy__vacancy__input'
+                    type="text"
+                    name="type"
+                    id="type"
+                    className="buy__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='type' />
+                  <span className="error__message">
+                    <ErrorMessage name="type" />
                   </span>
                 </div>
-                <div className='buy__vacancy__input__box'>
+                <div className="buy__vacancy__input__box">
                   <select
                     ref={selectRef2}
                     required
-                    className='buy_vacancy__select buy__vacancy__select'
-                    defaultValue='1'
+                    className="buy_vacancy__select buy__vacancy__select"
+                    defaultValue="1"
                   >
                     {cities.map((item) => (
-                      <option
-                        key={item.name}
-                        value={item.value}
-                      >
+                      <option key={item.name} value={item.value}>
                         {item.name}
                       </option>
                     ))}
                   </select>
-                  <span className='error__message'>
-                    <ErrorMessage name='region' />
+                  <span className="error__message">
+                    <ErrorMessage name="region" />
                   </span>{' '}
                 </div>
-                <div className='buy__vacancy__input__box'>
-                  <label htmlFor='district'>Tuman</label>
+                <div className="buy__vacancy__input__box">
+                  <label htmlFor="district">Tuman</label>
                   <Field
-                    className='buy__vacancy__input'
-                    name='district'
-                    type='text'
-                    list='district'
+                    className="buy__vacancy__input"
+                    name="district"
+                    type="text"
+                    list="district"
                   />
-                  <datalist id='district'>
+                  <datalist id="district">
                     {districts.map((item) => (
                       <option
                         key={item.name}
@@ -203,29 +196,23 @@ export const BuyVacancy = () => {
                     ))}
                   </datalist>
                 </div>
-                <div className='buy__vacancy__input__box'>
-                  <label htmlFor='description'>Izoh</label>
+                <div className="buy__vacancy__input__box">
+                  <label htmlFor="description">Izoh</label>
                   <Field
                     required
-                    type='text'
-                    name='description'
-                    id='description'
-                    className='buy__vacancy__input'
+                    type="text"
+                    name="description"
+                    id="description"
+                    className="buy__vacancy__input"
                   />
-                  <span className='error__message'>
-                    <ErrorMessage name='Izoh' />
+                  <span className="error__message">
+                    <ErrorMessage name="Izoh" />
                   </span>
                 </div>
-                <GreenButton
-                  text='Yuborish'
-                  type='submit'
-                />
-                <Link
-                  className='buy__vacancy__link'
-                  to='/'
-                >
+                <GreenButton text="Yuborish" type="submit" />
+                <Link className="buy__vacancy__link" to="/">
                   Bosh Sahifaga
-                  <i className='fa-solid fa-arrow-right'></i>
+                  <i className="fa-solid fa-arrow-right"></i>
                 </Link>
               </Form>
             </Formik>

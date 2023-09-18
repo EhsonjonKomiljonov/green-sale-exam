@@ -72,11 +72,11 @@ export const SellVacancyGetComp = () => {
                   <option value="1" selected disabled>
                     Kategoriyani tanlang...
                   </option>
-                  <option value="64f07653f7c051e624804d5f">Mevalar</option>
-                  <option value="64f07653f7c051e624804d60">
-                    Poliz-Ekinlari
+                  <option value="6507ea8059f642ae7e96e29b">Sabzavotlar</option>
+                  <option value="6507eaa8a56f231cf168c608">
+                    Poliz-ekinlari
                   </option>
-                  <option value="64f07d6885548d0039615a9a">Sabzavotlar</option>
+                  <option value="6507ea98ed8a459c1bb6b595">Mevalar</option>
                   <option value="null">Barchasi</option>
                 </select>
                 <form

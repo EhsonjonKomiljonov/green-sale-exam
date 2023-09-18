@@ -91,7 +91,7 @@ export const ProductCard = ({ obj, edit, del }) => {
     if (data.data?.data?._id) {
       toast.success('Vacansiya muvaffaqiyatli ozgartirildi');
       return setTimeout(() => {
-        navigate('/');
+        location.reload();
       }, 1000);
     } else {
       toast.error(data.data?.message);
@@ -154,15 +154,14 @@ export const ProductCard = ({ obj, edit, del }) => {
   });
 
   const updateBuyerRequest = async (values) => {
-    console.log(_id);
     const data = await API.updateBuyer(_id, values).catch((err) =>
-      console.log(err)
+      toast.error("Ups serverda qandaydur xatolik qaytadan urinib ko'ring!")
     );
 
     if (data.data?.data?._id) {
       toast.success('Vacansiya muvaffaqiyatli ozgartirildi');
       return setTimeout(() => {
-        navigate('/');
+        location.reload();
       }, 1000);
     } else {
       toast.error(data.data?.message);
@@ -253,7 +252,7 @@ export const ProductCard = ({ obj, edit, del }) => {
             </span>
             <time className="product-card__time" dateTime={created_at || ''}>
               <i className="fa-solid fa-clock"></i>
-              {`${month}-${day} ${hour}:${minute}`}
+              {`${month}-${day} ${+hour + 5}:${minute}`}
             </time>
           </div>
           <h3 className="product-card__title">{name.slice(0, 20)}...</h3>
@@ -339,6 +338,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                           />
                         </div>
                         <div className="sell__vacancy__input__box">
+                          <label htmlFor="name">Mahsulot nomi</label>
                           <Field
                             type="text"
                             className="form-control"
@@ -348,6 +348,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                           />
                         </div>
                         <div className="sell__vacancy__input__box">
+                          <label htmlFor="price">Mahsulot narxi</label>
                           <Field
                             type="number"
                             className="form-control"
@@ -357,6 +358,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                           />
                         </div>
                         <div className="sell__vacancy__input__box">
+                          <label htmlFor="capacity">Mahsulot sig'imi</label>
                           <Field
                             type="number"
                             className="form-control"
@@ -366,6 +368,9 @@ export const ProductCard = ({ obj, edit, del }) => {
                           />
                         </div>
                         <div className="sell__vacancy__input__box">
+                          <label htmlFor="capacityMeasure">
+                            Mahsulot sig'im tipi
+                          </label>
                           <Field
                             type="text"
                             className="form-control"
@@ -375,6 +380,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                           />
                         </div>
                         <div className="sell__vacancy__input__box">
+                          <label htmlFor="type">Mahsulot tipi</label>
                           <Field
                             type="text"
                             className="form-control"
@@ -384,6 +390,7 @@ export const ProductCard = ({ obj, edit, del }) => {
                           />
                         </div>
                         <div className="sell__vacancy__input__box">
+                          <label htmlFor="capacity">Izoh</label>
                           <Field
                             type="text"
                             className="form-control"

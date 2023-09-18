@@ -41,8 +41,6 @@ export const CompareCard = ({ obj }) => {
     setPlaceholderImg(true);
   };
 
-  console.log(obj);
-
   return (
     <div className="compare-card">
       <Link
@@ -88,7 +86,7 @@ export const CompareCard = ({ obj }) => {
                 }}
                 className="fa-solid fa-clock"
               ></i>
-              {`${month}-${day} ${hour}:${minute}`}
+              {`${month}-${day} ${+hour + 5}:${minute}`}
             </time>
           </div>
           <p className="fs-5">Tipi: {obj?.type}</p>
@@ -106,6 +104,11 @@ export const CompareCard = ({ obj }) => {
           <p>
             Sig'imi: {obj?.capacity} {obj?.capacityMeasure}
           </p>
+          {obj?.price && (
+            <p>
+              Narxi: {obj?.price} so'm
+            </p>
+          )}
           <p className="mt-3">Izoh: {description}</p>
         </div>
       </Link>
