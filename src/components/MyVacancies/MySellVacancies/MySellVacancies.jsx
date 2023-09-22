@@ -47,7 +47,7 @@ export const MySellVacancies = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center">
+      <div className="d-flex justify-content-between align-items-center flex-column flex-md-row">
         <h2 className="h2 my-4">Mening vakansiyalarim</h2>
         <Link
           to="/my-vacancies/buy"
@@ -56,7 +56,7 @@ export const MySellVacancies = () => {
           Oluvchi vakansiyalar
         </Link>
       </div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center my-4 gap-4 flex-column flex-md-row">
         <select onChange={onChange} className="sell__vacancy__get__select ">
           <option value="1" selected disabled>
             Kategoriyani tanlang...
@@ -67,7 +67,7 @@ export const MySellVacancies = () => {
           <option value="null">Barchasi</option>
         </select>
         <form
-          style={{ width: 400 }}
+          style={{ maxWidth: 400 }}
           onSubmit={searchSubmit}
           className="d-flex input-group"
         >
@@ -87,7 +87,7 @@ export const MySellVacancies = () => {
           </button>
         </form>
       </div>
-      <div className="d-flex justify-content-between flex-wrap gap-5">
+      <div className="d-flex justify-content-center flex-wrap gap-5">
         {data?.length ? (
           data.map((el) => <ProductCard edit="true" obj={el} del="true" />)
         ) : (

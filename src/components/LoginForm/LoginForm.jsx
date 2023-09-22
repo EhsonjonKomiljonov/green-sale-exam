@@ -3,8 +3,9 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { motion } from 'framer-motion';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { API } from '../../API/api';
+import Logo from '../../assets/images/logo.svg';
 import { GreenButton } from '../GreenButton/GreenButton';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -14,13 +15,32 @@ import { Loading } from '../Loading/Loading';
 import '../Header/header.scss';
 import './login-form.scss';
 import { AuthContext } from '../../context/AuthContext';
+import { VerifyTokenContext } from '../../context/VerifyToken';
 
 export const LoginForm = () => {
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
   const { setAuth } = useContext(AuthContext);
+  const { verifyToken, setVerifyToken } = useContext(VerifyTokenContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
   const dispatch = useDispatch();
+
+  const query = useQuery('verify-token', API.verifyToken, {
+    onSuccess: (data) => {
+      setIsLoading(false);
+      if (data.data.data) {
+        setIsLoading(false);
+        setVerifyToken(true);
+      } else {
+        setVerifyToken(false);
+      }
+    },
+    onError: (err) => {
+      setIsLoading(false);
+      setVerifyToken(false);
+      toast.error('Qandaydur xatolik saytni yangilang!');
+    },
+  });
 
   const openMenu = () => {
     setMenu(true);
@@ -207,16 +227,10 @@ export const LoginForm = () => {
         onClick={(evt) => closeMenu(evt)}
       >
         <div className={`menu__inner ${menu ? 'open' : ''}`}>
-          <label className="px-3 w-100 input-group">
-            <input
-              type="text"
-              placeholder="Search for product"
-              className="form-control"
-            />
-            <button className="search-btn btn">
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </label>
+          <Link className="logo" to="/">
+            <img src={Logo} alt="Green Sale" width="50px" />
+            <p>GREEN SALE</p>
+          </Link>
           <ul className="d-flex flex-column">
             <li>
               <Link to="/">Bosh sahifa</Link>
@@ -230,6 +244,33 @@ export const LoginForm = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
+            <li>
+              <Link to="/compares">Taqqoslash</Link>
+            </li>
+            <li>
+              <Link to="/buyer-vacancies">Oluvchi vakansiyalar</Link>
+            </li>
+            <li>
+              <Link to="/seller-vacancies">Sotuvchi vakansiyalar</Link>
+            </li>
+            {verifyToken && admin_key != localStorage.getItem('admin') ? (
+              <li>
+                <Link className="like rounded-1" to="/my-vacancies">
+                  Mening vakansiyalarim
+                </Link>
+              </li>
+            ) : (
+              ''
+            )}
+            {verifyToken && admin_key != localStorage.getItem('admin') ? (
+              <li>
+                <Link className="like rounded-1" to="/favorite-vacancies">
+                  Sevimlilar
+                </Link>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </div>
       </div>

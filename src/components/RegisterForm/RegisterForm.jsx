@@ -1,11 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useContext, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { API } from '../../API/api';
 import { AuthContext } from '../../context/AuthContext';
+import Logo from '../../assets/images/logo.svg';
 import { cities } from '../../db/cities';
 import { motion } from 'framer-motion';
 import { districts } from '../../db/districts';
@@ -25,7 +26,25 @@ export const RegisterForm = () => {
   const { setAuth } = useContext(AuthContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
   const { setVerify } = useContext(VerifyContactContext);
+  const { verifyToken, setVerifyToken } = useContext(VerifyTokenContext);
   const dispatch = useDispatch();
+
+  const query = useQuery('verify-token', API.verifyToken, {
+    onSuccess: (data) => {
+      setIsLoading(false);
+      if (data.data.data) {
+        setIsLoading(false);
+        setVerifyToken(true);
+      } else {
+        setVerifyToken(false);
+      }
+    },
+    onError: (err) => {
+      setIsLoading(false);
+      setVerifyToken(false);
+      toast.error('Qandaydur xatolik saytni yangilang!');
+    },
+  });
 
   const openMenu = () => {
     setMenu(true);
@@ -167,7 +186,6 @@ export const RegisterForm = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
-           
           </ul>
         </nav>
       </div>
@@ -316,16 +334,10 @@ export const RegisterForm = () => {
         onClick={(evt) => closeMenu(evt)}
       >
         <div className={`menu__inner ${menu ? 'open' : ''}`}>
-          <label className="px-3 w-100 input-group">
-            <input
-              type="text"
-              placeholder="Search for product"
-              className="form-control"
-            />
-            <button className="search-btn btn">
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </label>
+          <Link className="logo" to="/">
+            <img src={Logo} alt="Green Sale" width="50px" />
+            <p>GREEN SALE</p>
+          </Link>
           <ul className="d-flex flex-column">
             <li>
               <Link to="/">Bosh sahifa</Link>
@@ -339,7 +351,33 @@ export const RegisterForm = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
-            
+            <li>
+              <Link to="/compares">Taqqoslash</Link>
+            </li>
+            <li>
+              <Link to="/buyer-vacancies">Oluvchi vakansiyalar</Link>
+            </li>
+            <li>
+              <Link to="/seller-vacancies">Sotuvchi vakansiyalar</Link>
+            </li>
+            {verifyToken && admin_key != localStorage.getItem('admin') ? (
+              <li>
+                <Link className="like rounded-1" to="/my-vacancies">
+                  Mening vakansiyalarim
+                </Link>
+              </li>
+            ) : (
+              ''
+            )}
+            {verifyToken && admin_key != localStorage.getItem('admin') ? (
+              <li>
+                <Link className="like rounded-1" to="/favorite-vacancies">
+                  Sevimlilar
+                </Link>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </div>
       </div>

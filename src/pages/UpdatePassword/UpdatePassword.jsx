@@ -1,10 +1,33 @@
 import { UpdatePasswordForm } from '../../components/UpdatePasswordForm/UpdatePasswordForm';
 import '../../components/Header/header.scss';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import Logo from '../../assets/images/logo.svg';
+import { useContext, useState } from 'react';
+import { VerifyTokenContext } from '../../context/VerifyToken';
+import { useQuery } from 'react-query';
+import { API } from '../../API/api';
 
 export const UpdatePassword = () => {
   const [menu, setMenu] = useState(false);
+  const { verifyToken, setVerifyToken } = useContext(VerifyTokenContext);
+  const [setIsLoading] = useState(false);
+
+  const query = useQuery('verify-token', API.verifyToken, {
+    onSuccess: (data) => {
+      setIsLoading(false);
+      if (data.data.data) {
+        setIsLoading(false);
+        setVerifyToken(true);
+      } else {
+        setVerifyToken(false);
+      }
+    },
+    onError: (err) => {
+      setIsLoading(false);
+      setVerifyToken(false);
+      toast.error('Qandaydur xatolik saytni yangilang!');
+    },
+  });
 
   const openMenu = () => {
     setMenu(true);
@@ -62,16 +85,10 @@ export const UpdatePassword = () => {
         onClick={(evt) => closeMenu(evt)}
       >
         <div className={`menu__inner ${menu ? 'open' : ''}`}>
-          <label className="px-3 w-100 input-group">
-            <input
-              type="text"
-              placeholder="Search for product"
-              className="form-control"
-            />
-            <button className="search-btn btn">
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </label>
+          <Link className="logo" to="/">
+            <img src={Logo} alt="Green Sale" width="50px" />
+            <p>GREEN SALE</p>
+          </Link>
           <ul className="d-flex flex-column">
             <li>
               <Link to="/">Bosh sahifa</Link>
@@ -85,6 +102,33 @@ export const UpdatePassword = () => {
             <li>
               <Link to="/about">Biz Haqimizda</Link>
             </li>
+            <li>
+              <Link to="/compares">Taqqoslash</Link>
+            </li>
+            <li>
+              <Link to="/buyer-vacancies">Oluvchi vakansiyalar</Link>
+            </li>
+            <li>
+              <Link to="/seller-vacancies">Sotuvchi vakansiyalar</Link>
+            </li>
+            {verifyToken && admin_key != localStorage.getItem('admin') ? (
+              <li>
+                <Link className="like rounded-1" to="/my-vacancies">
+                  Mening vakansiyalarim
+                </Link>
+              </li>
+            ) : (
+              ''
+            )}
+            {verifyToken && admin_key != localStorage.getItem('admin') ? (
+              <li>
+                <Link className="like rounded-1" to="/favorite-vacancies">
+                  Sevimlilar
+                </Link>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </div>
       </div>

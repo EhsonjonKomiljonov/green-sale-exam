@@ -58,7 +58,6 @@ export const Header = () => {
       if (scrollY < lastScrollY && scrollY < 115) {
         setScroll(false);
       }
-
       lastScrollY = scrollY;
     };
 
@@ -71,24 +70,24 @@ export const Header = () => {
 
   return (
     <>
-      <header className='site-header'>
-        <div className='container'>
-          <div className='site-header__inner'>
-            <div className='site-header__top d-flex align-items-center justify-content-between mb-4'>
-              <div className='localization'>
-                <select className='localization__select'>
-                  <option value='uzbek'>Uzbek</option>
-                  <option value='rus'>Russian</option>
+      <header className="site-header">
+        <div className="container">
+          <div className="site-header__inner">
+            <div className="site-header__top d-flex align-items-center justify-content-between mb-4">
+              <div className="localization">
+                <select className="localization__select">
+                  <option value="uzbek">Uzbek</option>
+                  <option value="rus">Russian</option>
                 </select>
-                <span className='localization__arrow'></span>
+                <span className="localization__arrow"></span>
               </div>
-              <div className='d-flex align-items-center'>
+              <div className="d-flex align-items-center">
                 {admin_key != localStorage.getItem('admin') && (
                   <Link
                     style={{
                       fontSize: '13px',
                     }}
-                    to='/my-profile'
+                    to="/my-profile"
                     className={`text-white text-opacity-50 ${
                       verifyToken ? '' : 'd-none'
                     }`}
@@ -101,7 +100,7 @@ export const Header = () => {
                     style={{
                       fontSize: '13px',
                     }}
-                    href='#log-out-modal'
+                    href="#log-out-modal"
                     className={`btn text-white text-opacity-50 ${
                       verifyToken ? '' : 'd-none'
                     }`}
@@ -113,75 +112,43 @@ export const Header = () => {
               <div
                 className={`site-header__sign ${verifyToken ? 'd-none' : ''}`}
               >
-                <Link
-                  className='me-3'
-                  to='/login'
-                >
+                <Link className="me-3" to="/login">
                   Kirish
                 </Link>
-                <Link to='/register'>Ro'yxatdan o'tish</Link>
+                <Link to="/register">Ro'yxatdan o'tish</Link>
               </div>
             </div>
-            <div className='site-header__center d-flex align-items-center justify-content-between'>
-              <button
-                className='menu-btn'
-                onClick={() => openMenu()}
-              >
-                <i className='fa-solid fa-bars'></i>
+            <div className="site-header__center d-flex align-items-center justify-content-between">
+              <button className="menu-btn" onClick={() => openMenu()}>
+                <i className="fa-solid fa-bars"></i>
               </button>
-              <Link
-                className='logo'
-                to='/'
-              >
-                <img
-                  src={Logo}
-                  alt='Green Sale'
-                  width='50px'
-                />
+              <Link className="logo" to="/">
+                <img src={Logo} alt="Green Sale" width="50px" />
                 <p>GREEN SALE</p>
               </Link>
-              <div className='site-header__center-links'>
+              <div className="site-header__center-links">
                 {verifyToken && admin_key != localStorage.getItem('admin') ? (
-                  <Link
-                    className='like rounded-1'
-                    to='/my-vacancies'
-                  >
+                  <Link className="like rounded-1" to="/my-vacancies">
                     Mening vakansiyalarim
                   </Link>
                 ) : (
                   ''
                 )}
-                <Link
-                  className='like rounded-1'
-                  to='/buyer-vacancies'
-                >
+                <Link className="like rounded-1" to="/buyer-vacancies">
                   Oluvchi vakansiyalar
                 </Link>
-                <Link
-                  className='like rounded-1'
-                  to='/seller-vacancies'
-                >
+                <Link className="like rounded-1" to="/seller-vacancies">
                   Sotuvchi vakansiyalar
                 </Link>
                 {verifyToken && admin_key != localStorage.getItem('admin') ? (
-                  <Link
-                    className='like rounded-1'
-                    to='/favorite-vacancies'
-                  >
-                    <svg
-                      width={23}
-                      viewBox='0 0 256 256'
-                    >
-                      <rect
-                        fill='none'
-                        height='256'
-                        width='256'
-                      ></rect>
+                  <Link className="like rounded-1" to="/favorite-vacancies">
+                    <svg width={23} viewBox="0 0 256 256">
+                      <rect fill="none" height="256" width="256"></rect>
                       <path
-                        d='M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z'
-                        strokeWidth='20px'
-                        stroke='#ffffff'
-                        fill='none'
+                        d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z"
+                        strokeWidth="20px"
+                        stroke="#ffffff"
+                        fill="none"
                       ></path>
                     </svg>
                   </Link>
@@ -190,9 +157,9 @@ export const Header = () => {
                 )}
               </div>
             </div>
-            <div className='site-header__bottom'>
+            <div className="site-header__bottom">
               <nav
-                className='nav'
+                className="nav"
                 style={{
                   position: scroll ? 'fixed' : '',
                   top: scroll ? '0' : '',
@@ -212,19 +179,19 @@ export const Header = () => {
                   }`}
                 >
                   <li>
-                    <Link to='/'>Bosh sahifa</Link>
+                    <Link to="/">Bosh sahifa</Link>
                   </li>
                   <li>
-                    <Link to='/buy-vacancies'>Olish uchun vakansiya</Link>
+                    <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
                   </li>
                   <li>
-                    <Link to='/sell-vacancies'>Sotish uchun vakansiya</Link>
+                    <Link to="/sell-vacancies">Sotish uchun vakansiya</Link>
                   </li>
                   <li>
-                    <Link to='/about'>Biz Haqimizda</Link>
+                    <Link to="/about">Biz Haqimizda</Link>
                   </li>
                   <li>
-                    <Link to='/compares'>Taqqoslash</Link>
+                    <Link to="/compares">Taqqoslash</Link>
                   </li>
                 </ul>
               </nav>
@@ -236,45 +203,57 @@ export const Header = () => {
           onClick={(evt) => closeMenu(evt)}
         >
           <div className={`menu__inner ${menu ? 'open' : ''}`}>
-            <label className='px-3 w-100 input-group'>
-              <input
-                type='text'
-                placeholder='Search for product'
-                className='form-control'
-              />
-              <button className='search-btn btn'>
-                <i className='fa-solid fa-magnifying-glass'></i>
-              </button>
-            </label>
-            <ul className='d-flex flex-column'>
+            <Link className="logo" to="/">
+              <img src={Logo} alt="Green Sale" width="50px" />
+              <p>GREEN SALE</p>
+            </Link>
+            <ul className="d-flex flex-column">
               <li>
-                <Link to='/'>Bosh sahifa</Link>
+                <Link to="/">Bosh sahifa</Link>
               </li>
               <li>
-                <Link to='/buy-vacancies'>Olish uchun vakansiya</Link>
+                <Link to="/buy-vacancies">Olish uchun vakansiya</Link>
               </li>
               <li>
-                <Link to='/sell-vacancies'>Sotish uchun vakansiya</Link>
+                <Link to="/sell-vacancies">Sotish uchun vakansiya</Link>
               </li>
               <li>
-                <Link to='/buyer-vacancies'>Oluvchi vakansiyalar</Link>
+                <Link to="/about">Biz Haqimizda</Link>
               </li>
               <li>
-                <Link to='/seller-vacancies'>Sotuvchi vakansiyalar</Link>
+                <Link to="/compares">Taqqoslash</Link>
               </li>
               <li>
-                <Link to='/about'>Biz Haqimizda</Link>
+                <Link to="/buyer-vacancies">Oluvchi vakansiyalar</Link>
               </li>
+              <li>
+                <Link to="/seller-vacancies">Sotuvchi vakansiyalar</Link>
+              </li>
+              {verifyToken && admin_key != localStorage.getItem('admin') ? (
+                <li>
+                  <Link className="like rounded-1" to="/my-vacancies">
+                    Mening vakansiyalarim
+                  </Link>
+                </li>
+              ) : (
+                ''
+              )}
+              {verifyToken && admin_key != localStorage.getItem('admin') ? (
+                <li>
+                  <Link className="like rounded-1" to="/favorite-vacancies">
+                    Sevimlilar
+                  </Link>
+                </li>
+              ) : (
+                ''
+              )}
             </ul>
           </div>
         </div>
-        <div id='log-out-modal'>
-          <a
-            className='close-modal-bg'
-            href='#'
-          ></a>
+        <div id="log-out-modal">
+          <a className="close-modal-bg" href="#"></a>
           <div>
-            <a href='#'>&times;</a>
+            <a href="#">&times;</a>
             <button
               onClick={() => {
                 setIsLoading(true);
