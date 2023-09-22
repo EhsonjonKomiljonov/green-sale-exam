@@ -20,6 +20,38 @@
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px 0;
+  justify-content: center;
+  gap: 20px 20px;
+}
+
+.buy__vacancy__form__sort {
+  width: 400px;
+}
+
+@media screen and (max-width: 700px) {
+  .sort {
+    display: inline-block !important;
+    text-align: center;
+  }
+  .buy__vacancy__get__top {
+    text-align: center;
+  }
+  .buy__vacancy__get__select {
+    margin-bottom: 15px;
+  }
+  .buy__vacancy__form__sort {
+    width: auto;
+  }
+}
+@media screen and (max-width: 420px) {
+  .sort {
+    display: flex !important;
+    flex-direction: column;
+  }
+  .buy__vacancy__get__top {
+    text-align: center;
+  }
+  .buy__vacancy__get__select {
+    margin-bottom: 15px;
+  }
 }

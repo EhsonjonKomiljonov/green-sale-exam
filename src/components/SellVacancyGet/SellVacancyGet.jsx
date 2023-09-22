@@ -59,41 +59,44 @@ export const SellVacancyGetComp = () => {
 
   return (
     <>
-      <section className="sell__vacancy__get pb-5">
-        <div className="container">
-          <div className="sell__vacancy__get__inner">
-            <div className="sell__vacancy__get__top">
-              <h2 className="h2 my-4">Sotuvchi vakansiyalar</h2>{' '}
-              <div className="d-flex justify-content-between align-items-center">
+      <section className='sell__vacancy__get pb-5'>
+        <div className='container'>
+          <div className='sell__vacancy__get__inner'>
+            <div className='buy__vacancy__get__top'>
+              <h2 className='h2 my-4'>Sotuvchi vakansiyalar</h2>{' '}
+              <div className='d-flex sort justify-content-between align-items-center'>
                 <select
                   onChange={onChange}
-                  className="sell__vacancy__get__select "
+                  className='buy__vacancy__get__select '
                 >
-                  <option value="1" selected disabled>
+                  <option
+                    value='1'
+                    selected
+                    disabled
+                  >
                     Kategoriyani tanlang...
                   </option>
-                  <option value="6507ea8059f642ae7e96e29b">Sabzavotlar</option>
-                  <option value="6507eaa8a56f231cf168c608">
+                  <option value='6507ea8059f642ae7e96e29b'>Sabzavotlar</option>
+                  <option value='6507eaa8a56f231cf168c608'>
                     Poliz-ekinlari
                   </option>
-                  <option value="6507ea98ed8a459c1bb6b595">Mevalar</option>
-                  <option value="null">Barchasi</option>
+                  <option value='6507ea98ed8a459c1bb6b595'>Mevalar</option>
+                  <option value='null'>Barchasi</option>
                 </select>
                 <form
-                  style={{ width: 400 }}
                   onSubmit={searchSubmit}
-                  className="d-flex input-group"
+                  className='d-flex buy__vacancy__form__sort input-group'
                 >
                   <input
                     onChange={(evt) => getMainPosts(evt)}
-                    type="text"
-                    className="form-control"
+                    type='text'
+                    className='form-control'
                     placeholder="Sotuvchi vakansiyani nomi bo'yicha izlang..."
                   />
-                  <button className="btn border">
+                  <button className='btn border'>
                     <img
                       src={SearchIcon}
-                      alt="search"
+                      alt='search'
                       width={20}
                       style={{ transform: 'scaleX(-1)' }}
                     />
@@ -101,7 +104,7 @@ export const SellVacancyGetComp = () => {
                 </form>
               </div>
             </div>
-            <div className="sell__vacancy__get__cards">
+            <div className='buy__vacancy__get__cards'>
               {data === 'no' ? (
                 <Loading />
               ) : data.length ? (
@@ -111,7 +114,10 @@ export const SellVacancyGetComp = () => {
               )}
             </div>
           </div>
-          <Pagination setActivePage={setActivePage} totalPage={totalPage} />
+          <Pagination
+            setActivePage={setActivePage}
+            totalPage={totalPage}
+          />
         </div>
       </section>
     </>
