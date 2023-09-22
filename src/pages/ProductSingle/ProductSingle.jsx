@@ -243,7 +243,7 @@ export const ProductSingle = () => {
                     </div>
                   </label>
                   <button
-                    className="btn position-absolute py-2 px-2 pb-1"
+                    className="btn position-absolute py-2 px-2 pb-1 compare"
                     style={{
                       width: 40,
                       height: 40,

@@ -25,7 +25,7 @@ export const Favorites = () => {
   return (
     <>
       <Header />
-      <section className="favorites mt-5 pt-3">
+      <section className="favorites mt-4 pt-3">
         <div className="container">
           <div className="favorites__inner">
             <h2 className="mb-4">Sevimlilar</h2>
@@ -65,7 +65,7 @@ export const Favorites = () => {
                     <h3 className="text-center fs-4 fw-semibold">
                       Qiziqarli vakansiyalarni saqlang.
                     </h3>
-                    <p>
+                    <p className='text-center'>
                       Sizni qiziqtirgan vakansiyaga ♡ bosing va biz uni shu
                       yerda saqlaymiz
                     </p>

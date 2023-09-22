@@ -53,7 +53,7 @@ export const Compare = () => {
               </h3>
             )}
           </div>
-          {localStorage.getItem('compare-products') && (
+          {prData.length ? (
             <button
               className="btn btn-danger mt-5"
               onClick={(evt) => {
@@ -67,7 +67,7 @@ export const Compare = () => {
             >
               Barchasini o'chirish
             </button>
-          )}
+          ) : ''}
         </div>
       </section>
       <Footer />

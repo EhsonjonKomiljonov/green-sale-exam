@@ -184,7 +184,7 @@ export const Comment = ({ obj }) => {
             onSubmit={onSubmit}
           >
             <Form className="w-75">
-              <div className="w-50 mt-4 input-group">
+              <div className="w-100 mt-4 input-group">
                 <Field
                   name="text"
                   type="text"
