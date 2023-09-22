@@ -7,3 +7,10 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+
+@media screen and (max-width: 500px) {
+  .my__vacancy__links {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+}

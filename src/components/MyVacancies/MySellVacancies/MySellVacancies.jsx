@@ -50,8 +50,8 @@ export const MySellVacancies = () => {
       <div className="d-flex justify-content-between align-items-center flex-column flex-md-row">
         <h2 className="h2 my-4">Mening vakansiyalarim</h2>
         <Link
-          to="/my-vacancies/buy"
-          className="fs-5 text-dark text-decoration-underline"
+          to='/my-vacancies/buy'
+          className='fs-5 text-dark text-decoration-underline'
         >
           Oluvchi vakansiyalar
         </Link>
@@ -89,9 +89,15 @@ export const MySellVacancies = () => {
       </div>
       <div className="d-flex justify-content-center flex-wrap gap-5">
         {data?.length ? (
-          data.map((el) => <ProductCard edit="true" obj={el} del="true" />)
+          data.map((el) => (
+            <ProductCard
+              edit='true'
+              obj={el}
+              del='true'
+            />
+          ))
         ) : (
-          <h2 className="text-center w-100 my-5 pb-4">
+          <h2 className='text-center w-100 my-5 pb-4'>
             Hozircha vakansiyalaringiz yo'q !
           </h2>
         )}
