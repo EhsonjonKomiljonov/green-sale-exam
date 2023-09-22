@@ -47,8 +47,8 @@ export const MySellVacancies = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center flex-column flex-md-row">
-        <h2 className="h2 my-4">Mening vakansiyalarim</h2>
+      <div className='d-flex justify-content-between my__vacancy__links align-items-center'>
+        <h2 className='h2 my-4'>Mening vakansiyalarim</h2>
         <Link
           to='/my-vacancies/buy'
           className='fs-5 text-dark text-decoration-underline'
@@ -56,38 +56,48 @@ export const MySellVacancies = () => {
           Oluvchi vakansiyalar
         </Link>
       </div>
-      <div className="d-flex justify-content-between align-items-center my-4 gap-4 flex-column flex-md-row">
-        <select onChange={onChange} className="sell__vacancy__get__select ">
-          <option value="1" selected disabled>
-            Kategoriyani tanlang...
-          </option>
-          <option value="6507ea8059f642ae7e96e29b">Sabzavotlar</option>
-          <option value="6507eaa8a56f231cf168c608">Poliz-ekinlari</option>
-          <option value="6507ea98ed8a459c1bb6b595">Mevalar</option>
-          <option value="null">Barchasi</option>
-        </select>
-        <form
-          style={{ maxWidth: 400 }}
-          onSubmit={searchSubmit}
-          className="d-flex input-group"
-        >
-          <input
-            onChange={(evt) => getMainPosts(evt)}
-            type="text"
-            className="form-control"
-            placeholder="Sotuvchi vakansiyani nomi bo'yicha izlang..."
-          />
-          <button className="btn border">
-            <img
-              src={SearchIcon}
-              alt="search"
-              width={20}
-              style={{ transform: 'scaleX(-1)' }}
-            />
-          </button>
-        </form>
+      <div className='buy__vacancy__get__top'>
+        <div className='buy__vacancy__get__top'>
+          <div className='d-flex sort justify-content-between align-items-center mb-4'>
+            <select
+              onChange={onChange}
+              className='buy__vacancy__get__select '
+            >
+              <option
+                value='1'
+                selected
+                disabled
+              >
+                Kategoriyani tanlang...
+              </option>
+              <option value='6507ea8059f642ae7e96e29b'>Sabzavotlar</option>
+              <option value='6507eaa8a56f231cf168c608'>Poliz-ekinlari</option>
+              <option value='6507ea98ed8a459c1bb6b595'>Mevalar</option>
+              <option value='null'>Barchasi</option>
+            </select>
+            <form
+              onSubmit={searchSubmit}
+              className='d-flex buy__vacancy__form__sort input-group'
+            >
+              <input
+                onChange={(evt) => getMainPosts(evt)}
+                type='text'
+                className='form-control'
+                placeholder="Sotuvchi vakansiyani nomi bo'yicha izlang..."
+              />
+              <button className='btn border'>
+                <img
+                  src={SearchIcon}
+                  alt='search'
+                  width={20}
+                  style={{ transform: 'scaleX(-1)' }}
+                />
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div className="d-flex justify-content-center flex-wrap gap-5">
+      <div className='buy__vacancy__get__cards'>
         {data?.length ? (
           data.map((el) => (
             <ProductCard
