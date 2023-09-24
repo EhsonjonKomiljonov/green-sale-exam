@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -17,6 +17,7 @@ export const Header = () => {
   const { verifyToken, setVerifyToken } = useContext(VerifyTokenContext);
   const [scroll, setScroll] = useState(false);
   const [menu, setMenu] = useState(false);
+  const headerCenterRef = useRef();
   const admin_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
   let lastScrollY = 0;
 
@@ -51,11 +52,11 @@ export const Header = () => {
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
 
-      if (scrollY > lastScrollY && scrollY > 115) {
+      if (scrollY > lastScrollY && scrollY > 100) {
         setScroll(true);
       }
 
-      if (scrollY < lastScrollY && scrollY < 115) {
+      if (scrollY < lastScrollY && scrollY < 100) {
         setScroll(false);
       }
       lastScrollY = scrollY;
@@ -73,14 +74,7 @@ export const Header = () => {
       <header className="site-header">
         <div className="container">
           <div className="site-header__inner">
-            <div className="site-header__top d-flex align-items-center justify-content-between mb-4">
-              <div className="localization">
-                <select className="localization__select">
-                  <option value="uzbek">Uzbek</option>
-                  <option value="rus">Russian</option>
-                </select>
-                <span className="localization__arrow"></span>
-              </div>
+            <div className="site-header__top d-flex align-items-center justify-content-end mb-4">
               <div className="d-flex align-items-center">
                 {admin_key != localStorage.getItem('admin') && (
                   <Link
@@ -118,7 +112,12 @@ export const Header = () => {
                 <Link to="/register">Ro'yxatdan o'tish</Link>
               </div>
             </div>
-            <div className="site-header__center d-flex align-items-center justify-content-between">
+            <div
+              ref={headerCenterRef}
+              className={`site-header__center d-flex align-items-center justify-content-between ${
+                scroll ? 'fix' : ''
+              }`}
+            >
               <button className="menu-btn" onClick={() => openMenu()}>
                 <i className="fa-solid fa-bars"></i>
               </button>
