@@ -1,0 +1,29 @@
+@media screen and (max-width: 455px) {
+  .add-comment-form {
+    width: 100% !important;
+  }
+
+  .comment-adder {
+    font-size: 17px;
+  }
+
+  .comment-profile {
+    font-size: 14px;
+  }
+
+  .edit-btns {
+    font-weight: 400 !important;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .comment-adder-box {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin-bottom: 20px;
+
+    div:nth-child(1) {
+      margin-bottom: 10px !important;
+    }
+  }
+}

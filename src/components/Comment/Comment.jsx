@@ -1,15 +1,14 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { VerifyTokenContext } from '../../context/VerifyToken';
 import { toast } from 'react-toastify';
 import { useMutation, useQuery } from 'react-query';
 import { API } from '../../API/api';
 import { Link, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
-import editicon from '../../assets/images/edit_icon.svg';
-import deleteicon from '../../assets/images/delete_icon.svg';
 import { AuthContext } from '../../context/AuthContext';
 import { Loading } from '../Loading/Loading';
+import './comment.scss';
 
 export const Comment = ({ obj }) => {
   const admin_sec_key = import.meta.env.VITE_REACT_APP_ADMIN_SECRET_KEY;
@@ -183,7 +182,7 @@ export const Comment = ({ obj }) => {
             validationSchema={validate}
             onSubmit={onSubmit}
           >
-            <Form className="w-75">
+            <Form className="w-75 add-comment-form">
               <div className="w-100 mt-4 input-group">
                 <Field
                   name="text"
@@ -222,16 +221,16 @@ export const Comment = ({ obj }) => {
               }, {})
             ).map((commentGroup, index) => (
               <li className="list-group-item" key={index}>
-                <div className="d-flex align-items-center justify-content-between">
+                <div className="d-flex align-items-center justify-content-between comment-adder-box">
                   <div className="d-flex align-items-center gap-4 mb-3">
-                    <h4 className="m-0">
+                    <h4 className="m-0 comment-adder">
                       {commentGroup[0].user_ref_id.first_name}{' '}
                       {commentGroup[0].user_ref_id.last_name}:
                     </h4>
                   </div>
                   <div className="d-flex flex-column">
                     <Link
-                      className="text-dark text-opacity-75 text-decoration-underline"
+                      className="text-dark text-opacity-75 text-decoration-underline comment-profile"
                       to={`/user-profile/${commentGroup[0].user_ref_id._id}`}
                     >
                       Profilni ko'rish
@@ -278,7 +277,7 @@ export const Comment = ({ obj }) => {
                         <div className="w-100 d-flex justify-content-end">
                           <button
                             type="button"
-                            className="btn p-0 text-warning fw-bold"
+                            className="edit-btns btn p-0 text-warning fw-bold"
                             id={commentGroup[0]?._id}
                             onClick={(evt) => editComment(evt)}
                           >
@@ -287,7 +286,7 @@ export const Comment = ({ obj }) => {
                           <button
                             onClick={(evt) => deleteComment(evt)}
                             type="button"
-                            className="btn ms-2 p-0 text-danger fw-bold"
+                            className="edit-btns btn ms-2 p-0 text-danger fw-bold"
                             id={commentGroup[0]?._id}
                           >
                             o'chirish
@@ -301,7 +300,7 @@ export const Comment = ({ obj }) => {
                           <button
                             onClick={(evt) => deleteCommentAdmin(evt)}
                             type="button"
-                            className="btn ms-2 p-0 text-danger fw-bold"
+                            className="edit-btns btn ms-2 p-0 text-danger fw-bold"
                             id={commentGroup[0]?._id}
                           >
                             o'chirish
