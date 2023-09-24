@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// const host = 'https://green-sale.onrender.com';
-const host = 'http://localhost:9000';
+const host = 'https://green-sale.onrender.com'; 
 
 export const API = {
   verifyToken: async () =>

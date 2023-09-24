@@ -30,7 +30,7 @@ export const Favorites = () => {
           <div className="favorites__inner">
             <h2 className="mb-4">Sevimlilar</h2>
 
-            <div className="favorites__cards d-flex align-items-center justify-content-center gap-5">
+            <div className="favorites__cards d-flex align-items-center justify-content-center gap-5 flex-wrap">
               {data.length ? (
                 data.map((item) => <ProductCard obj={item} key={item._id} />)
               ) : (
