@@ -34,3 +34,27 @@
     font-size: 20px;
   }
 }
+
+@media screen and (max-width: 840px) {
+  .about {
+    h2 {
+      font-size: 23px;
+    }
+
+    h3 {
+      font-size: 21px;
+    }
+
+    &__list-title {
+      width: 100% !important;
+    }
+
+    li {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+}

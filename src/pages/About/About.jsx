@@ -17,9 +17,8 @@ export const About = () => {
               meva-sabzavotlar va qishloq xo'jaligi mahsulotlarini sotib
               olishingiz va sotishingiz mumkin.
             </p>
-            <h3 className="about__list-title">
-              Saytda ro'yxatdan o'tgan foydalanuvchilar ikkita turdagi e'lon{' '}
-              <br />
+            <h3 className="about__list-title w-75">
+              Saytda ro'yxatdan o'tgan foydalanuvchilar ikkita turdagi e'lon 
               joylashtirishlari mumkin:
             </h3>
             <ul>
