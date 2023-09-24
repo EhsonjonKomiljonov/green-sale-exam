@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host = 'https://green-sale.onrender.com'; 
+const host = VITE_REACT_APP_HOST;
 
 export const API = {
   verifyToken: async () =>

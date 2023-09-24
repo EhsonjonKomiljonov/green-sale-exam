@@ -11,7 +11,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';
-const host = 'http://localhost:9000';
+const host = import.meta.env.VITE_REACT_APP_HOST;
 
 export const ProductCard = ({ obj, edit, del }) => {
   const {
