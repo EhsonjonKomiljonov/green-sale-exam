@@ -223,7 +223,7 @@ export const ProductSingle = () => {
                     <i className="fa-solid fa-clock"></i>
                     Joylangan: {`${month}-${day} ${hour}:${minute}`}
                   </time>
-                  <label className="like-container">
+                  <label className="like-container like-single-container">
                     <input
                       type="checkbox"
                       id={data._id}

@@ -1,0 +1,17 @@
+.rotate-phone {
+  display: none;
+}
+
+@media screen and (max-width: 1050px) {
+  .rotate-phone {
+    display: flex;
+  }
+
+  .compare-product {
+    overflow-x: auto;
+  }
+
+  .compare__inner {
+    width: 1200px;
+  }
+}
