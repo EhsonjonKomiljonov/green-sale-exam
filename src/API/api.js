@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host = VITE_REACT_APP_HOST;
+const host = import.meta.VITE_REACT_APP_HOST;
 
 export const API = {
   verifyToken: async () =>
