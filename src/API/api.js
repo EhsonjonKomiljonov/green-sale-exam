@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const host = import.meta.VITE_REACT_APP_HOST;
+const host = import.meta.env.VITE_REACT_APP_HOST;
 
 export const API = {
-  verifyToken: async () =>
-    await axios.get(host + '/check-token', {
+  verifyToken: () =>
+    axios.get(host + '/check-token', {
       headers: {
         authorization: localStorage.getItem('token'),
       },
